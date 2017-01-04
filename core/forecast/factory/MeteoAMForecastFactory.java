@@ -33,8 +33,8 @@ public class MeteoAMForecastFactory extends ForecastAbstractFactory {
 		Element dayElement = root.select("#" + giorno).select("tbody").first();
 		infoGiorno.put("ultimoAggiornamento", lastUpdateRoot.select("p").get(3).text());
 		infoGiorno.put("giorno", giorno);
-		infoGiorno.put("min", getDegree(dayElement, Integer::min) + "Â°");
-		infoGiorno.put("max", getDegree(dayElement, Integer::max) + "Â°");
+		infoGiorno.put("min", getDegree(dayElement, Integer::min) + "°");
+		infoGiorno.put("max", getDegree(dayElement, Integer::max) + "°");
 		infoGiorno.put("allerte", getAlerts(dayElement));
 		return infoGiorno;
 	}
