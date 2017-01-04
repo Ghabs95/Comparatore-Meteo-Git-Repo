@@ -4,14 +4,14 @@ import java.util.ArrayList;
 
 public class HTMLCleaner {
 
-	//Toglie tutto ciò che è contenuto tra 2 tag (uno di apertura e uno di chiusura)
+	//Toglie tutto cio' che e' contenuto tra 2 tag (uno di apertura e uno di chiusura)
 	public String cutTag(String dirtyStr, String startRegex, String endRegex){
 		String[] dirtyList = dirtyStr.split(startRegex);
 		
 		ArrayList<String> cleanList = new ArrayList<>();
-		cleanList.add(dirtyList[0]);			//il primo elemento è pulito
+		cleanList.add(dirtyList[0]);			//il primo elemento e' pulito
 		
-		for(int i=1; i<dirtyList.length; i++){ //salto il primo elemento (perchè non inizia col tag cercato)
+		for(int i=1; i<dirtyList.length; i++){ //salto il primo elemento (perche' non inizia col tag cercato)
 			String[] tmp = dirtyList[i].split(endRegex);
 			if(tmp.length > 1){
 				cleanList.add(tmp[1]);

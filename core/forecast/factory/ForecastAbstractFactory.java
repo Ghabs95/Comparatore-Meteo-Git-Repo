@@ -1,6 +1,6 @@
 package core.forecast.factory;
 
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 import org.jsoup.nodes.Document;
@@ -23,7 +23,7 @@ public abstract class ForecastAbstractFactory {
 	
 	public Forecast createForecast(Document doc, int day) {
 		Elements root = createRoot(doc);
-		Map<String, Map<String, String>> forecast = new HashMap<>();
+		Map<String, Map<String, String>> forecast = new LinkedHashMap<>();
 		forecast.put("infoGiorno", getInfoGiorno(root, day));
 		forecast.put("notte", getPrevisioniOrarie(root, day, NOTTE));
 		forecast.put("mattina", getPrevisioniOrarie(root, day, MATTINA));

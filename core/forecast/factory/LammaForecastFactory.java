@@ -1,6 +1,6 @@
 package core.forecast.factory;
 
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 import org.jsoup.nodes.Document;
@@ -18,7 +18,7 @@ public class LammaForecastFactory extends ForecastAbstractFactory {
 	public Map<String, String> getInfoGiorno(Elements root, int day) {
 		int dayIndex = getDayIndex(day);
 		Element dayTag = getDayTag(root, dayIndex);
-		Map<String, String> infoGiorno = new HashMap<>();
+		Map<String, String> infoGiorno = new LinkedHashMap<>();
 		infoGiorno.put("giorno", dayTag.attr("datadescr"));
 		infoGiorno.put("min", getContent(dayTag, "temp", 0));
 		infoGiorno.put("max", getContent(dayTag, "temp", 1));
@@ -28,7 +28,7 @@ public class LammaForecastFactory extends ForecastAbstractFactory {
 
 	@Override
 	public Map<String, String> getPrevisioniOrarie(Elements root, int day, int orario) {
-		Map<String, String> hourForecast = new HashMap<>();
+		Map<String, String> hourForecast = new LinkedHashMap<>();
 		Element forecastTag = getForecastTag(root, day, orario);
 		if (tagNotFound(forecastTag)) {
 			return addEmptyMap(hourForecast);
