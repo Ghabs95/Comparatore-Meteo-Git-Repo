@@ -76,8 +76,8 @@ public class ThreeBForecastFactory extends ForecastAbstractFactory {
 		Map<String, String> infoGiorno = new HashMap<>();
 		infoGiorno.put("ultimoAggiornamento", lastUpdateRoot.text());
 		infoGiorno.put("giorno", giorno.text());
-		infoGiorno.put("min", getDegree(root, stringTag, Double::min, degree) + "°");
-		infoGiorno.put("max", getDegree(root, stringTag, Double::max, degree) + "°");
+		infoGiorno.put("min", getDegree(root, stringTag, Double::min, degree) + "Â°");
+		infoGiorno.put("max", getDegree(root, stringTag, Double::max, degree) + "Â°");
 		return infoGiorno;
 	}
 	
