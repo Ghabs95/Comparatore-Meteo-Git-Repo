@@ -22,7 +22,7 @@ public class ThreeBForecastFactory extends ForecastAbstractFactory {
 	private final String FORECAST_TAG = "small.hidden-xs";
 	private final String DATA_TAG = "div.col-xs-2-3.col-sm-1-5.text-center.altriDati.altriDatiD-active";
 	private final String ONLY_NUMBER_HOUR_REGEX = ":00|[^0-9]+";
-	private final String DELETE_DEG_SIMBOL_REGEX = "Â°|C";
+	private final String DELETE_DEG_SIMBOL_REGEX = "°|C";
 	private Element lastUpdateRoot;
 	
 	@Override
@@ -117,9 +117,5 @@ public class ThreeBForecastFactory extends ForecastAbstractFactory {
 						.filter(i -> i % slice == 0)
 						.mapToObj(i -> list.get(i))
 						.collect(toList());
-	}
-
-	public Element getLastUpdateRoot() {
-		return lastUpdateRoot;
 	}
 }

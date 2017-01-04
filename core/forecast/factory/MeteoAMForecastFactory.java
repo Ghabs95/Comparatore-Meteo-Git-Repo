@@ -100,9 +100,5 @@ public class MeteoAMForecastFactory extends ForecastAbstractFactory {
 			hour = hours.get(0);
 		}
 		return hour;
-	}
-
-	public Element getLastUpdateRoot() {
-		return lastUpdateRoot;
 	} 
 }
