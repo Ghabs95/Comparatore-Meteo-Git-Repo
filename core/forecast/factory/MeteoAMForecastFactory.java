@@ -48,7 +48,7 @@ public class MeteoAMForecastFactory extends ForecastAbstractFactory {
 				  .reduce(function)
 				  .get();
 	}
-	
+
 	private String getAlerts(Element root) {
 		Elements alerts = root.select("tr");
 		String allerte = "";
