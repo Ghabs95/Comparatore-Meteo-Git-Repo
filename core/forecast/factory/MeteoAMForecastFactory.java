@@ -9,8 +9,8 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 public class MeteoAMForecastFactory extends ForecastAbstractFactory {
-	Element lastUpdateRoot;	
-	
+	private Element lastUpdateRoot;	
+
 	@Override
 	public Elements createRoot(Document doc) {
 		this.lastUpdateRoot = doc.select("#block-system-main").first();
@@ -101,5 +101,8 @@ public class MeteoAMForecastFactory extends ForecastAbstractFactory {
 		}
 		return hour;
 	}
-	
+
+	public Element getLastUpdateRoot() {
+		return lastUpdateRoot;
+	}
 }
