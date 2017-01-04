@@ -39,7 +39,7 @@ public class MeteoAM extends Site {
 	}
 	
 	private String getCodeLocation(String location) throws IOException {
-		BufferedReader locList = new BufferedReader(new FileReader("Comparatore-Meteo-Git-Repo/core/site/listaLocalita.txt"));
+		BufferedReader locList = new BufferedReader(new FileReader("/home/gab/git/Comparatore-Meteo-Git-Repo/core/site/listaLocalita.txt"));
 		String codeLoc = locList.lines()
 				.filter(s -> s.contains(location.toUpperCase()))
 				.map(s -> s.substring(0, s.indexOf('|')))

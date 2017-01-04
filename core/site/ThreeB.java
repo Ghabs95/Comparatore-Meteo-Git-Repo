@@ -33,8 +33,8 @@ public class ThreeB extends Site {
 
 	@Override
 	public String cleanSiteContent(String siteContent) {
-		// TODO Pulire i tag che rompono
-		return null;
+		// TODO Pulire i tag che rompono (se ce ne sono)
+		return siteContent;
 	}
 
 }

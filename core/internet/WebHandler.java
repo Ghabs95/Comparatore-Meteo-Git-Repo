@@ -50,7 +50,7 @@ public class WebHandler {
 	
 	private String loadStringExample(String url){
 		String site = "";
-		String path = "src\\core\\internet\\";
+		String path = "/home/gab/git/Comparatore-Meteo-Git-Repo/core/internet/";
 		if(url.contains("lamma")){
 			path += "lamma.xml";
 		}else if(url.contains("meteoam")){
