@@ -104,5 +104,5 @@ public class MeteoAMForecastFactory extends ForecastAbstractFactory {
 
 	public Element getLastUpdateRoot() {
 		return lastUpdateRoot;
-	}
+	} 
 }
