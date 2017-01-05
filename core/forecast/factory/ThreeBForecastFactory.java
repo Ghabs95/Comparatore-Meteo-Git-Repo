@@ -22,7 +22,8 @@ public class ThreeBForecastFactory extends ForecastAbstractFactory {
 	private final String FORECAST_TAG = "small.hidden-xs";
 	private final String DATA_TAG = "div.col-xs-2-3.col-sm-1-5.text-center.altriDati.altriDatiD-active";
 	private final String ONLY_NUMBER_HOUR_REGEX = ":00|[^0-9]+";
-	private final String DELETE_DEG_SIMBOL_REGEX = "°|C";
+	private final String DEGREE_SIMBOL = "\u00B0";
+	private final String DELETE_DEG_SIMBOL_REGEX = DEGREE_SIMBOL + "|C";
 	private Element lastUpdateRoot;
 	
 	@Override
@@ -76,8 +77,8 @@ public class ThreeBForecastFactory extends ForecastAbstractFactory {
 		Map<String, String> infoGiorno = new HashMap<>();
 		infoGiorno.put("ultimoAggiornamento", lastUpdateRoot.text());
 		infoGiorno.put("giorno", giorno.text());
-		infoGiorno.put("min", getDegree(root, stringTag, Double::min, degree) + "°");
-		infoGiorno.put("max", getDegree(root, stringTag, Double::max, degree) + "°");
+		infoGiorno.put("min", getDegree(root, stringTag, Double::min, degree) + DEGREE_SIMBOL);
+		infoGiorno.put("max", getDegree(root, stringTag, Double::max, degree) + DEGREE_SIMBOL);
 		return infoGiorno;
 	}
 	
