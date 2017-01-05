@@ -3,17 +3,18 @@ package core.forecast.factory;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.function.BinaryOperator;
+import java.util.stream.Collectors;
 
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 public class MeteoAMForecastFactory extends ForecastAbstractFactory {
-	private Element lastUpdateRoot;	
+	private Element lastUpdateRoot;
 
 	@Override
 	public Elements createRoot(Document doc) {
-		this.lastUpdateRoot = doc.select("#block-system-main").first();		
+		this.lastUpdateRoot = doc.select("#block-system-main").first();
 		return doc.select("#giorno");
 	}
 
@@ -33,8 +34,8 @@ public class MeteoAMForecastFactory extends ForecastAbstractFactory {
 		Element dayElement = root.select("#" + giorno).select("tbody").first();
 		infoGiorno.put("ultimoAggiornamento", lastUpdateRoot.getElementsContainingOwnText("aggiornamento pagina").get(0).text());
 		infoGiorno.put("giorno", giorno);
-		infoGiorno.put("min", getDegree(dayElement, Integer::min) + "°");
-		infoGiorno.put("max", getDegree(dayElement, Integer::max) + "°");
+		infoGiorno.put("min", getDegree(dayElement, Integer::min) + "\u00B0");
+		infoGiorno.put("max", getDegree(dayElement, Integer::max) + "\u00B0");
 		infoGiorno.put("allerte", getAlerts(dayElement));
 		return infoGiorno;
 	}
@@ -42,11 +43,11 @@ public class MeteoAMForecastFactory extends ForecastAbstractFactory {
 	private Integer getDegree(Element root, BinaryOperator<Integer> function) {
 		Elements degs = root.select("tr");
 		return degs.stream()
-				  .map(p -> p.select("td").get(3))
-				  .map(Element::text)
-				  .map(Integer::parseInt)
-				  .reduce(function)
-				  .get();
+				   .map(p -> p.select("td").get(3))
+				   .map(Element::text)
+				   .map(Integer::parseInt)
+				   .reduce(function)
+				   .get();
 	}
 
 	private String getAlerts(Element root) {
@@ -57,7 +58,10 @@ public class MeteoAMForecastFactory extends ForecastAbstractFactory {
 			if (alert.text().equals("-")) {
 				allerte += "nessuno, ";
 			} else {
-				allerte += alert.select("img[title]").attr("title") + ", ";
+				Elements img = alert.select("img[title]");
+				for (int j = 0; j < img.size(); j++) {
+					allerte += img.get(j).attr("title") + ", ";
+				}
 			}
 		}
 		return allerte;
@@ -78,27 +82,43 @@ public class MeteoAMForecastFactory extends ForecastAbstractFactory {
 		Map<String, String> infoOra = new LinkedHashMap<>();
 		Element dayElement = root.select("#" + giorno).select("tbody").first();
 		Elements hourElements = dayElement.select("tr");
-		infoOra.put("ora", takeHour(dayElement.select("th"), orario).text());
-		infoOra.put("cielo", takeHour(hourElements, orario).select("img[title]").attr("title"));
-		infoOra.put("probPrecipitazioni", takeHour(hourElements, orario).select("td").get(2).text());
-		infoOra.put("tempPercepita", takeHour(hourElements, orario).select(".temperatura-percepita").text() + "°");
-		infoOra.put("temp", takeHour(hourElements, orario).select("td").get(3).text() + "°");
+		if (takeHour(hourElements, orario) != null) {
+			infoOra.put("ora", takeHour(hourElements, orario).select("th").text());
+			infoOra.put("cielo", takeHour(hourElements, orario).select("td").get(1).select("img[title]").attr("title"));
+			infoOra.put("probPrecipitazioni", takeHour(hourElements, orario).select("td").get(2).text());
+			infoOra.put("tempPercepita", takeHour(hourElements, orario).select(".temperatura-percepita").text() + "\u00B0");
+			infoOra.put("temp", takeHour(hourElements, orario).select("td").get(3).text() + "\u00B0");
+		}
 		return infoOra;
 	}
 
 	private Element takeHour(Elements hours, int orario) {
-		Element hour;
-		if (orario == NOTTE && hours.size() >= 2) {
-			hour = hours.get(1);
-		} else if (orario == MATTINA && hours.size() >= 4) {
-			hour = hours.get(3);
-		} else if (orario == POMERIGGIO && hours.size() >= 6) {
-			hour = hours.get(5);
-		} else if (orario == SERA && hours.size() >= 8) {
-			hour = hours.get(7);
-		} else {
-			hour = hours.get(0);
+		Element hour = null;
+		String notteH = "04:00";
+		String mattinaH = "10:00";
+		String pomeriggioH = "16:00";
+		String seraH = "22:00";
+		int nh = getHour(hours, notteH);
+		int mh = getHour(hours, mattinaH);
+		int ph = getHour(hours, pomeriggioH);
+		int sh = getHour(hours, seraH);
+		if (orario == NOTTE && nh != -1 && hours.get(nh).select("th").text().equals(notteH)) {
+			hour = hours.get(nh);
+		} else if (orario == MATTINA && mh != -1 && hours.get(mh).select("th").text().equals(mattinaH)) {
+			hour = hours.get(mh);
+		} else if (orario == POMERIGGIO && ph != -1 && hours.get(ph).select("th").text().equals(pomeriggioH)) {
+			hour = hours.get(ph);
+		} else if (orario == SERA && sh != -1 && hours.get(sh).select("th").text().equals(seraH)) {
+			hour = hours.get(sh);
 		}
 		return hour;
 	}
+
+	private int getHour(Elements root, String hour) {
+		return root.stream()
+				   .map(p -> p.select("th").text())
+				   .collect(Collectors.toList())
+				   .indexOf(hour);
+	}
+
 }
