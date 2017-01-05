@@ -48,16 +48,20 @@ public class WebHandler {
 		return siteStr;
 	}
 	
-	private String loadStringExample(String url){
+	private String loadStringExample(String url) {
 		String site = "";
-		String path = "/home/gab/git/Comparatore-Meteo-Git-Repo/core/internet/";
-		if(url.contains("lamma")){
-			path += "lamma.xml";
-		}else if(url.contains("meteoam")){
-			path += "meteoAM.html"; 
-		}else if(url.contains("3bmeteo")){
-			path += "3bMeteo.html";
-		}else{
+		URL urlP = null;
+		String path = "";
+		if (url.contains("lamma")) {
+			urlP = getClass().getResource("lamma.xml");
+			path = urlP.getPath();
+		} else if (url.contains("meteoam")) {
+			urlP = getClass().getResource("meteoAM.html");
+			path = urlP.getPath();
+		} else if (url.contains("3bmeteo")) {
+			urlP = getClass().getResource("3bMeteo.html");
+			path = urlP.getPath();
+		} else {
 			return "Sito non disponibile!";
 		}
 		site = loadFromFile(path);

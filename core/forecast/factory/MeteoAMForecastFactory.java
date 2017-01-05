@@ -31,7 +31,7 @@ public class MeteoAMForecastFactory extends ForecastAbstractFactory {
 	private Map<String, String> putInMap(Elements root, String giorno) {
 		Map<String, String> infoGiorno = new LinkedHashMap<>();
 		Element dayElement = root.select("#" + giorno).select("tbody").first();
-//		infoGiorno.put("ultimoAggiornamento", lastUpdateRoot.select("p").get(3).text());
+		infoGiorno.put("ultimoAggiornamento", lastUpdateRoot.getElementsContainingOwnText("aggiornamento pagina").get(0).text());
 		infoGiorno.put("giorno", giorno);
 		infoGiorno.put("min", getDegree(dayElement, Integer::min) + "°");
 		infoGiorno.put("max", getDegree(dayElement, Integer::max) + "°");
@@ -52,12 +52,12 @@ public class MeteoAMForecastFactory extends ForecastAbstractFactory {
 	private String getAlerts(Element root) {
 		Elements alerts = root.select("tr");
 		String allerte = "";
-		for(int i = 1; i < alerts.size(); i = i + 2) {
+		for (int i = 1; i < alerts.size(); i = i + 2) {
 			Element alert = alerts.get(i).select("td").get(0);
-			if(alert.text().equals("-")) {
+			if (alert.text().equals("-")) {
 				allerte += "nessuno, ";
 			} else {
-				allerte += alert.select("img[title]").attr("title");
+				allerte += alert.select("img[title]").attr("title") + ", ";
 			}
 		}
 		return allerte;
@@ -81,8 +81,8 @@ public class MeteoAMForecastFactory extends ForecastAbstractFactory {
 		infoOra.put("ora", takeHour(dayElement.select("th"), orario).text());
 		infoOra.put("cielo", takeHour(hourElements, orario).select("img[title]").attr("title"));
 		infoOra.put("probPrecipitazioni", takeHour(hourElements, orario).select("td").get(2).text());
-		infoOra.put("tempPercepita", takeHour(hourElements, orario).select(".temperatura-percepita").text());
-		infoOra.put("temp", takeHour(hourElements, orario).select("td").get(3).text());
+		infoOra.put("tempPercepita", takeHour(hourElements, orario).select(".temperatura-percepita").text() + "°");
+		infoOra.put("temp", takeHour(hourElements, orario).select("td").get(3).text() + "°");
 		return infoOra;
 	}
 
@@ -100,5 +100,5 @@ public class MeteoAMForecastFactory extends ForecastAbstractFactory {
 			hour = hours.get(0);
 		}
 		return hour;
-	} 
+	}
 }

@@ -3,6 +3,7 @@ package core.site;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.net.URL;
 
 import core.forecast.factory.ForecastAbstractFactory;
 import core.forecast.factory.MeteoAMForecastFactory;
@@ -34,11 +35,12 @@ public class MeteoAM extends Site {
 		HTMLCleaner cleaner = new HTMLCleaner(); 
 		String cleanContent = cleaner.cutTag(siteContent, "([^\"])(<script.)", "</script>"); //toglie i tag script e il loro contenuto
 		cleanContent = cleaner.removeBlocks(cleanContent, "<!-- /.block -->");
-		return cleanContent;
+		return siteContent;
 	}
 
 	private String getCodeLocation(String location) throws IOException {
-		BufferedReader locList = new BufferedReader(new FileReader("/home/gab/git/Comparatore-Meteo-Git-Repo/core/site/listaLocalita.txt"));
+		URL url = getClass().getResource("listaLocalita.txt");
+		BufferedReader locList = new BufferedReader(new FileReader(url.getPath()));
 		String s;
 		String codeLoc;
 		while (true) {
