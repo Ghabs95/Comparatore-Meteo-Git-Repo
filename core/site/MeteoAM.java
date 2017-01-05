@@ -3,7 +3,6 @@ package core.site;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import static java.util.stream.Collectors.*;
 
 import core.forecast.factory.ForecastAbstractFactory;
 import core.forecast.factory.MeteoAMForecastFactory;
@@ -37,14 +36,18 @@ public class MeteoAM extends Site {
 		cleanContent = cleaner.removeBlocks(cleanContent, "<!-- /.block -->");
 		return cleanContent;
 	}
-	
+
 	private String getCodeLocation(String location) throws IOException {
 		BufferedReader locList = new BufferedReader(new FileReader("/home/gab/git/Comparatore-Meteo-Git-Repo/core/site/listaLocalita.txt"));
-		String codeLoc = locList.lines()
-				.filter(s -> s.contains(location.toUpperCase()))
-				.map(s -> s.substring(0, s.indexOf('|')))
-				.collect(joining());
-
+		String s;
+		String codeLoc;
+		while (true) {
+			s = locList.readLine();
+			if (s.contains(location.toUpperCase())) {
+				codeLoc = s.substring(0, s.indexOf('|'));
+				break;
+			}
+		}
 		locList.close();
 		return codeLoc;
 	}

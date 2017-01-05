@@ -13,7 +13,7 @@ public class MeteoAMForecastFactory extends ForecastAbstractFactory {
 
 	@Override
 	public Elements createRoot(Document doc) {
-		this.lastUpdateRoot = doc.select("#block-system-main").first();
+		this.lastUpdateRoot = doc.select("#block-system-main").first();		
 		return doc.select("#giorno");
 	}
 
@@ -31,10 +31,10 @@ public class MeteoAMForecastFactory extends ForecastAbstractFactory {
 	private Map<String, String> putInMap(Elements root, String giorno) {
 		Map<String, String> infoGiorno = new LinkedHashMap<>();
 		Element dayElement = root.select("#" + giorno).select("tbody").first();
-		infoGiorno.put("ultimoAggiornamento", lastUpdateRoot.select("p").get(3).text());
+//		infoGiorno.put("ultimoAggiornamento", lastUpdateRoot.select("p").get(3).text());
 		infoGiorno.put("giorno", giorno);
-		infoGiorno.put("min", getDegree(dayElement, Integer::min) + "°");
-		infoGiorno.put("max", getDegree(dayElement, Integer::max) + "°");
+		infoGiorno.put("min", getDegree(dayElement, Integer::min) + "Â°");
+		infoGiorno.put("max", getDegree(dayElement, Integer::max) + "Â°");
 		infoGiorno.put("allerte", getAlerts(dayElement));
 		return infoGiorno;
 	}
