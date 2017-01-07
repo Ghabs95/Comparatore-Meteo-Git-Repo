@@ -5,8 +5,10 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
 import java.net.URL;
 import java.net.URLConnection;
+import java.net.URLDecoder;
 
 import javax.imageio.ImageIO;
 
@@ -50,22 +52,29 @@ public class WebHandler {
 	
 	private String loadStringExample(String url) {
 		String site = "";
-		URL urlP = null;
 		String path = "";
 		if (url.contains("lamma")) {
-			urlP = getClass().getResource("lamma.xml");
-			path = urlP.getPath();
+			path = getPath("lamma.xml");
 		} else if (url.contains("meteoam")) {
-			urlP = getClass().getResource("meteoAM.html");
-			path = urlP.getPath();
+			path = getPath("meteoAM.html");
 		} else if (url.contains("3bmeteo")) {
-			urlP = getClass().getResource("3bMeteo.html");
-			path = urlP.getPath();
+			path = getPath("3bMeteo.html");
 		} else {
 			return "Sito non disponibile!";
 		}
 		site = loadFromFile(path);
 		return site;
+	}
+	
+	private String getPath(String meteo){
+		URL urlP = getClass().getResource("meteo");
+		String path = "";
+		try {
+			path = URLDecoder.decode(urlP.getPath(), "UTF-8");
+		} catch (UnsupportedEncodingException e) {
+			System.out.println("Example file NOT FOUND!!");
+		}
+		return path;
 	}
 	
 	private String loadFromFile(String path){
