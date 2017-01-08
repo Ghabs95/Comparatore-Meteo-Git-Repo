@@ -29,6 +29,7 @@ public class WebHandler {
 			site = readSite(connection);				
 		} catch (Exception e) {
 			site = loadStringExample(url);
+			System.out.println("+++++WARNING+++++\nCaricamento file di esempio per il link: "+ url);
 		}	
 		return site;
 	}
@@ -67,7 +68,7 @@ public class WebHandler {
 	}
 	
 	private String getPath(String meteo){
-		URL urlP = getClass().getResource("meteo");
+		URL urlP = getClass().getResource(meteo);
 		String path = "";
 		try {
 			path = URLDecoder.decode(urlP.getPath(), "UTF-8");
