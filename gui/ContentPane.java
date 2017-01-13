@@ -1,29 +1,31 @@
 package gui;
 
 import java.awt.Container;
-import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 
 import javax.swing.JLabel;
-import javax.swing.JTextArea;
-import javax.swing.JTextField;
 
 @SuppressWarnings("serial")
 public class ContentPane extends Container {
 	private final static int CENTER = GridBagConstraints.CENTER;
 	private final static int HORIZONTAL = GridBagConstraints.HORIZONTAL;
 	private final static int BOTH = GridBagConstraints.BOTH;
-	private final static int EAST = GridBagConstraints.EAST;
+	private final static int NORTH = GridBagConstraints.NORTH;
 	//Variabili parte grafica
 	private MyConstraints lim;
+	private SearchContainer searchC;
+	private DisplayContainer displayC;
+	//Ascoltatori:
+	private SearchListener sl;
 	
 	
 	public ContentPane() {
 		initContentPane();
 		addTitle("Comparatore Meteo");
-		addSearchPanel();
-		addDisplayPanel();
+		addSearch();
+		addDisplay();
+		addSearchListener();
 	}
 	
 	private void initContentPane(){
@@ -40,30 +42,26 @@ public class ContentPane extends Container {
 		this.add(titleP, lim);
 	}
 	
-	private void addSearchPanel(){
-		JLabel sl = new JLabel("Localita: ");
-		sl.setFont(new Font("TimesRoman",Font.PLAIN,14));
+	private void addSearch(){
+		searchC = new SearchContainer();
 		lim.setPosition(0,1);
-		lim.setInsets(10,0,10,10);
-		lim.setFillAndAnchor(HORIZONTAL, GridBagConstraints.NORTHEAST);
+		lim.setFillAndAnchor(HORIZONTAL,NORTH);
 		lim.setGridCellDimension(1,1);
-		this.add(sl, lim);
-		
-		JTextField searchBox = new JTextField(10);
-		lim.setPosition(1,1);
-		lim.setInsets(10,10,10,10);
-		lim.setFillAndAnchor(HORIZONTAL, GridBagConstraints.NORTH);
-		lim.setGridCellDimension(1,1);
-		this.add(searchBox, lim);
+		this.add(searchC,lim);
 	}
 	
-	private void addDisplayPanel(){
-		JTextArea displayBox = new JTextArea(20,20);
+	private void addDisplay(){
+		displayC = new DisplayContainer();
 		lim.setPosition(2,1);
 		lim.setInsets(10,10,10,10);
 		lim.setFillAndAnchor(BOTH, CENTER);
 		lim.setGridCellDimension(1,1);
-		this.add(displayBox, lim);
+		this.add(displayC, lim);
+	}
+	
+	private void addSearchListener(){
+		sl = new SearchListener(searchC.start, searchC.searchBox, displayC.displayBox);
+		searchC.start.addActionListener(sl);
 	}
 	
 }

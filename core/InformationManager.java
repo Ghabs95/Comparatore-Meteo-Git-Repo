@@ -25,6 +25,12 @@ public class InformationManager {
 		ft.createLocationForecast(meteoID, location);
 	}
 	
+	public String getPrintableForecast(int meteoID, String location, int dayID){
+		Forecast tmp = ft.getDayForecast(meteoID, location, dayID);
+		String str = tmp.toString();	
+		return str;
+	}
+	
 	//Solo per Esempio!
 	public void showAll(){
 		Map<String,ArrayList<Forecast>> meteoForecast;

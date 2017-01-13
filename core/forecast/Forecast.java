@@ -31,4 +31,16 @@ public class Forecast {
 		info.entrySet().forEach(entry -> System.out.println("\t" + entry.getKey() + ": " + entry.getValue()));
 	}
 	
+	@Override
+	public String toString(){
+		String str = "";
+		for (Map.Entry<String, Map<String, String>> entry : forecast.entrySet()) {
+			str += entry.getKey() + ":\n";
+			for (Map.Entry<String, String> sub_entry : entry.getValue().entrySet()) {
+				str += "\t" + sub_entry.getKey() + ": " + sub_entry.getValue() + "\n";
+			}
+		}
+		return str;
+	}
+	
 }
