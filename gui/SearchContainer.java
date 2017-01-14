@@ -14,7 +14,7 @@ public class SearchContainer extends Container {
 	private MyConstraints lim;
 	//Componenti attive:
 	public JTextField searchBox;
-	public JButton start;
+	public JButton startButton;
 
 	public SearchContainer(){
 		initContainer();
@@ -48,9 +48,9 @@ public class SearchContainer extends Container {
 	}
 	
 	private void addStartButton(){
-		start = new JButton("Search!");
+		startButton = new JButton("Search!");
 		lim.setPosition(1, 1);
-		this.add(start, lim);
+		this.add(startButton, lim);
 	}
 	
 }
