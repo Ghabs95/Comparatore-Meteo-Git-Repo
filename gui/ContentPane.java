@@ -60,8 +60,11 @@ public class ContentPane extends Container {
 	}
 	
 	private void addSearchListener(){
-		sl = new SearchListener(searchC.startButton, searchC.searchBox, displayC.displayBox);
-		searchC.startButton.addActionListener(sl);
+		sl = new SearchListener(searchC.activeComponents.getButton("search"),
+								searchC.activeComponents.getTextField("searchBox"),
+								displayC.activeComponents.getTextArea("display"));
+		
+		searchC.activeComponents.getButton("search").addActionListener(sl);
 	}
 	
 }

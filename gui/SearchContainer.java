@@ -1,56 +1,28 @@
 package gui;
 
-import java.awt.Container;
-import java.awt.Font;
 import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-
-import javax.swing.JButton;
-import javax.swing.JLabel;
-import javax.swing.JTextField;
 
 @SuppressWarnings("serial")
-public class SearchContainer extends Container {
-	private MyConstraints lim;
-	//Componenti attive:
-	public JTextField searchBox;
-	public JButton startButton;
+public class SearchContainer extends GridBagContainer {
 
-	public SearchContainer(){
-		initContainer();
-		addSearchLabel();
-		addSearchBox();
-		addStartButton();
+	@Override
+	public void addComponents() {
+		setupConstraints();
+		addChild(new LocationChoice(), 0);
+		//addMeteoService();
+		addChild(new MeteoService(), 1);
 	}
 	
-	private void initContainer() {
-		this.setLayout(new GridBagLayout());
-		lim = new MyConstraints();
-	}
-
-	private void addSearchLabel() {
-		JLabel sl = new JLabel("Localita: ");
-		sl.setFont(new Font("TimesRoman",Font.PLAIN,14));
-		lim.setPosition(0,0);
-		lim.setInsets(10,0,10,10);
-		lim.setFillAndAnchor(GridBagConstraints.HORIZONTAL, GridBagConstraints.NORTHEAST);
+	private void setupConstraints(){
+		lim.setInsets(0,0,0,0);
+		lim.setFillAndAnchor(GridBagConstraints.NONE, GridBagConstraints.WEST);
 		lim.setGridCellDimension(1,1);
-		this.add(sl, lim);
 	}
 	
-	private void addSearchBox() {
-		searchBox = new JTextField(10);
-		lim.setPosition(1,0);
-		lim.setInsets(10,10,10,10);
-		lim.setFillAndAnchor(GridBagConstraints.HORIZONTAL, GridBagConstraints.NORTH);
-		lim.setGridCellDimension(1,1);
-		this.add(searchBox, lim);
+	private void addChild(GridBagContainer child, int y){
+		lim.setPosition(0, y);
+		getChildActiveComponents(child.getActiveComponents());
+		this.add(child,lim);
 	}
-	
-	private void addStartButton(){
-		startButton = new JButton("Search!");
-		lim.setPosition(1, 1);
-		this.add(startButton, lim);
-	}
-	
+		
 }

@@ -36,6 +36,7 @@ public class ForecastComparatorMain extends JFrame {
 	
 	public static void main(String[] args) {
 		ForecastComparatorMain cm = new ForecastComparatorMain();
+		//cm.pack();
 		cm.setVisible(true);
 	}
 
