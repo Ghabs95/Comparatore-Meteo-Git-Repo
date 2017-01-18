@@ -1,10 +1,12 @@
 package core;
 
+import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.Map;
 
 import core.forecast.Forecast;
 import core.forecast.ForecastTree;
+import core.internet.WebHandler;
 
 public class InformationManager {
 	public final static int LAMMA = ForecastTree.LAMMA;
@@ -29,6 +31,11 @@ public class InformationManager {
 		Forecast tmp = ft.getDayForecast(meteoID, location, dayID);
 		String str = tmp.toString();	
 		return str;
+	}
+	
+	public BufferedImage getMeteoSatImage(){
+		String path = "http://img2.meteo.it/forecastimg/realtime/europa/eu_sat_07.jpg";
+		return WebHandler.getInstance().getPhoto(path);
 	}
 	
 	//Solo per Esempio!

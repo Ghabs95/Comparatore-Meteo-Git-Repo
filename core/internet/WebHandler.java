@@ -2,6 +2,7 @@ package core.internet;
 
 import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -110,6 +111,19 @@ public class WebHandler {
 			URL myUrl = new URL(url);
 			img = ImageIO.read(myUrl);
 		} catch(IOException e){
+			System.out.println("WARNING! Caricamento immagine di esempio da File!");
+			img = getSampleImage();
+		}
+		return img;
+	}
+	
+	private BufferedImage getSampleImage(){
+		File sample = new File(getPath("meteoSat.png"));
+		BufferedImage img = null;
+		try {
+			img = ImageIO.read(sample);
+		} catch (IOException e) {
+			System.out.println("Immagine Esempio Non Trovata!");
 			e.printStackTrace();
 		}
 		return img;

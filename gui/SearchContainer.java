@@ -8,9 +8,9 @@ public class SearchContainer extends GridBagContainer {
 	@Override
 	public void addComponents() {
 		setupConstraints();
-		addChild(new LocationChoice(), 0);
-		//addMeteoService();
-		addChild(new MeteoService(), 1);
+		addChild(new Preface(), 0);
+		addChild(new LocationChoice(), 1);
+		addChild(new MeteoService(), 2);
 	}
 	
 	private void setupConstraints(){
