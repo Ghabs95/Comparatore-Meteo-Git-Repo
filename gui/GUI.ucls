@@ -1,107 +1,239 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<class-diagram version="1.1.10" icons="true" automaticImage="PNG" always-add-relationships="false" 
+<class-diagram version="1.1.13" icons="true" automaticImage="PNG" always-add-relationships="false" 
   generalizations="true" realizations="true" associations="true" dependencies="true" nesting-relationships="true" 
   router="FAN">  
-  <class id="1" language="java" name="gui.ForecastComparatorMain" project="Comparatore Meteo" 
-    file="/Comparatore Meteo/Comparatore-Meteo-Git-Repo/gui/ForecastComparatorMain.java" binary="false" 
-    corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="126" y="172"/>    
+  <class id="1" language="java" name="gui.DisplayContainer" project="Progetto-MP" 
+    file="/Progetto-MP/Comparatore-Meteo-Git-Repo/gui/DisplayContainer.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="95" width="137" x="354" y="442"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="false" protected="false" private="false" static="false"/>      
       <operations public="true" package="false" protected="false" private="false" static="false"/>    
     </display>  
   </class>  
-  <class id="2" language="java" name="gui.ContentPane" project="Comparatore Meteo" 
-    file="/Comparatore Meteo/Comparatore-Meteo-Git-Repo/gui/ContentPane.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="329" y="171"/>    
+  <class id="2" language="java" name="gui.GridBagContainer" project="Progetto-MP" 
+    file="/Progetto-MP/Comparatore-Meteo-Git-Repo/gui/GridBagContainer.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="131" width="323" x="512" y="271"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="false" protected="false" private="false" static="false"/>      
       <operations public="true" package="false" protected="false" private="false" static="false"/>    
     </display>  
   </class>  
-  <class id="3" language="java" name="gui.SearchContainer" project="Comparatore Meteo" 
-    file="/Comparatore Meteo/Comparatore-Meteo-Git-Repo/gui/SearchContainer.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="598" y="93"/>    
+  <class id="3" language="java" name="gui.LocationChoice" project="Progetto-MP" 
+    file="/Progetto-MP/Comparatore-Meteo-Git-Repo/gui/LocationChoice.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="95" width="137" x="710" y="577"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="false" protected="false" private="false" static="false"/>      
       <operations public="true" package="false" protected="false" private="false" static="false"/>    
     </display>  
   </class>  
-  <class id="4" language="java" name="gui.DisplayContainer" project="Comparatore Meteo" 
-    file="/Comparatore Meteo/Comparatore-Meteo-Git-Repo/gui/DisplayContainer.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="597" y="321"/>    
+  <class id="4" language="java" name="gui.ForecastComparatorMain" project="Progetto-MP" 
+    file="/Progetto-MP/Comparatore-Meteo-Git-Repo/gui/ForecastComparatorMain.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="77" width="171" x="512" y="37"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="false" protected="false" private="false" static="false"/>      
       <operations public="true" package="false" protected="false" private="false" static="false"/>    
     </display>  
   </class>  
-  <class id="5" language="java" name="gui.LocationChoice" project="Comparatore Meteo" 
-    file="/Comparatore Meteo/Comparatore-Meteo-Git-Repo/gui/LocationChoice.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="821" y="28"/>    
+  <class id="5" language="java" name="gui.MeteoService" project="Progetto-MP" 
+    file="/Progetto-MP/Comparatore-Meteo-Git-Repo/gui/MeteoService.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="95" width="137" x="533" y="577"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="false" protected="false" private="false" static="false"/>      
       <operations public="true" package="false" protected="false" private="false" static="false"/>    
     </display>  
   </class>  
-  <class id="6" language="java" name="gui.MeteoService" project="Comparatore Meteo" 
-    file="/Comparatore Meteo/Comparatore-Meteo-Git-Repo/gui/MeteoService.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="821" y="144"/>    
+  <class id="6" language="java" name="gui.MyConstraints" project="Progetto-MP" 
+    file="/Progetto-MP/Comparatore-Meteo-Git-Repo/gui/MyConstraints.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="149" width="187" x="451" y="712"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="false" protected="false" private="false" static="false"/>      
       <operations public="true" package="false" protected="false" private="false" static="false"/>    
     </display>  
   </class>  
-  <class id="7" language="java" name="gui.SearchListener" project="Comparatore Meteo" 
-    file="/Comparatore Meteo/Comparatore-Meteo-Git-Repo/gui/SearchListener.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="329" y="493"/>    
+  <class id="7" language="java" name="gui.ActiveComponentsManager" project="Progetto-MP" 
+    file="/Progetto-MP/Comparatore-Meteo-Git-Repo/gui/ActiveComponentsManager.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="311" width="236" x="868" y="712"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="false" protected="false" private="false" static="false"/>      
       <operations public="true" package="false" protected="false" private="false" static="false"/>    
     </display>  
   </class>  
-  <dependency id="8">    
-    <end type="SOURCE" refId="3"/>    
-    <end type="TARGET" refId="5"/>  
+  <class id="8" language="java" name="gui.ContentPane" project="Progetto-MP" 
+    file="/Progetto-MP/Comparatore-Meteo-Git-Repo/gui/ContentPane.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="77" width="98" x="512" y="154"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="false" protected="false" private="false" static="false"/>      
+      <operations public="true" package="false" protected="false" private="false" static="false"/>    
+    </display>  
+  </class>  
+  <class id="9" language="java" name="gui.SearchContainer" project="Progetto-MP" 
+    file="/Progetto-MP/Comparatore-Meteo-Git-Repo/gui/SearchContainer.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="95" width="137" x="573" y="442"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="false" protected="false" private="false" static="false"/>      
+      <operations public="true" package="false" protected="false" private="false" static="false"/>    
+    </display>  
+  </class>  
+  <class id="10" language="java" name="gui.SearchListener" project="Progetto-MP" 
+    file="/Progetto-MP/Comparatore-Meteo-Git-Repo/gui/SearchListener.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="95" width="251" x="42" y="271"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="false" protected="false" private="false" static="false"/>      
+      <operations public="true" package="false" protected="false" private="false" static="false"/>    
+    </display>  
+  </class>  
+  <class id="11" language="java" name="gui.Preface" project="Progetto-MP" 
+    file="/Progetto-MP/Comparatore-Meteo-Git-Repo/gui/Preface.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="95" width="137" x="230" y="432"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="false" protected="false" private="false" static="false"/>      
+      <operations public="true" package="false" protected="false" private="false" static="false"/>    
+    </display>  
+  </class>  
+  <dependency id="12">    
+    <end type="SOURCE" refId="11"/>    
+    <end type="TARGET" refId="7"/>  
   </dependency>  
-  <association id="9">    
+  <association id="13">    
+    <bendpoint x="898" y="442"/>    
+    <bendpoint x="898" y="577"/>    
     <end type="SOURCE" refId="2" navigable="false">      
-      <attribute id="10" name="displayC"/>      
-      <multiplicity id="11" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="4" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="12">    
-    <end type="SOURCE" refId="2" navigable="false">      
-      <attribute id="13" name="sl"/>      
-      <multiplicity id="14" minimum="0" maximum="1"/>    
+      <attribute id="14" name="activeComponents">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="15" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
     </end>    
     <end type="TARGET" refId="7" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <dependency id="15">    
+  <association id="16">    
+    <end type="SOURCE" refId="8" navigable="false">      
+      <attribute id="17" name="sl">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="18" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="10" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <dependency id="19">    
+    <end type="SOURCE" refId="8"/>    
+    <end type="TARGET" refId="2"/>  
+  </dependency>  
+  <generalization id="20">    
+    <bendpoint x="542" y="442"/>    
+    <end type="SOURCE" refId="5"/>    
+    <end type="TARGET" refId="2"/>  
+  </generalization>  
+  <dependency id="21">    
+    <end type="SOURCE" refId="3"/>    
+    <end type="TARGET" refId="7"/>  
+  </dependency>  
+  <dependency id="22">    
+    <end type="SOURCE" refId="9"/>    
+    <end type="TARGET" refId="3"/>  
+  </dependency>  
+  <generalization id="23">    
+    <bendpoint x="740" y="442"/>    
+    <end type="SOURCE" refId="3"/>    
+    <end type="TARGET" refId="2"/>  
+  </generalization>  
+  <dependency id="24">    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="8"/>  
+  </dependency>  
+  <generalization id="25">    
+    <end type="SOURCE" refId="1"/>    
+    <end type="TARGET" refId="2"/>  
+  </generalization>  
+  <dependency id="26">    
+    <end type="SOURCE" refId="9"/>    
+    <end type="TARGET" refId="11"/>  
+  </dependency>  
+  <dependency id="27">    
     <end type="SOURCE" refId="3"/>    
     <end type="TARGET" refId="6"/>  
   </dependency>  
-  <dependency id="16">    
-    <end type="SOURCE" refId="1"/>    
-    <end type="TARGET" refId="2"/>  
-  </dependency>  
-  <association id="17">    
+  <association id="28">    
+    <bendpoint x="521" y="442"/>    
+    <bendpoint x="460" y="577"/>    
     <end type="SOURCE" refId="2" navigable="false">      
-      <attribute id="18" name="searchC"/>      
-      <multiplicity id="19" minimum="0" maximum="1"/>    
+      <attribute id="29" name="lim">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="30" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
     </end>    
-    <end type="TARGET" refId="3" navigable="true"/>    
+    <end type="TARGET" refId="6" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
+  <dependency id="31">    
+    <end type="SOURCE" refId="11"/>    
+    <end type="TARGET" refId="6"/>  
+  </dependency>  
+  <generalization id="32">    
+    <end type="SOURCE" refId="9"/>    
+    <end type="TARGET" refId="2"/>  
+  </generalization>  
+  <dependency id="33">    
+    <end type="SOURCE" refId="5"/>    
+    <end type="TARGET" refId="6"/>  
+  </dependency>  
+  <dependency id="34">    
+    <end type="SOURCE" refId="5"/>    
+    <end type="TARGET" refId="7"/>  
+  </dependency>  
+  <dependency id="35">    
+    <bendpoint x="481" y="577"/>    
+    <end type="SOURCE" refId="1"/>    
+    <end type="TARGET" refId="7"/>  
+  </dependency>  
+  <generalization id="36">    
+    <end type="SOURCE" refId="11"/>    
+    <end type="TARGET" refId="2"/>  
+  </generalization>  
+  <dependency id="37">    
+    <bendpoint x="502" y="577"/>    
+    <end type="SOURCE" refId="9"/>    
+    <end type="TARGET" refId="6"/>  
+  </dependency>  
+  <dependency id="38">    
+    <end type="SOURCE" refId="9"/>    
+    <end type="TARGET" refId="5"/>  
+  </dependency>  
+  <dependency id="39">    
+    <bendpoint x="412" y="577"/>    
+    <end type="SOURCE" refId="1"/>    
+    <end type="TARGET" refId="6"/>  
+  </dependency>  
+  <dependency id="40">    
+    <bendpoint x="877" y="577"/>    
+    <end type="SOURCE" refId="9"/>    
+    <end type="TARGET" refId="7"/>  
+  </dependency>  
+  <dependency id="41">    
+    <bendpoint x="919" y="271"/>    
+    <bendpoint x="919" y="442"/>    
+    <bendpoint x="919" y="577"/>    
+    <end type="SOURCE" refId="8"/>    
+    <end type="TARGET" refId="7"/>  
+  </dependency>  
   <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
     sort-features="false" accessors="true" visibility="true">    
     <attributes public="true" package="false" protected="false" private="false" static="false"/>    
