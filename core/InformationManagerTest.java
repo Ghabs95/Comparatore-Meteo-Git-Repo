@@ -1,7 +1,5 @@
 package core;
 
-import static org.junit.Assert.*;
-
 import org.junit.Before;
 import org.junit.Test;
 
@@ -11,7 +9,7 @@ public class InformationManagerTest {
 	public final static int LAMMA = ForecastTree.LAMMA;
 	public final static int AM = ForecastTree.AM;
 	public final static int THREEB = ForecastTree.THREEB;
-	
+
 	private InformationManager im;
 
 	@Before
@@ -27,7 +25,5 @@ public class InformationManagerTest {
 	public void test() {
 		im.showAll();
 	}
-	
-	
 
 }

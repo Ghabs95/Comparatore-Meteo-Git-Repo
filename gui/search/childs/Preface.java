@@ -20,25 +20,25 @@ public class Preface extends GridBagContainer {
 		addTitleLabel();
 		addImageLabel();
 	}
-	
+
 	private void addTitleLabel() {
 		JLabel titleL = new JLabel("Comparatore Meteo");
-		titleL.setFont(new Font("TimesRoman",Font.BOLD,20));
-		lim.setPosition(0,0);
-		lim.setInsets(0,0,0,0);
+		titleL.setFont(new Font("TimesRoman", Font.BOLD, 20));
+		lim.setPosition(0, 0);
+		lim.setInsets(0, 0, 0, 0);
 		lim.setFillAndAnchor(GridBagConstraints.HORIZONTAL, GridBagConstraints.CENTER);
-		lim.setGridCellDimension(1,1);
+		lim.setGridCellDimension(1, 1);
 		this.add(titleL, lim);
 	}
-	
-	private void addImageLabel(){
+
+	private void addImageLabel() {
 		JLabel image = new JLabel(new ImageIcon(getMeteoSatImage()));
-		lim.setPosition(0,1);
-		lim.setInsets(5,5,5,5);
+		lim.setPosition(0, 1);
+		lim.setInsets(5, 5, 5, 5);
 		lim.setFillAndAnchor(GridBagConstraints.BOTH, GridBagConstraints.CENTER);
-		lim.setGridCellDimension(1,1);
+		lim.setGridCellDimension(1, 1);
 		activeComponents.addLabel("image", image);
-		this.add(image,lim);
+		this.add(image, lim);
 	}
 	
 	private BufferedImage getMeteoSatImage(){
@@ -46,14 +46,14 @@ public class Preface extends GridBagContainer {
 		BufferedImage image = WebHandler.getInstance().getPhoto(path); 
 		return resize(image,250,150);
 	}
-	
-	//Trovato su internet!
+
+	// Trovato su internet!
 	private BufferedImage resize(BufferedImage image, int width, int height) {
-	    BufferedImage bi = new BufferedImage(width, height, BufferedImage.TRANSLUCENT);
-	    Graphics2D g2d = (Graphics2D) bi.createGraphics();
-	    g2d.addRenderingHints(new RenderingHints(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY));
-	    g2d.drawImage(image, 0, 0, width, height, null);
-	    g2d.dispose();
-	    return bi;
+		BufferedImage bi = new BufferedImage(width, height, BufferedImage.TRANSLUCENT);
+		Graphics2D g2d = (Graphics2D) bi.createGraphics();
+		g2d.addRenderingHints(new RenderingHints(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY));
+		g2d.drawImage(image, 0, 0, width, height, null);
+		g2d.dispose();
+		return bi;
 	}
 }
