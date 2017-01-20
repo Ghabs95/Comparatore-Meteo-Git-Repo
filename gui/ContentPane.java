@@ -4,6 +4,11 @@ import java.awt.GridBagConstraints;
 
 import javax.swing.JLabel;
 
+import gui.display.DisplayContainer;
+import gui.listeners.LocationChoiceListener;
+import gui.search.SearchContainer;
+import gui.utilities.GridBagContainer;
+
 @SuppressWarnings("serial")
 public class ContentPane extends GridBagContainer {
 	private final static int CENTER = GridBagConstraints.CENTER;
@@ -11,15 +16,13 @@ public class ContentPane extends GridBagContainer {
 	private final static int BOTH = GridBagConstraints.BOTH;
 	private final static int NORTH = GridBagConstraints.NORTH;
 	
-	//Ascoltatori:
-	private SearchListener sl;
-	
+		
 	
 	@Override
 	public void addComponents() {
 		addSearch();
 		addDisplay();
-		addSearchListener();
+		addLocationChoiceListener();
 		
 	}
 					
@@ -44,8 +47,8 @@ public class ContentPane extends GridBagContainer {
 		this.add(displayC, lim);
 	}
 	
-	private void addSearchListener(){
-		sl = new SearchListener(activeComponents.getButton("search"),
+	private void addLocationChoiceListener(){
+		LocationChoiceListener sl = new LocationChoiceListener(activeComponents.getButton("search"),
 								activeComponents.getTextField("searchBox"),
 								activeComponents.getTextArea("display"));
 		

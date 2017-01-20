@@ -1,4 +1,4 @@
-package gui;
+package gui.utilities;
 
 import java.awt.Container;
 import java.awt.GridBagLayout;

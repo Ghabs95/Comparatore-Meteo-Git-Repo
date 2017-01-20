@@ -1,9 +1,11 @@
-package gui;
+package gui.display;
 
 import java.awt.GridBagConstraints;
 
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
+
+import gui.utilities.GridBagContainer;
 
 @SuppressWarnings("serial")
 public class DisplayContainer extends GridBagContainer {

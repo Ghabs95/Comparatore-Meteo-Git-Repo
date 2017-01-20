@@ -1,4 +1,4 @@
-package gui;
+package gui.search.childs;
 
 import java.awt.Font;
 import java.awt.GridBagConstraints;
@@ -6,6 +6,8 @@ import java.awt.GridBagConstraints;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
+
+import gui.utilities.GridBagContainer;
 
 @SuppressWarnings("serial")
 public class LocationChoice extends GridBagContainer {

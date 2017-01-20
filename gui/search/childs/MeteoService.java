@@ -1,10 +1,12 @@
-package gui;
+package gui.search.childs;
 
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 
 import javax.swing.JCheckBox;
 import javax.swing.JLabel;
+
+import gui.utilities.GridBagContainer;
 
 @SuppressWarnings("serial")
 public class MeteoService extends GridBagContainer {

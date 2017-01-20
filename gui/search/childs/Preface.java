@@ -1,4 +1,4 @@
-package gui;
+package gui.search.childs;
 
 import java.awt.Font;
 import java.awt.Graphics2D;
@@ -10,6 +10,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
 import core.internet.WebHandler;
+import gui.utilities.GridBagContainer;
 
 @SuppressWarnings("serial")
 public class Preface extends GridBagContainer {
@@ -41,7 +42,7 @@ public class Preface extends GridBagContainer {
 	}
 	
 	private BufferedImage getMeteoSatImage(){
-		String path = "http://img2.meteo.it/forecastimg/realtime/europa/eu_sat.jpg";
+		String path = "http://img2.meteo.it/forecastimg/realtime/europa/eu_sat_07.jpg";
 		BufferedImage image = WebHandler.getInstance().getPhoto(path); 
 		return resize(image,250,150);
 	}

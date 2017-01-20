@@ -1,4 +1,4 @@
-package gui;
+package gui.listeners;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -9,13 +9,13 @@ import javax.swing.JTextField;
 
 import core.InformationManager;
 
-public class SearchListener implements ActionListener {
+public class LocationChoiceListener implements ActionListener {
 	private JButton button;
 	private JTextField box;
 	private InformationManager info;
 	private JTextArea display;
 	
-	public SearchListener(JButton listened, JTextField searchBox, JTextArea display){
+	public LocationChoiceListener(JButton listened, JTextField searchBox, JTextArea display){
 		button = listened;
 		box = searchBox;
 		this.display = display;
