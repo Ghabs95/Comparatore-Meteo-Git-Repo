@@ -2,10 +2,10 @@ package gui;
 
 import java.awt.GridBagConstraints;
 
-import javax.swing.JLabel;
-
+import core.InformationManager;
 import gui.display.DisplayContainer;
 import gui.listeners.LocationChoiceListener;
+import gui.listeners.WeatherListener;
 import gui.search.SearchContainer;
 import gui.utilities.GridBagContainer;
 
@@ -20,7 +20,9 @@ public class ContentPane extends GridBagContainer {
 	public void addComponents() {
 		addSearch();
 		addDisplay();
-		addLocationChoiceListener();
+	//	addLocationChoiceListener();
+		addWeatherListener("todayMeteo", InformationManager.OGGI);
+		addWeatherListener("tomorrowMeteo", InformationManager.DOMANI);
 	}
 
 	private void addSearch() {
@@ -42,12 +44,18 @@ public class ContentPane extends GridBagContainer {
 		this.add(displayC, lim);
 	}
 	
-	private void addLocationChoiceListener(){
-		LocationChoiceListener sl = new LocationChoiceListener(activeComponents.getButton("search"),
-								activeComponents.getTextField("searchBox"),
-								activeComponents.getTextArea("display"));
-
-		activeComponents.getButton("search").addActionListener(sl);
+//	private void addLocationChoiceListener(){
+//		LocationChoiceListener sl = new LocationChoiceListener(activeComponents.getButton("search"),
+//								activeComponents.getTextField("searchBox"),
+//								activeComponents.getTextArea("display"));
+//
+//		activeComponents.getButton("search").addActionListener(sl);
+//	}
+	
+	private void addWeatherListener(String buttonName, int dayID){
+		WeatherListener twl = new WeatherListener(activeComponents, dayID);
+		activeComponents.getRadioButton(buttonName).addActionListener(twl);
 	}
+	
 
 }
