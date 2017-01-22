@@ -14,7 +14,7 @@ public class ForecastComparatorMain extends JFrame {
 	private final static double GOLDEN_RATIO = (1 + sqrt(5)) / 2;
 	public final static int WIDTH = 790;
 	public final static int HEIGHT = getGoldenRatio(WIDTH);
-	private final static Color BACKGROUND = new Color(240, 220, 130);
+	public final static Color BACKGROUND = new Color(240, 220, 130);
 
 	public ForecastComparatorMain() {
 		initFrame();
@@ -36,7 +36,7 @@ public class ForecastComparatorMain extends JFrame {
 
 	public static void main(String[] args) {
 		ForecastComparatorMain cm = new ForecastComparatorMain();
-		// cm.pack();
+		cm.pack();  //<---
 		cm.setVisible(true);
 	}
 

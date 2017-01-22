@@ -9,7 +9,7 @@ import core.forecast.factory.ThreeBForecastFactory;
 public class ThreeB extends Site {
 
 	public ThreeB(String url) {
-		super(url);
+		super(url,"threeB_loc.txt");
 	}
 
 	@Override

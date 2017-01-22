@@ -7,6 +7,7 @@ import javax.swing.ButtonGroup;
 import javax.swing.JLabel;
 import javax.swing.JRadioButton;
 
+import gui.ForecastComparatorMain;
 import gui.utilities.GridBagContainer;
 
 @SuppressWarnings("serial")
@@ -41,6 +42,7 @@ public class Command extends GridBagContainer {
 	
 	private void addOperation(String name, String description, int y){
 		JRadioButton button = new JRadioButton(description);
+		button.setBackground(ForecastComparatorMain.BACKGROUND);
 		lim.setPosition(0, y);
 		activeComponents.addRadioButton(name, button);
 		group.add(button);

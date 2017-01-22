@@ -25,7 +25,7 @@ public class Preface extends GridBagContainer {
 		JLabel titleL = new JLabel("Comparatore Meteo");
 		titleL.setFont(new Font("TimesRoman", Font.BOLD, 20));
 		lim.setPosition(0, 0);
-		lim.setInsets(0, 0, 0, 0);
+		lim.setInsets(20, 20, 20, 0);
 		lim.setFillAndAnchor(GridBagConstraints.HORIZONTAL, GridBagConstraints.CENTER);
 		lim.setGridCellDimension(1, 1);
 		this.add(titleL, lim);

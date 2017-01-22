@@ -12,7 +12,7 @@ import core.forecast.factory.MeteoAMForecastFactory;
 public class MeteoAM extends Site {
 
 	public MeteoAM(String url) {
-		super(url);
+		super(url,"am_loc.txt");
 	}
 
 	@Override

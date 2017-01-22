@@ -10,41 +10,46 @@ import gui.ForecastComparatorMain;
 import gui.utilities.GridBagContainer;
 
 @SuppressWarnings("serial")
-public class MeteoService extends GridBagContainer {
+public class TimeChoice extends GridBagContainer {
 
 	@Override
 	public void addComponents() {
 		addTitleLabel();
-		addCheckBoxes();
+		setupConstraints();
+		//aggiungo i giorni
+		addBox("checkOggi","Oggi", 				0,2);
+		addBox("checkDomani","Domani",  		0,3);
+		addBox("checkDopodomani","Dopodomani", 	0,4);
+		//aggiungo gli orari
+		addBox("checkMattina", "Mattina", 		1, 2);
+		addBox("checkPomeriggio", "Pomeriggio", 1, 3);
+		addBox("checkSera", "Sera", 			1, 4);
+		
 	}
 	
 	private void addTitleLabel() {
-		JLabel sl = new JLabel("Servizio Meteo");
+		JLabel sl = new JLabel("Quando");
 		sl.setFont(new Font("TimesRoman",Font.BOLD,14));
 		lim.setPosition(0,0);
 		lim.setInsets(10,0,10,10);
 		lim.setFillAndAnchor(GridBagConstraints.HORIZONTAL, GridBagConstraints.CENTER);
-		lim.setGridCellDimension(2,1);
+		lim.setGridCellDimension(3,1);
 		this.add(sl, lim);
 	}
 	
-	private void addCheckBoxes(){
+	private void setupConstraints(){
 		//imposto le limitazioni
 		lim.setInsets(5,0,5,0);
 		lim.setFillAndAnchor(GridBagConstraints.NONE, GridBagConstraints.WEST);
 		lim.setGridCellDimension(1,1);
-		//aggiungo i box
-		addBox("checkLamma","Lamma", 2);
-		addBox("checkAM","Meteo AM", 3);
-		addBox("check3B","3B Meteo", 4);
 	}
 	
-	private void addBox(String name, String description, int y){
+	private void addBox(String name, String description, int x, int y){
 		JCheckBox box = new JCheckBox(description);
 		box.setBackground(ForecastComparatorMain.BACKGROUND);
-		lim.setPosition(0, y);
+		lim.setPosition(x, y);
 		activeComponents.addCheckBox(name, box);
 		this.add(box,lim);
 	}
-	
+
 }

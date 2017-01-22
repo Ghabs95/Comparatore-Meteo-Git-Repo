@@ -4,9 +4,10 @@ import core.forecast.factory.ForecastAbstractFactory;
 import core.forecast.factory.LammaForecastFactory;
 
 public class Lamma extends Site {
+	
 
 	public Lamma(String url) {
-		super(url);
+		super(url,"lamma_loc.txt");
 	}
 
 	@Override

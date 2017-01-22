@@ -4,7 +4,7 @@ import java.awt.GridBagConstraints;
 
 import core.InformationManager;
 import gui.display.DisplayContainer;
-import gui.listeners.LocationChoiceListener;
+import gui.listeners.LocationAvailability;
 import gui.listeners.WeatherListener;
 import gui.search.SearchContainer;
 import gui.utilities.GridBagContainer;
@@ -21,6 +21,7 @@ public class ContentPane extends GridBagContainer {
 		addSearch();
 		addDisplay();
 	//	addLocationChoiceListener();
+		addLocationAvailability();
 		addWeatherListener("todayMeteo", InformationManager.OGGI);
 		addWeatherListener("tomorrowMeteo", InformationManager.DOMANI);
 	}
@@ -51,6 +52,11 @@ public class ContentPane extends GridBagContainer {
 //
 //		activeComponents.getButton("search").addActionListener(sl);
 //	}
+	
+	private void addLocationAvailability(){
+		LocationAvailability la = new LocationAvailability(activeComponents);
+		activeComponents.getTextField("searchBox").addCaretListener(la);
+	}
 	
 	private void addWeatherListener(String buttonName, int dayID){
 		WeatherListener twl = new WeatherListener(activeComponents, dayID);
