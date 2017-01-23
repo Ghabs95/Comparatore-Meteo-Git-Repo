@@ -7,14 +7,16 @@ import org.junit.Test;
 
 public class TestSiteAvailability {
 	private Lamma lamma;
+	@SuppressWarnings("unused")
 	private MeteoAM am;
+	@SuppressWarnings("unused")
 	private ThreeB threeB;
 
 	@Before
 	public void setUp() throws Exception {
-		lamma = new Lamma(""); //url fake, non mi serve
-		am = new MeteoAM("");
-		threeB = new ThreeB("");
+		lamma = new Lamma(); 
+		am = new MeteoAM();
+		threeB = new ThreeB();
 	}
 
 	@Test

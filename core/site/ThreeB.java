@@ -8,8 +8,8 @@ import core.forecast.factory.ThreeBForecastFactory;
 
 public class ThreeB extends Site {
 
-	public ThreeB(String url) {
-		super(url,"threeB_loc.txt");
+	public ThreeB() {
+		super("http://www.3bmeteo.com/meteo/","threeB_loc.txt");
 	}
 
 	@Override

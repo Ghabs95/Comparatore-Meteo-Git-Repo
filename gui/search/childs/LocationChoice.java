@@ -3,7 +3,6 @@ package gui.search.childs;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 
-import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 
@@ -16,7 +15,6 @@ public class LocationChoice extends GridBagContainer {
 	public void addComponents() {
 		addSearchLabel();
 		addSearchBox();
-		addStartButton();
 	}
 	
 	private void addSearchLabel() {
@@ -39,14 +37,4 @@ public class LocationChoice extends GridBagContainer {
 		this.add(searchBox, lim);
 	}	
 	
-	private void addStartButton(){
-		JButton searchButton = new JButton("Search!");
-		lim.setPosition(1, 1);
-		activeComponents.addButton("search",searchButton);
-		this.add(searchButton, lim);
-	}
-	
-	
-	
-
 }

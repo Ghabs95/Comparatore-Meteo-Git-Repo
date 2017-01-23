@@ -16,7 +16,7 @@ public class Display extends GridBagContainer {
 	}
 	
 	private void addDisplay() {
-		JTextArea displayBox = new JTextArea(20,30);
+		JTextArea displayBox = new JTextArea(40,40);
 		displayBox.setEditable(false);
 		JScrollPane sp = new JScrollPane(displayBox);
 		lim.setPosition(0,0);

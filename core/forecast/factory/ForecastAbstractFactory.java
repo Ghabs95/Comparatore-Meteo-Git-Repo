@@ -9,11 +9,12 @@ import org.jsoup.nodes.Node;
 import org.jsoup.select.Elements;
 
 import core.forecast.Forecast;
+import core.forecast.ForecastTree;
 
 public abstract class ForecastAbstractFactory {
-	public final static int OGGI = 0;
-	public final static int DOMANI = 1;
-	public final static int DOPODOMANI = 2;
+	public final static int OGGI = ForecastTree.OGGI;
+	public final static int DOMANI = ForecastTree.DOMANI;
+	public final static int DOPODOMANI = ForecastTree.DOPODOMANI;
 	public final static int NOTTE = 0;
 	public final static int MATTINA = 1;
 	public final static int POMERIGGIO = 2;

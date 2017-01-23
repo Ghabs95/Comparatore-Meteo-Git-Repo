@@ -18,16 +18,16 @@ public class Command extends GridBagContainer {
 	public void addComponents() {
 		addLabel();
 		operationConstraintsSetup();
-		addOperation("todayMeteo", "Meteo Oggi",      1);
-		addOperation("tomorrowMeteo", "Meteo Domani", 2);
-		
+		addCancelButton();
+		//Operazioni:
+		addOperation("customWeather", "Meteo",      1);
 	}
 	
 	private void addLabel() {
 		JLabel sl = new JLabel("Operazione");
 		sl.setFont(new Font("TimesRoman",Font.BOLD,14));
 		lim.setPosition(0,0);
-		lim.setInsets(10,0,0,0);
+		lim.setInsets(10,0,10,0);
 		lim.setFillAndAnchor(GridBagConstraints.HORIZONTAL, GridBagConstraints.WEST);
 		lim.setGridCellDimension(1,1);
 		this.add(sl, lim);
@@ -48,4 +48,12 @@ public class Command extends GridBagContainer {
 		group.add(button);
 		this.add(button,lim);
 	}
+	
+	//Bottone di servizio, per disattivare gli altri
+	private void addCancelButton(){
+		JRadioButton button = new JRadioButton();
+		activeComponents.addRadioButton("cancel", button);
+		group.add(button);
+	}
+	
 }

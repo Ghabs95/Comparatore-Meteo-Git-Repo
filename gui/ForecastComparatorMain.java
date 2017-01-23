@@ -24,9 +24,9 @@ public class ForecastComparatorMain extends JFrame {
 
 	private void initFrame() {
 		setTitle("Comparatore Meteo - v1.0");
-		setLocation(280, 100);
+		setLocation(280, 10);
 		setSize(WIDTH, HEIGHT);
-		setResizable(true);
+		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 

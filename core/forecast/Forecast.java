@@ -3,13 +3,20 @@ package core.forecast;
 import java.util.Map;
 
 public class Forecast {
+	public final static String NOTTE = "notte";
+	public final static String MATTINA = "mattina";
+	public final static String POMERIGGIO = "pomeriggio";
+	public final static String SERA = "sera";
+	
 	private Map<String,Map<String,String>> forecast;
+	
 	
 	public Forecast(Map<String,Map<String,String>> root){
 		forecast = root;
 	}
 	
 	// Metodi per la lettura delle informazioni 
+	@Deprecated
 	public void showOld() {
 		System.out.println("------------------------------------");
 		for (Map.Entry<String, Map<String, String>> entry : forecast.entrySet()) {
@@ -41,6 +48,11 @@ public class Forecast {
 			}
 		}
 		return str;
+	}
+	
+	/* Metodi di ricerca */
+	public Map<String,String> getPartialForecast(String timeID){
+		return forecast.get(timeID);
 	}
 	
 }

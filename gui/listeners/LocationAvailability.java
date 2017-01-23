@@ -24,9 +24,9 @@ public class LocationAvailability implements CaretListener {
 	
 	public LocationAvailability(ActiveComponentsManager acm) {
 		super();
-		lamma = new Lamma(""); //url fake, non mi serve
-		am = new MeteoAM("");
-		threeB = new ThreeB("");
+		lamma = new Lamma();
+		am = new MeteoAM();
+		threeB = new ThreeB();
 		searchBox = acm.getTextField("searchBox");
 		lammaCheck = acm.getCheckBox("checkLamma");
 		amCheck = acm.getCheckBox("checkAM");

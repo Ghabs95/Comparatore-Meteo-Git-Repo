@@ -11,8 +11,8 @@ import core.forecast.factory.MeteoAMForecastFactory;
 
 public class MeteoAM extends Site {
 
-	public MeteoAM(String url) {
-		super(url,"am_loc.txt");
+	public MeteoAM() {
+		super("http://www.meteoam.it/ta/previsione/","am_loc.txt");
 	}
 
 	@Override
