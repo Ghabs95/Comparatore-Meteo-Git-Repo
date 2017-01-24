@@ -2,6 +2,7 @@ package core.forecast;
 
 import java.util.LinkedList;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class Forecast {	
 	private Map<String,Map<String,String>> forecast;
@@ -23,18 +24,22 @@ public class Forecast {
 		info.entrySet().forEach(entry -> System.out.println("\t" + entry.getKey() + ": " + entry.getValue()));
 	}
 	
-	//TODO #java8: rifattorizzare il metodo
 	@Override
-	public String toString(){
-		String str = "";
-		for (Map.Entry<String, Map<String, String>> entry : forecast.entrySet()) {
-			str += entry.getKey() + ":\n";
-			for (Map.Entry<String, String> sub_entry : entry.getValue().entrySet()) {
-				str += "\t" + sub_entry.getKey() + ": " + sub_entry.getValue() + "\n";
-			}
-		}
-		return str;
-	}
+	 public String toString(){
+	  String str = "";
+	  str = forecast.entrySet().stream().map(entry -> getTostring(entry)).collect(Collectors.joining());
+	  
+	  return str;
+	 }
+
+
+	 private String getTostring(Map.Entry<String, Map<String, String>> entry) {
+	  String str = entry.getKey() + ":\n";
+	  str += entry.getValue().entrySet().stream()
+	            .map(sub_entry -> "\t" + sub_entry.getKey() + ": " + sub_entry.getValue() + "\n")
+	            .collect(Collectors.joining());
+	  return str;
+	 }
 	
 	public static LinkedList<String> getAvailableElements(){
 		LinkedList<String> elements = new LinkedList<>();

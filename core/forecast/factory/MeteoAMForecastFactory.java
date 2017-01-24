@@ -102,7 +102,7 @@ public class MeteoAMForecastFactory extends ForecastAbstractFactory {
 		return infoOra;
 	}
 
-	//TODO #refactoring: ci sono un pò di varibili usate una sola volta, probilmente si posso creare in-place ed evitare la dichiarazione a parte
+	
 	private Element takeHour(Elements hours, int orario) {
 		Element hour = null;
 		String notteH = "04:00";
