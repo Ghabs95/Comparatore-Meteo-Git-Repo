@@ -13,7 +13,7 @@ public class CompareElementListener extends AbstractWeatherListener {
 	public CompareElementListener(ActiveComponentsManager acm) {
 		super(acm);
 		chooseElement = acm.getComboBox("chooseForecastElement");
-	}
+	} 
 
 	//TODO #refactoring: rifattorizzare gli elementi in comune con CustomWeatherListener
 	@Override
