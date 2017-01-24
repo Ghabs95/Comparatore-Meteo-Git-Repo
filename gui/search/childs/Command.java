@@ -2,11 +2,14 @@ package gui.search.childs;
 
 import java.awt.Font;
 import java.awt.GridBagConstraints;
+import java.util.LinkedList;
 
 import javax.swing.ButtonGroup;
+import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JRadioButton;
 
+import core.forecast.Forecast;
 import gui.ForecastComparatorMain;
 import gui.utilities.GridBagContainer;
 
@@ -20,7 +23,9 @@ public class Command extends GridBagContainer {
 		operationConstraintsSetup();
 		addCancelButton();
 		//Operazioni:
-		addOperation("customWeather", "Meteo",      1);
+		addOperation("customWeather", "Meteo", 1);
+		addOperation("forecastElement","Confronta ", 2);
+		addComboBox("chooseForecastElement",Forecast.getAvailableElements(), 2);
 	}
 	
 	private void addLabel() {
@@ -48,6 +53,16 @@ public class Command extends GridBagContainer {
 		group.add(button);
 		this.add(button,lim);
 	}
+	
+	private void addComboBox(String name, LinkedList<String> description, int y){
+		JComboBox<String> box = new JComboBox<>();
+		description.forEach((element) -> box.addItem(element));
+		box.setSelectedItem("prob. pioggia");
+		lim.setPosition(1, y);
+		activeComponents.addComboBox(name, box);
+		this.add(box,lim);
+	}
+	
 	
 	//Bottone di servizio, per disattivare gli altri
 	private void addCancelButton(){

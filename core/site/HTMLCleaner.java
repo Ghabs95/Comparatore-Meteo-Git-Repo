@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 public class HTMLCleaner {
 
+	//TODO #java8: riscrivere il metodo!
 	//Toglie tutto cio' che e' contenuto tra 2 tag (uno di apertura e uno di chiusura)
 	public String cutTag(String dirtyStr, String startRegex, String endRegex){
 		String[] dirtyList = dirtyStr.split(startRegex);
@@ -22,6 +23,7 @@ public class HTMLCleaner {
 		return clean;
 	}
 	
+	//TODO #java8: riscrivere il metodo!
 	private String listToString(ArrayList<String> a){
 		String tmp = "";
 		for(String s : a){
@@ -30,6 +32,7 @@ public class HTMLCleaner {
 		return tmp;
 	}
 	
+	//TODO #java8: riscrivere il metodo!
 	public String removeBlocks(String dirtyStr, String block){
 		String[] tmp = dirtyStr.split(block);
 		String sum ="";

@@ -5,6 +5,7 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
+//TODO #choose: mantenere questa classe?
 public class TestSiteAvailability {
 	private Lamma lamma;
 	@SuppressWarnings("unused")

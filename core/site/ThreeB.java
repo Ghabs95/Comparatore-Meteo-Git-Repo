@@ -33,7 +33,7 @@ public class ThreeB extends Site {
 
 	@Override
 	public String cleanSiteContent(String siteContent) {
-		// TODO Pulire i tag che rompono (se ce ne sono)
+		//TODO #choose: se c'è da fare pulizia nel file html, andrebbe fatta qui, anzichè nella factory!
 		return siteContent;
 	}
 

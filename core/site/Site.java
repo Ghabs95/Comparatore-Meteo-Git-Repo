@@ -29,7 +29,7 @@ public abstract class Site {
 		String url = getLocationUrl(location, day);
 		WebHandler web = WebHandler.getInstance();
 		String siteContent = web.getSite(url);
-		String cleanContent = cleanSiteContent(siteContent);
+		String cleanContent = cleanSiteContent(siteContent);  //TODO #choose: serve? col nuovo parser pare di no, ma va verificato
 		Document document = Jsoup.parse(cleanContent);
 		ForecastAbstractFactory constructor = getForecastConstructor();
 		return constructor.createForecast(document, day);
@@ -45,6 +45,7 @@ public abstract class Site {
 	
 	public abstract String cleanSiteContent(String siteContent);
 	
+	//TODO #java8: riscrivere il metodo!
 	public String getFormattedLocation(String location) {
 		String fLoc = "";
 		String[] locPieces = location.split(" ");
@@ -77,6 +78,7 @@ public abstract class Site {
 		}
 	}
 	
+	//TODO #java8: riscrivere il metodo!
 	private String getPath(String fileName){
 		URL urlP = getClass().getResource(fileName);
 		String path = "";
@@ -88,6 +90,7 @@ public abstract class Site {
 		return path;
 	}
 	
+	//TODO #java8: riscrivere il metodo!
 	private String loadFromFile(String path){
 		BufferedReader br = null;
 		String locations = "";

@@ -15,6 +15,7 @@ public class Display extends GridBagContainer {
 		addDisplay();
 	}
 	
+	//TODO #choose: modificare il display o lasciarlo semplice?
 	private void addDisplay() {
 		JTextArea displayBox = new JTextArea(40,40);
 		displayBox.setEditable(false);

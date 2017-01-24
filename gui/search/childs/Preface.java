@@ -42,12 +42,13 @@ public class Preface extends GridBagContainer {
 	}
 	
 	private BufferedImage getMeteoSatImage(){
-		String path = "http://img2.meteo.it/forecastimg/realtime/europa/eu_sat_07.jpg";
+		String path = "http://img2.meteo.it/forecastimg/realtime/europa/eu_sat_07.jpg"; //TODO #check: cercare un'altra immagine con url stabile
 		BufferedImage image = WebHandler.getInstance().getPhoto(path); 
 		return resize(image,250,150);
 	}
 
 	// Trovato su internet!
+	//TODO #check: controllare, visto che è preso da internet!
 	private BufferedImage resize(BufferedImage image, int width, int height) {
 		BufferedImage bi = new BufferedImage(width, height, BufferedImage.TRANSLUCENT);
 		Graphics2D g2d = (Graphics2D) bi.createGraphics();

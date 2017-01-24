@@ -2,15 +2,15 @@ package gui.utilities;
 
 import java.util.HashMap;
 
-import javax.swing.JButton;
 import javax.swing.JCheckBox;
+import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JRadioButton;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 public class ActiveComponentsManager {
-	private HashMap<String,JButton> button;
+	private HashMap<String,JComboBox<String>> comboBox;
 	private HashMap<String,JRadioButton> radioButton;
 	private HashMap<String,JCheckBox> checkBox;
 	private HashMap<String,JTextField> textField;
@@ -18,7 +18,7 @@ public class ActiveComponentsManager {
 	private HashMap<String,JLabel> label;
 	
 	public ActiveComponentsManager(){
-		button = new HashMap<>();
+		comboBox = new HashMap<>();
 		radioButton = new HashMap<>();
 		checkBox = new HashMap<>();
 		textField = new HashMap<>();
@@ -27,8 +27,8 @@ public class ActiveComponentsManager {
 	}
 	
 	/* ADDERS */
-	public void addButton(String name, JButton component){
-		button.put(name, component);
+	public void addComboBox(String name, JComboBox<String> component){
+		comboBox.put(name, component);
 	}
 	
 	public void addRadioButton(String name, JRadioButton component){
@@ -53,7 +53,7 @@ public class ActiveComponentsManager {
 	
 	/* UPDATER */
 	public void updateAll(ActiveComponentsManager acm){
-		button.putAll(acm.button);
+		comboBox.putAll(acm.comboBox);
 		radioButton.putAll(acm.radioButton);
 		checkBox.putAll(acm.checkBox);
 		textField.putAll(acm.textField);
@@ -63,8 +63,8 @@ public class ActiveComponentsManager {
 	
 	
 	/* GETTERS per ricerca */
-	public JButton getButton(String name){
-		return button.get(name);
+	public JComboBox<String> getComboBox(String name){
+		return comboBox.get(name);
 	}
 	
 	public JCheckBox getCheckBox(String name){
@@ -87,6 +87,4 @@ public class ActiveComponentsManager {
 		return label.get(name);
 	}
 	
-	 
-
 }

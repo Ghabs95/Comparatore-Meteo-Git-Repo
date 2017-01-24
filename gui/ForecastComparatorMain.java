@@ -10,6 +10,7 @@ import javax.swing.JFrame;
 
 @SuppressWarnings("serial")
 public class ForecastComparatorMain extends JFrame {
+	//TODO #choose: mantenere le costanti se poi usiamo pack?
 	// Costanti Grafiche
 	private final static double GOLDEN_RATIO = (1 + sqrt(5)) / 2;
 	public final static int WIDTH = 790;
@@ -23,7 +24,7 @@ public class ForecastComparatorMain extends JFrame {
 	}
 
 	private void initFrame() {
-		setTitle("Comparatore Meteo - v1.0");
+		setTitle("Comparatore Meteo - v2.0");
 		setLocation(280, 10);
 		setSize(WIDTH, HEIGHT);
 		setResizable(false);

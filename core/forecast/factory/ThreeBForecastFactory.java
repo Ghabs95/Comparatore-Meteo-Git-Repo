@@ -50,7 +50,7 @@ public class ThreeBForecastFactory extends ForecastAbstractFactory {
 		}
 		else {
 			orario = orario == NOTTE ? 3 : orario - 1;
-			hourForecast = putInMapForecats(root, orario);
+			hourForecast = putInMapForecast(root, orario);
 		}
 		return hourForecast;
 	}
@@ -64,30 +64,32 @@ public class ThreeBForecastFactory extends ForecastAbstractFactory {
 			int index = dayTimeFormatted.indexOf(orario * 5 + 5);
 			String dayTimeList = dayTime.get(index * 2 + 1);
 			List<String> allTemp = getDayTime(root, TODAY_DEG_TAG);
-			
+			//TODO #choose: visto che le key delle mappe sono stringhe, adrebbero fissate con delle costanti in Forecast (ma sono tante, forse viene brutto...)
 			hourForecast.put("cielo", dayTimeList);
-			hourForecast.put("temp", slicingList(allTemp, 3).get(index));
-			hourForecast.put("rain_prob", getDayTime(root, RAIN_TAG).get(index));
-			hourForecast.put("temp_perc", slicingList(allTemp.subList(1, allTemp.size()), 3).get(index));
+			hourForecast.put("temperatura", slicingList(allTemp, 3).get(index));
+			hourForecast.put("prob. pioggia", getDayTime(root, RAIN_TAG).get(index));
+			hourForecast.put("temp. percepita", slicingList(allTemp.subList(1, allTemp.size()), 3).get(index));
 		}
 		return hourForecast;
 	}
-
+	
+	//TODO #choose: visto che le key delle mappe sono stringhe, adrebbero fissate con delle costanti in Forecast (ma sono tante, forse viene brutto...)
 	private Map<String, String> putInMapInfoDay(Elements root, Element giorno, String stringTag, List<String> degree) {
 		Map<String, String> infoGiorno = new HashMap<>();
-		infoGiorno.put("ultimoAggiornamento", lastUpdateRoot.text());
+		infoGiorno.put("aggiornamento", lastUpdateRoot.text());
 		infoGiorno.put("giorno", giorno.text());
-		infoGiorno.put("min", getDegree(root, stringTag, Double::min, degree) + DEGREE_SIMBOL);
-		infoGiorno.put("max", getDegree(root, stringTag, Double::max, degree) + DEGREE_SIMBOL);
+		infoGiorno.put("T_min", getDegree(root, stringTag, Double::min, degree) + DEGREE_SIMBOL);
+		infoGiorno.put("T_max", getDegree(root, stringTag, Double::max, degree) + DEGREE_SIMBOL);
 		return infoGiorno;
 	}
 	
-	private Map<String, String> putInMapForecats(Elements root, int orario) {
+	//TODO #choose: visto che le key delle mappe sono stringhe, adrebbero fissate con delle costanti in Forecast (ma sono tante, forse viene brutto...)
+	private Map<String, String> putInMapForecast(Elements root, int orario) {
 		Map<String, String> forecast = new HashMap<>();
 		forecast.put("cielo", getDayTime(root, FORECAST_TAG).get(orario));
-		forecast.put("temp", getDayTime(root, DEG_TAG).subList(0, 4).get(orario));
-		forecast.put("rain_prob", getDayTime(root, DATA_TAG).subList(12, 16).get(orario));
-		forecast.put("temp_perc", slicingList(getDayTime(root, TODAY_DEG_TAG), 2).get(orario));
+		forecast.put("temperatura", getDayTime(root, DEG_TAG).subList(0, 4).get(orario));
+		forecast.put("prob. pioggia", getDayTime(root, DATA_TAG).subList(12, 16).get(orario));
+		forecast.put("temp. percepita", slicingList(getDayTime(root, TODAY_DEG_TAG), 2).get(orario));
 		return forecast;
 	}
 	

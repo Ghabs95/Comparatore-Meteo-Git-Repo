@@ -4,6 +4,7 @@ import java.awt.GridBagConstraints;
 
 import gui.display.DisplayContainer;
 import gui.listeners.LocationAvailability;
+import gui.listeners.CompareElementListener;
 import gui.listeners.CustomWeatherListener;
 import gui.search.SearchContainer;
 import gui.utilities.GridBagContainer;
@@ -18,6 +19,7 @@ public class ContentPane extends GridBagContainer {
 		//LISTENERS:
 		addLocationAvailability();
 		addCustomWeatherListener();
+		addCompareElementListener();
 	}
 
 	private void addSearch() {
@@ -47,6 +49,11 @@ public class ContentPane extends GridBagContainer {
 	private void addCustomWeatherListener(){
 		CustomWeatherListener twl = new CustomWeatherListener(activeComponents);
 		activeComponents.getRadioButton("customWeather").addActionListener(twl);
+	}
+	
+	private void addCompareElementListener(){
+		CompareElementListener cel = new CompareElementListener(activeComponents);
+		activeComponents.getRadioButton("forecastElement").addActionListener(cel);
 	}
 	
 

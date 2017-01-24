@@ -16,6 +16,7 @@ public class ForecastTree {
 	public final static int OGGI = 0;
 	public final static int DOMANI = 1;
 	public final static int DOPODOMANI = 2;
+	public final static String GIORNO = Forecast.GIORNO;
 	public final static String NOTTE = Forecast.NOTTE;
 	public final static String MATTINA = Forecast.MATTINA;
 	public final static String POMERIGGIO = Forecast.POMERIGGIO;
@@ -29,12 +30,16 @@ public class ForecastTree {
 	private ArrayList<Integer> meteoIDs;
 
 	public ForecastTree() {
-		lamma = new Lamma();
-		am = new MeteoAM();
-		threeB = new ThreeB();
+		setupMeteoService();
 		setupDayList();
 		setupMeteoList();
 		setupTree();
+	}
+	
+	private void setupMeteoService(){
+		lamma = new Lamma();
+		am = new MeteoAM();
+		threeB = new ThreeB();
 	}
 	
 	private void setupDayList(){
@@ -62,18 +67,10 @@ public class ForecastTree {
 	public void createLocationForecast(int meteoID, String location) {
 		ArrayList<Forecast> fullForecast;
 		switch (meteoID) {
-		case (LAMMA): {
-			fullForecast = getFullForecast(lamma, location); break;
-			}
-		case (AM): {
-			fullForecast = getFullForecast(am, location); break;
-			}
-		case (THREEB): {
-			fullForecast = getFullForecast(threeB, location); break;
-			}
-		default: {
-			fullForecast = new ArrayList<>();
-			}
+		case (LAMMA): { fullForecast = getFullForecast(lamma, location); break; }
+		case (AM): { fullForecast = getFullForecast(am, location); break; }
+		case (THREEB): { fullForecast = getFullForecast(threeB, location); break; }
+		default: { fullForecast = new ArrayList<>(); }
 		}
 		forecastTree.get(meteoID).put(location, fullForecast);
 	}
@@ -96,6 +93,13 @@ public class ForecastTree {
 		return forecastTree.get(meteoID).containsKey(location);
 	}
 	
+	public Forecast getDayForecast(int meteoID, String location, int dayID) {
+		checkAvailability(meteoID, location);
+		return forecastTree.get(meteoID).get(location).get(dayID);
+	}
+	
+	
+	//TODO #choose: questi metodi non sono utilizzati, sono solo esempi delle possibilità della struttura ad albero. Decidere se tenerli o no!
 	public Map<String, ArrayList<Forecast>> getForecastByMeteo(int meteoID) {
 		return forecastTree.get(meteoID);
 	}
@@ -117,12 +121,5 @@ public class ForecastTree {
 		}
 		return byDay;
 	}
-
-	public Forecast getDayForecast(int meteoID, String location, int dayID) {
-		checkAvailability(meteoID, location);
-		return forecastTree.get(meteoID).get(location).get(dayID);
-	}
-	
-	
 
 }

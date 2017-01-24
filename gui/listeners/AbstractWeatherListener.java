@@ -5,6 +5,7 @@ import java.awt.event.ActionListener;
 import java.util.LinkedList;
 
 import javax.swing.JCheckBox;
+import javax.swing.JRadioButton;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
@@ -17,6 +18,7 @@ public abstract class AbstractWeatherListener implements ActionListener {
 	private LinkedList<JCheckBox> times;
 	protected JTextField searchBox;
 	protected JTextArea display;	
+	protected JRadioButton cancel;
 	protected InformationManager info;
 	
 
@@ -26,6 +28,7 @@ public abstract class AbstractWeatherListener implements ActionListener {
 		setupTimes(acm);
 		searchBox = acm.getTextField("searchBox");
 		display = acm.getTextArea("display");
+		cancel = acm.getRadioButton("cancel");
 		info = new InformationManager();
 	}
 	
@@ -50,6 +53,7 @@ public abstract class AbstractWeatherListener implements ActionListener {
 		times.add(acm.getCheckBox("checkSera"));
 	}
 	
+	//TODO #refactoring: rifattorizzare col metodo sotto!
 	public LinkedList<Integer> getSelectedMeteo(){
 		LinkedList<Integer> meteoIDs = new LinkedList<>();
 		for(JCheckBox box:meteo){
@@ -67,6 +71,7 @@ public abstract class AbstractWeatherListener implements ActionListener {
 		return meteoIDs;
 	}
 		
+	//TODO #refactoring: rifattorizzare col metodo sopra!
 	public LinkedList<Integer> getSelectedDays(){
 		LinkedList<Integer> dayIDs = new LinkedList<>();
 		for(JCheckBox box:days){
@@ -107,8 +112,7 @@ public abstract class AbstractWeatherListener implements ActionListener {
 	}
 	
 	private String getDefaultTime(){
-		times.get(0).setSelected(true);
-		return InformationManager.MATTINA;
+		return InformationManager.GIORNO;
 	}
 
 	public String getMeteo(int meteoID){

@@ -60,7 +60,7 @@ public class WebHandler {
 		} else if (url.contains("meteoam")) {
 			path = getPath("meteoAM.html");
 		} else if (url.contains("3bmeteo")) {
-			path = getPath("3bMeteo.html");
+			path = getPath("3bMeteo.html");   //TODO #check: il file caricato non viene parsato correttamente, modificare il file!
 		} else {
 			return "Sito non disponibile!";
 		}
@@ -79,6 +79,7 @@ public class WebHandler {
 		return path;
 	}
 	
+	//TODO #java8: riscrivere il metodo! + ricontrollare anche gli altri metodi della classe
 	private String loadFromFile(String path){
 		BufferedReader br = null;
 		FileReader fr = null;

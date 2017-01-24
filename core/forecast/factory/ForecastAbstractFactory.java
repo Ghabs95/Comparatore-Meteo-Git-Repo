@@ -22,6 +22,7 @@ public abstract class ForecastAbstractFactory {
 	public final static int MIN = 0;
 	public final static int MAX = 1;
 	
+	//TODO #choose: visto che le key delle mappe sono stringhe, adrebbero fissate con delle costanti in Forecast (ma sono tante, forse viene brutto...)
 	public Forecast createForecast(Document doc, int day) {
 		Elements root = createRoot(doc);
 		Map<String, Map<String, String>> forecast = new LinkedHashMap<>();
@@ -46,32 +47,16 @@ public abstract class ForecastAbstractFactory {
 	// (es. 0 se e' il primo)
 	public String getContent(Element rootElement, String tagName, int tagPosition) {
 		Element node = getNthNode(rootElement, tagName, tagPosition);
-		if (node == null) {
-			return "";
-		} // se il tag non esiste
+		if (node == null) { return ""; } // se il tag non esiste
 		return node.text();
 	}
 
 	// Restituisce l'N-esimo nodo, dato un certo tag
 	public Element getNthNode(Element root, String name, int tagPosition) {
 		Elements tmp = root.select(name);
-		if (tmp.size() == 0) {
-			return null;
-		} // se il tag non e' presente
-		else {
-			return tmp.get(tagPosition);
-		}
+		if (tmp.size() == 0) { return null;	} // se il tag non e' presente
+		return tmp.get(tagPosition);
 	}
-
-	// Dato un Node, lo trasforma in un Element (solo se e' lecito)
-//	@SuppressWarnings("static-access")
-//	public Element nodeToElement(Node node) {
-//		if (node.getNodeType() == node.ELEMENT_NODE) {
-//			return (Element) node;
-//		} else {
-//			return null;
-//		}
-//	}
 
 	// Dato un nodo, ritorna il valore di un suo attributo
 	public String getNodeAttribute(Node node, String attrName) {

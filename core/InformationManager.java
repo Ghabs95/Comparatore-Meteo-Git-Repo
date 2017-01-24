@@ -12,6 +12,7 @@ public class InformationManager {
 	public final static int OGGI = ForecastTree.OGGI;
 	public final static int DOMANI = ForecastTree.DOMANI;
 	public final static int DOPODOMANI = ForecastTree.DOPODOMANI;
+	public final static String GIORNO = ForecastTree.GIORNO;
 	public final static String NOTTE = ForecastTree.NOTTE;
 	public final static String MATTINA = ForecastTree.MATTINA;
 	public final static String POMERIGGIO = ForecastTree.POMERIGGIO;
@@ -33,5 +34,14 @@ public class InformationManager {
 		return partialForecast;
 	}
 	
+	public String getPrintableForecastElement(int meteoID, String location, int dayID, String timeID, String element){
+		Forecast forecast = ft.getDayForecast(meteoID, location, dayID);
+		Map<String,String> partial = forecast.getPartialForecast(timeID);
+		String strElement = partial.get(element);
+		if(strElement == null || strElement == ""){ strElement = "Non Disponibile!"; }  //TODO #check: basta uno solo dei 2 controlli, verificare quale (probabilmente null)
+		return strElement;
+	}
+	
+		
 	
 }

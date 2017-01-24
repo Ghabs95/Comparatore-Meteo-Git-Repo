@@ -3,17 +3,19 @@ package gui.listeners;
 import java.awt.event.ActionEvent;
 import java.util.LinkedList;
 
+import javax.swing.JComboBox;
 
 import gui.utilities.ActiveComponentsManager;
 
-public class CustomWeatherListener extends AbstractWeatherListener {
-	
-		
-	public CustomWeatherListener(ActiveComponentsManager acm) {
+public class CompareElementListener extends AbstractWeatherListener {
+	private JComboBox<String> chooseElement;
+
+	public CompareElementListener(ActiveComponentsManager acm) {
 		super(acm);
+		chooseElement = acm.getComboBox("chooseForecastElement");
 	}
-	
-	//TODO #refactoring: rifattorizzare con i metodi in comune al CompareElementListener
+
+	//TODO #refactoring: rifattorizzare gli elementi in comune con CustomWeatherListener
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
 		String location = searchBox.getText();
@@ -25,12 +27,12 @@ public class CustomWeatherListener extends AbstractWeatherListener {
 		for(int mID:meteoIDs){
 			display.append("+++"+getMeteo(mID)+"+++\n\n");
 			for(int dID:daysIDs){
-				display.append("--"+getDay(dID)+"--\n");
+				display.append("\n--"+getDay(dID)+"--\n");
 				for(String tID:timesIDs){
 					display.append("*"+tID+"*\n");
-					display.append(info.getPrintablePartialForecast(mID, location, dID, tID));
+					String ce = getChoosedElement();
+					display.append(ce +": "+info.getPrintableForecastElement(mID, location, dID, tID, ce));
 					display.append("\n");
-				
 				}
 			}
 			display.append("\n\n");
@@ -47,5 +49,8 @@ public class CustomWeatherListener extends AbstractWeatherListener {
 		return false;
 	}
 	
+	private String getChoosedElement(){
+		return (String)chooseElement.getSelectedItem();
+	}
 
 }
