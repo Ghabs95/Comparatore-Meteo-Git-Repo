@@ -9,7 +9,7 @@ import core.forecast.factory.ThreeBForecastFactory;
 public class ThreeB extends Site {
 
 	public ThreeB() {
-		super("http://www.3bmeteo.com/meteo/","threeB_loc.txt");
+		super("http://www.3bmeteo.com/meteo/", "threeB_loc.txt");
 	}
 
 	@Override
@@ -18,23 +18,15 @@ public class ThreeB extends Site {
 		locUrl += getFormattedLocation(location);
 		return locUrl + "/" + day;
 	}
-	
+
 	@Override
 	public String getFormattedLocation(String location) {
-		return Stream.of(location.split(" "))
-					 .map(String::toLowerCase)
-					 .collect(joining("+"));
+		return Stream.of(location.split(" ")).map(String::toLowerCase).collect(joining("+"));
 	}
 
 	@Override
 	public ForecastAbstractFactory getForecastConstructor() {
 		return new ThreeBForecastFactory();
-	}
-
-	@Override
-	public String cleanSiteContent(String siteContent) {
-		//TODO #choose: se c'è da fare pulizia nel file html, andrebbe fatta qui, anzichè nella factory!
-		return siteContent;
 	}
 
 }

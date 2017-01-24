@@ -4,9 +4,9 @@ import core.forecast.factory.ForecastAbstractFactory;
 import core.forecast.factory.LammaForecastFactory;
 
 public class Lamma extends Site {
-	
+
 	public Lamma() {
-		super("http://www.lamma.rete.toscana.it/previ/ita/xml/comuni_web/dati/","lamma_loc.txt");
+		super("http://www.lamma.rete.toscana.it/previ/ita/xml/comuni_web/dati/", "lamma_loc.txt");
 	}
 
 	@Override
@@ -20,10 +20,5 @@ public class Lamma extends Site {
 	public ForecastAbstractFactory getForecastConstructor() {
 		return new LammaForecastFactory();
 	}
-
-	@Override
-	public String cleanSiteContent(String siteContent) {
-		return siteContent;
-	}
-
+	
 }
