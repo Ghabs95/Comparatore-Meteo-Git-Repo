@@ -9,28 +9,18 @@ import org.jsoup.nodes.Node;
 import org.jsoup.select.Elements;
 
 import core.forecast.Forecast;
-import core.forecast.ForecastTree;
+import core.forecast.ForecastConstants;
 
 public abstract class ForecastAbstractFactory {
-	public final static int OGGI = ForecastTree.OGGI;
-	public final static int DOMANI = ForecastTree.DOMANI;
-	public final static int DOPODOMANI = ForecastTree.DOPODOMANI;
-	public final static int NOTTE = 0;
-	public final static int MATTINA = 1;
-	public final static int POMERIGGIO = 2;
-	public final static int SERA = 3;
-	public final static int MIN = 0;
-	public final static int MAX = 1;
 	
-	//TODO #choose: visto che le key delle mappe sono stringhe, adrebbero fissate con delle costanti in Forecast (ma sono tante, forse viene brutto...)
 	public Forecast createForecast(Document doc, int day) {
 		Elements root = createRoot(doc);
 		Map<String, Map<String, String>> forecast = new LinkedHashMap<>();
-		forecast.put("infoGiorno", getInfoGiorno(root, day));
-		forecast.put("notte", getPrevisioniOrarie(root, day, NOTTE));
-		forecast.put("mattina", getPrevisioniOrarie(root, day, MATTINA));
-		forecast.put("pomeriggio", getPrevisioniOrarie(root, day, POMERIGGIO));
-		forecast.put("sera", getPrevisioniOrarie(root, day, SERA));
+		forecast.put(ForecastConstants.GIORNO, getInfoGiorno(root, day));
+		forecast.put(ForecastConstants.NOTTE, getPrevisioniOrarie(root, day, FactoryConstants.NOTTE));
+		forecast.put(ForecastConstants.MATTINA, getPrevisioniOrarie(root, day, FactoryConstants.MATTINA));
+		forecast.put(ForecastConstants.POMERIGGIO, getPrevisioniOrarie(root, day, FactoryConstants.POMERIGGIO));
+		forecast.put(ForecastConstants.SERA, getPrevisioniOrarie(root, day, FactoryConstants.SERA));
 		return new Forecast(forecast);
 	}
 

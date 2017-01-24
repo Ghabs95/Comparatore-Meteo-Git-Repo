@@ -9,47 +9,38 @@ import java.util.stream.IntStream;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+
+import core.forecast.ForecastConstants;
+
 import static java.util.stream.Collectors.*;
 
 public class ThreeBForecastFactory extends ForecastAbstractFactory {
-	private final String LAST_UPDATE_TAG = "div.page-header.text-align-sm > div";
-	private final String ROOT_TAG = "div.box.noMarg";
-	private final String DAY_LIST_TAG = "div.navDays";
-	private final String TODAY_DEG_TAG = "span.switchcelsius.switch-te.active";
-	private final String DEG_TAG = "p.big.switchcelsius.switch-te.active";
-	private final String TIME_FORECAST_TAG = "div.col-xs-1-4.big, div.col-xs-2-4";
-	private final String RAIN_TAG = "span.gray";
-	private final String FORECAST_TAG = "small.hidden-xs";
-	private final String DATA_TAG = "div.col-xs-2-3.col-sm-1-5.text-center.altriDati.altriDatiD-active";
-	private final String ONLY_NUMBER_HOUR_REGEX = ":00|[^0-9]+";
-	private final String DEGREE_SIMBOL = "\u00B0";
-	private final String DELETE_DEG_SIMBOL_REGEX = DEGREE_SIMBOL + "|C";
 	private Element lastUpdateRoot;
 	
 	@Override
 	public Elements createRoot(Document doc) {
-		this.lastUpdateRoot = doc.select(LAST_UPDATE_TAG).first();
-		return doc.select(ROOT_TAG);
+		this.lastUpdateRoot = doc.select(ThreeBConstants.LAST_UPDATE_TAG).first();
+		return doc.select(ThreeBConstants.ROOT_TAG);
 	}
 
 	@Override
 	public Map<String, String> getInfoGiorno(Elements root, int day) {
-		Element dayElement = root.select(DAY_LIST_TAG).get(day);
-		if (day == OGGI) {
-			return putInMapInfoDay(root, dayElement, TODAY_DEG_TAG, slicingList(getDayTime(root, TODAY_DEG_TAG), 3));
+		Element dayElement = root.select(ThreeBConstants.DAY_LIST_TAG).get(day);
+		if (day == FactoryConstants.OGGI) {
+			return putInMapInfoDay(root, dayElement, ThreeBConstants.TODAY_DEG_TAG, slicingList(getDayTime(root, ThreeBConstants.TODAY_DEG_TAG), 3));
 		} else {
-			return putInMapInfoDay(root, dayElement, DEG_TAG, getDayTime(root, DEG_TAG));
+			return putInMapInfoDay(root, dayElement, ThreeBConstants.DEG_TAG, getDayTime(root, ThreeBConstants.DEG_TAG));
 		}
 	}
 
 	@Override
 	public Map<String, String> getPrevisioniOrarie(Elements root, int day, int orario) {
 		Map<String, String> hourForecast = new LinkedHashMap<>();
-		if(day == OGGI) {
+		if(day == FactoryConstants.OGGI) {
 			hourForecast = putInMapTodayForecast(root, orario);
 		}
 		else {
-			orario = orario == NOTTE ? 3 : orario - 1;
+			orario = orario == FactoryConstants.NOTTE ? 3 : orario - 1;
 			hourForecast = putInMapForecast(root, orario);
 		}
 		return hourForecast;
@@ -57,45 +48,44 @@ public class ThreeBForecastFactory extends ForecastAbstractFactory {
 	
 	private Map<String, String> putInMapTodayForecast(Elements root, int orario) {
 		Map<String, String> hourForecast = new HashMap<>();
-		List<String> dayTime = getDayTime(root, TIME_FORECAST_TAG);
+		List<String> dayTime = getDayTime(root, ThreeBConstants.TIME_FORECAST_TAG);
 		List<Integer> dayTimeFormatted = formatTimeToInteger(dayTime);
 		
 		if(dayTimeFormatted.contains(orario * 5 + 5)) {
 			int index = dayTimeFormatted.indexOf(orario * 5 + 5);
 			String dayTimeList = dayTime.get(index * 2 + 1);
-			List<String> allTemp = getDayTime(root, TODAY_DEG_TAG);
-			//TODO #choose: visto che le key delle mappe sono stringhe, adrebbero fissate con delle costanti in Forecast (ma sono tante, forse viene brutto...)
-			hourForecast.put("cielo", dayTimeList);
-			hourForecast.put("temperatura", slicingList(allTemp, 3).get(index));
-			hourForecast.put("prob. pioggia", getDayTime(root, RAIN_TAG).get(index));
-			hourForecast.put("temp. percepita", slicingList(allTemp.subList(1, allTemp.size()), 3).get(index));
+			List<String> allTemp = getDayTime(root, ThreeBConstants.TODAY_DEG_TAG);
+			hourForecast.put(ForecastConstants.CIELO, dayTimeList);
+			hourForecast.put(ForecastConstants.TEMPERATURA, slicingList(allTemp, 3).get(index));
+			hourForecast.put(ForecastConstants.PROB_PIOGGIA, getDayTime(root, ThreeBConstants.RAIN_TAG).get(index));
+			hourForecast.put(ForecastConstants.TEMP_PERCEPITA, slicingList(allTemp.subList(1, allTemp.size()), 3).get(index));
 		}
 		return hourForecast;
 	}
 	
-	//TODO #choose: visto che le key delle mappe sono stringhe, adrebbero fissate con delle costanti in Forecast (ma sono tante, forse viene brutto...)
+	
 	private Map<String, String> putInMapInfoDay(Elements root, Element giorno, String stringTag, List<String> degree) {
 		Map<String, String> infoGiorno = new HashMap<>();
-		infoGiorno.put("aggiornamento", lastUpdateRoot.text());
-		infoGiorno.put("giorno", giorno.text());
-		infoGiorno.put("T_min", getDegree(root, stringTag, Double::min, degree) + DEGREE_SIMBOL);
-		infoGiorno.put("T_max", getDegree(root, stringTag, Double::max, degree) + DEGREE_SIMBOL);
+		infoGiorno.put(ForecastConstants.AGGIORNAMENTO, lastUpdateRoot.text());
+		infoGiorno.put(ForecastConstants.GIORNO, giorno.text());
+		infoGiorno.put(ForecastConstants.MIN, getDegree(root, stringTag, Double::min, degree) + ThreeBConstants.DEGREE_SIMBOL);
+		infoGiorno.put(ForecastConstants.MAX, getDegree(root, stringTag, Double::max, degree) + ThreeBConstants.DEGREE_SIMBOL);
 		return infoGiorno;
 	}
 	
-	//TODO #choose: visto che le key delle mappe sono stringhe, adrebbero fissate con delle costanti in Forecast (ma sono tante, forse viene brutto...)
+
 	private Map<String, String> putInMapForecast(Elements root, int orario) {
 		Map<String, String> forecast = new HashMap<>();
-		forecast.put("cielo", getDayTime(root, FORECAST_TAG).get(orario));
-		forecast.put("temperatura", getDayTime(root, DEG_TAG).subList(0, 4).get(orario));
-		forecast.put("prob. pioggia", getDayTime(root, DATA_TAG).subList(12, 16).get(orario));
-		forecast.put("temp. percepita", slicingList(getDayTime(root, TODAY_DEG_TAG), 2).get(orario));
+		forecast.put(ForecastConstants.CIELO, getDayTime(root, ThreeBConstants.FORECAST_TAG).get(orario));
+		forecast.put(ForecastConstants.TEMPERATURA, getDayTime(root, ThreeBConstants.DEG_TAG).subList(0, 4).get(orario));
+		forecast.put(ForecastConstants.PROB_PIOGGIA, getDayTime(root, ThreeBConstants.DATA_TAG).subList(12, 16).get(orario));
+		forecast.put(ForecastConstants.TEMP_PERCEPITA, slicingList(getDayTime(root, ThreeBConstants.TODAY_DEG_TAG), 2).get(orario));
 		return forecast;
 	}
 	
 	private Double getDegree(Elements root, String tag, BinaryOperator<Double> function, List<String> degree) {
 		return degree.stream()
-					.map(text -> text.replaceAll(DELETE_DEG_SIMBOL_REGEX, ""))
+					.map(text -> text.replaceAll(ThreeBConstants.DELETE_DEG_SIMBOL_REGEX, ""))
 					.map(Double::parseDouble)
 					.reduce(function)
 					.get();
@@ -109,7 +99,7 @@ public class ThreeBForecastFactory extends ForecastAbstractFactory {
 	
 	private List<Integer> formatTimeToInteger(List<String> dayTime) {
 		return dayTime.stream()
-					  .map(hour -> hour.replaceAll(ONLY_NUMBER_HOUR_REGEX, ""))
+					  .map(hour -> hour.replaceAll(ThreeBConstants.ONLY_NUMBER_HOUR_REGEX, ""))
 					  .filter(hour -> !hour.isEmpty())
 					  .map(Integer::parseInt)
 					  .collect(toList());

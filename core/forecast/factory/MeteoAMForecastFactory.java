@@ -20,9 +20,9 @@ public class MeteoAMForecastFactory extends ForecastAbstractFactory {
 
 	@Override
 	public Map<String, String> getInfoGiorno(Elements root, int day) {
-		if (day == OGGI) {
+		if (day == FactoryConstants.OGGI) {
 			return putInMap(root, "oggi");
-		} else if (day == DOMANI) {
+		} else if (day == FactoryConstants.DOMANI) {
 			return putInMap(root, "domani");
 		} else {
 			return putInMap(root, "dopodomani");
@@ -32,9 +32,17 @@ public class MeteoAMForecastFactory extends ForecastAbstractFactory {
 	//TODO #choose: visto che le key delle mappe sono stringhe, adrebbero fissate con delle costanti in Forecast (ma sono tante, forse viene brutto...)
 	private Map<String, String> putInMap(Elements root, String giorno) {
 		Map<String, String> infoGiorno = new LinkedHashMap<>();
+		if (giorno.equals("dopodomani")) {
+			giorno = "tregiorni";
+		}
 		Element dayElement = root.select("#" + giorno).select("tbody").first();
-		infoGiorno.put("aggiornamento", lastUpdateRoot.getElementsContainingOwnText("aggiornamento pagina").get(0).text());
-		infoGiorno.put("giorno", giorno);
+		infoGiorno.put("aggiornamento",
+				lastUpdateRoot.getElementsContainingOwnText("aggiornamento pagina").get(0).text());
+		if (!giorno.equals("tregiorni")) {
+			infoGiorno.put("giorno", giorno);
+		} else {
+			infoGiorno.put("giorno", "dopodomani");
+		}
 		infoGiorno.put("T_min", getDegree(dayElement, Integer::min) + "\u00B0");
 		infoGiorno.put("T_max", getDegree(dayElement, Integer::max) + "\u00B0");
 		infoGiorno.put("allerta", getAlerts(dayElement));
@@ -71,9 +79,9 @@ public class MeteoAMForecastFactory extends ForecastAbstractFactory {
 	
 	@Override
 	public Map<String, String> getPrevisioniOrarie(Elements root, int day, int orario) {
-		if (day == OGGI) {
+		if (day == FactoryConstants.OGGI) {
 			return putInMapHour(root, "oggi", orario);
-		} else if (day == DOMANI) {
+		} else if (day == FactoryConstants.DOMANI) {
 			return putInMapHour(root, "domani", orario);
 		} else {
 			return putInMapHour(root, "tregiorni", orario);
@@ -105,13 +113,13 @@ public class MeteoAMForecastFactory extends ForecastAbstractFactory {
 		int mh = getHour(hours, mattinaH);
 		int ph = getHour(hours, pomeriggioH);
 		int sh = getHour(hours, seraH);
-		if (orario == NOTTE && nh != -1 && hours.get(nh).select("th").text().equals(notteH)) {
+		if (orario == FactoryConstants.NOTTE && nh != -1 && hours.get(nh).select("th").text().equals(notteH)) {
 			hour = hours.get(nh);
-		} else if (orario == MATTINA && mh != -1 && hours.get(mh).select("th").text().equals(mattinaH)) {
+		} else if (orario == FactoryConstants.MATTINA && mh != -1 && hours.get(mh).select("th").text().equals(mattinaH)) {
 			hour = hours.get(mh);
-		} else if (orario == POMERIGGIO && ph != -1 && hours.get(ph).select("th").text().equals(pomeriggioH)) {
+		} else if (orario == FactoryConstants.POMERIGGIO && ph != -1 && hours.get(ph).select("th").text().equals(pomeriggioH)) {
 			hour = hours.get(ph);
-		} else if (orario == SERA && sh != -1 && hours.get(sh).select("th").text().equals(seraH)) {
+		} else if (orario == FactoryConstants.SERA && sh != -1 && hours.get(sh).select("th").text().equals(seraH)) {
 			hour = hours.get(sh);
 		}
 		return hour;

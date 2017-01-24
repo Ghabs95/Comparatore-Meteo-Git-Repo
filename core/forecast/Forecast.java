@@ -3,13 +3,7 @@ package core.forecast;
 import java.util.LinkedList;
 import java.util.Map;
 
-public class Forecast {
-	public final static String GIORNO = "infoGiorno";
-	public final static String NOTTE = "notte";
-	public final static String MATTINA = "mattina";
-	public final static String POMERIGGIO = "pomeriggio";
-	public final static String SERA = "sera";
-	
+public class Forecast {	
 	private Map<String,Map<String,String>> forecast;
 	
 	
@@ -42,18 +36,17 @@ public class Forecast {
 		return str;
 	}
 	
-	//TODO #choose: visto che le key delle mappe sono stringhe, adrebbero fissate con delle costanti in Forecast (ma sono tante, forse viene brutto...)
 	public static LinkedList<String> getAvailableElements(){
 		LinkedList<String> elements = new LinkedList<>();
-		elements.add("aggiornamento");
-		elements.add("T_max");
-		elements.add("T_min");
-		elements.add("allerta");
+		elements.add(ForecastConstants.AGGIORNAMENTO);
+		elements.add(ForecastConstants.MAX);
+		elements.add(ForecastConstants.MIN);
+		elements.add(ForecastConstants.ALLERTA);
 		
-		elements.add("cielo");
-		elements.add("prob. pioggia");
-		elements.add("temperatura");
-		elements.add("temp. percepita");
+		elements.add(ForecastConstants.CIELO);
+		elements.add(ForecastConstants.PROB_PIOGGIA);
+		elements.add(ForecastConstants.TEMPERATURA);
+		elements.add(ForecastConstants.TEMP_PERCEPITA);
 		return elements;
 	}
 	

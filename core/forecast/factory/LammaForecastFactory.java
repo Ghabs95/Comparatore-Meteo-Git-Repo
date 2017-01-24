@@ -7,6 +7,8 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
+import core.forecast.ForecastConstants;
+
 public class LammaForecastFactory extends ForecastAbstractFactory {
 
 	@Override
@@ -14,21 +16,19 @@ public class LammaForecastFactory extends ForecastAbstractFactory {
 		return doc.select("dati");
 	}
 
-	//TODO #choose: visto che le key delle mappe sono stringhe, adrebbero fissate con delle costanti in Forecast (ma sono tante, forse viene brutto...)
 	@Override
 	public Map<String, String> getInfoGiorno(Elements root, int day) {
 		int dayIndex = getDayIndex(day);
 		Element dayTag = getDayTag(root, dayIndex);
 		Map<String, String> infoGiorno = new LinkedHashMap<>();
-		infoGiorno.put("aggiornamento", getContent(dayTag, "aggiornamento", 0)); //TODO: #check: controllare perchè non prende le info
-		infoGiorno.put("giorno", dayTag.attr("datadescr"));
-		infoGiorno.put("T_min", getContent(dayTag, "temp", 0));
-		infoGiorno.put("T_max", getContent(dayTag, "temp", 1));
-		infoGiorno.put("allerta", getAlerts(dayTag)); //TODO: #check: controllare perchè non prende le info
+		infoGiorno.put(ForecastConstants.AGGIORNAMENTO, getContent(dayTag, "aggiornamento", 0)); //TODO: #check: controllare perchè non prende le info
+		infoGiorno.put(ForecastConstants.GIORNO, dayTag.attr("datadescr"));
+		infoGiorno.put(ForecastConstants.MIN, getContent(dayTag, "temp", 0));
+		infoGiorno.put(ForecastConstants.MAX, getContent(dayTag, "temp", 1));
+		infoGiorno.put(ForecastConstants.ALLERTA, getAlerts(dayTag)); //TODO: #check: controllare perchè non prende le info
 		return infoGiorno;
 	}
 
-	//TODO #choose: visto che le key delle mappe sono stringhe, adrebbero fissate con delle costanti in Forecast (ma sono tante, forse viene brutto...)
 	@Override
 	public Map<String, String> getPrevisioniOrarie(Elements root, int day, int orario) {
 		Map<String, String> hourForecast = new LinkedHashMap<>();
@@ -36,10 +36,10 @@ public class LammaForecastFactory extends ForecastAbstractFactory {
 		if (tagNotFound(forecastTag)) {
 			return addEmptyMap(hourForecast);
 		} // se il tag non c'e' ritorna la stringa vuota
-		hourForecast.put("cielo", getNodeAttribute(getNthNode(forecastTag, "simbolo", 0), "descr"));
-		hourForecast.put("temperatura", getContent(forecastTag, "temp", 0));
-		hourForecast.put("temp. percepita", getContent(forecastTag, "temp", 1));
-		hourForecast.put("prob. pioggia", getRainProb(forecastTag));
+		hourForecast.put(ForecastConstants.CIELO, getNodeAttribute(getNthNode(forecastTag, "simbolo", 0), "descr"));
+		hourForecast.put(ForecastConstants.TEMPERATURA, getContent(forecastTag, "temp", 0));
+		hourForecast.put(ForecastConstants.TEMP_PERCEPITA, getContent(forecastTag, "temp", 1));
+		hourForecast.put(ForecastConstants.PROB_PIOGGIA, getRainProb(forecastTag));
 		return hourForecast;
 	}
 
@@ -106,13 +106,13 @@ public class LammaForecastFactory extends ForecastAbstractFactory {
 	private int getHourIndex(int day, int orario) {
 		int increment = 0;
 		switch (orario) {
-		case NOTTE: increment = 1; break;
-		case MATTINA: increment = 2; break;
-		case POMERIGGIO: increment = 3;	break;
-		case SERA: increment = 4; break;
+		case FactoryConstants.NOTTE: increment = 1; break;
+		case FactoryConstants.MATTINA: increment = 2; break;
+		case FactoryConstants.POMERIGGIO: increment = 3;	break;
+		case FactoryConstants.SERA: increment = 4; break;
 		default: increment = 1;
 		}
-		if (day == OGGI) 
+		if (day == FactoryConstants.OGGI) 
 			increment--; 
 		return (getDayIndex(day) + increment);
 	}

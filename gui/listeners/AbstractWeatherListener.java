@@ -10,6 +10,7 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 import core.InformationManager;
+import core.forecast.ForecastConstants;
 import gui.utilities.ActiveComponentsManager;
 
 public abstract class AbstractWeatherListener implements ActionListener {
@@ -59,11 +60,11 @@ public abstract class AbstractWeatherListener implements ActionListener {
 		for(JCheckBox box:meteo){
 			if(box.isSelected()){
 				if(box.getText().contains("Lamma")){
-					meteoIDs.add(InformationManager.LAMMA);
+					meteoIDs.add(ForecastConstants.LAMMA);
 				}else if(box.getText().contains("AM")){
-					meteoIDs.add(InformationManager.AM);
+					meteoIDs.add(ForecastConstants.AM);
 				}else{
-					meteoIDs.add(InformationManager.THREEB);
+					meteoIDs.add(ForecastConstants.THREEB);
 				}
 			}
 		}
@@ -77,11 +78,11 @@ public abstract class AbstractWeatherListener implements ActionListener {
 		for(JCheckBox box:days){
 			if(box.isSelected()){
 				if(box.getText().contains("Oggi")){
-					dayIDs.add(InformationManager.OGGI);
+					dayIDs.add(ForecastConstants.OGGI);
 				}else if(box.getText().contains("Domani")){
-					dayIDs.add(InformationManager.DOMANI);
+					dayIDs.add(ForecastConstants.DOMANI);
 				}else{
-					dayIDs.add(InformationManager.DOPODOMANI);
+					dayIDs.add(ForecastConstants.DOPODOMANI);
 				}
 			}
 		}
@@ -91,7 +92,7 @@ public abstract class AbstractWeatherListener implements ActionListener {
 	
 	private int getDefaultDay(){
 		days.get(1).setSelected(true);
-		return InformationManager.DOMANI;
+		return ForecastConstants.DOMANI;
 	}
 	
 	public LinkedList<String> getSelectedTimes(){
@@ -99,11 +100,11 @@ public abstract class AbstractWeatherListener implements ActionListener {
 		for(JCheckBox box:times){
 			if(box.isSelected()){
 				if(box.getText().contains("Mattina")){
-					timeIDs.add(InformationManager.MATTINA);
+					timeIDs.add(ForecastConstants.MATTINA);
 				}else if(box.getText().contains("Pomeriggio")){
-					timeIDs.add(InformationManager.POMERIGGIO);
+					timeIDs.add(ForecastConstants.POMERIGGIO);
 				}else{
-					timeIDs.add(InformationManager.SERA);
+					timeIDs.add(ForecastConstants.SERA);
 				}
 			}
 		}
@@ -112,23 +113,23 @@ public abstract class AbstractWeatherListener implements ActionListener {
 	}
 	
 	private String getDefaultTime(){
-		return InformationManager.GIORNO;
+		return ForecastConstants.GIORNO;
 	}
 
 	public String getMeteo(int meteoID){
 		switch(meteoID){
-		case InformationManager.LAMMA : return "LAMMA";
-		case InformationManager.AM : return "METEO AM";
-		case InformationManager.THREEB : return "3B METEO";
+		case ForecastConstants.LAMMA : return "LAMMA";
+		case ForecastConstants.AM : return "METEO AM";
+		case ForecastConstants.THREEB : return "3B METEO";
 		default : return "";
 		}
 	}
 	
 	public String getDay(int dayID){
 		switch(dayID){
-		case InformationManager.OGGI : return "OGGI";
-		case InformationManager.DOMANI : return "DOMANI";
-		case InformationManager.DOPODOMANI : return "DOPODOMANI";
+		case ForecastConstants.OGGI : return "OGGI";
+		case ForecastConstants.DOMANI : return "DOMANI";
+		case ForecastConstants.DOPODOMANI : return "DOPODOMANI";
 		default : return "";
 		}
 		

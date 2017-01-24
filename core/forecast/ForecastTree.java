@@ -10,18 +10,6 @@ import core.site.Site;
 import core.site.ThreeB;
 
 public class ForecastTree {
-	public final static int LAMMA = 0;
-	public final static int AM = 1;
-	public final static int THREEB = 2;
-	public final static int OGGI = 0;
-	public final static int DOMANI = 1;
-	public final static int DOPODOMANI = 2;
-	public final static String GIORNO = Forecast.GIORNO;
-	public final static String NOTTE = Forecast.NOTTE;
-	public final static String MATTINA = Forecast.MATTINA;
-	public final static String POMERIGGIO = Forecast.POMERIGGIO;
-	public final static String SERA = Forecast.SERA;
-
 	private ArrayList<Map<String, ArrayList<Forecast>>> forecastTree;
 	private Lamma lamma;
 	private MeteoAM am;
@@ -44,16 +32,16 @@ public class ForecastTree {
 	
 	private void setupDayList(){
 		dayIDs = new ArrayList<>();
-		dayIDs.add(OGGI);
-		dayIDs.add(DOMANI);
-		dayIDs.add(DOPODOMANI);
+		dayIDs.add(ForecastConstants.OGGI);
+		dayIDs.add(ForecastConstants.DOMANI);
+		dayIDs.add(ForecastConstants.DOPODOMANI);
 	}
 	
 	private void setupMeteoList(){
 		meteoIDs = new ArrayList<>();
-		meteoIDs.add(LAMMA);
-		meteoIDs.add(AM);
-		meteoIDs.add(THREEB);
+		meteoIDs.add(ForecastConstants.LAMMA);
+		meteoIDs.add(ForecastConstants.AM);
+		meteoIDs.add(ForecastConstants.THREEB);
 	}
 	
 	private void setupTree(){
@@ -67,9 +55,9 @@ public class ForecastTree {
 	public void createLocationForecast(int meteoID, String location) {
 		ArrayList<Forecast> fullForecast;
 		switch (meteoID) {
-		case (LAMMA): { fullForecast = getFullForecast(lamma, location); break; }
-		case (AM): { fullForecast = getFullForecast(am, location); break; }
-		case (THREEB): { fullForecast = getFullForecast(threeB, location); break; }
+		case (ForecastConstants.LAMMA): { fullForecast = getFullForecast(lamma, location); break; }
+		case (ForecastConstants.AM): { fullForecast = getFullForecast(am, location); break; }
+		case (ForecastConstants.THREEB): { fullForecast = getFullForecast(threeB, location); break; }
 		default: { fullForecast = new ArrayList<>(); }
 		}
 		forecastTree.get(meteoID).put(location, fullForecast);
