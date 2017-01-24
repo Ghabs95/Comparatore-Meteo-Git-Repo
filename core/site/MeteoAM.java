@@ -12,7 +12,7 @@ import core.forecast.factory.MeteoAMForecastFactory;
 public class MeteoAM extends Site {
 
 	public MeteoAM() {
-		super("http://www.meteoam.it/ta/previsione/","am_loc.txt");
+		super("http://www.meteoam.it/ta/previsione/", "am_loc.txt");
 	}
 
 	@Override
@@ -20,7 +20,7 @@ public class MeteoAM extends Site {
 		String locUrl = getUrl();
 		try {
 			locUrl += getCodeLocation(location);
-		} catch (IOException e) {	
+		} catch (IOException e) {
 			System.out.println("FNF");
 		}
 		return locUrl;
@@ -29,14 +29,6 @@ public class MeteoAM extends Site {
 	@Override
 	public ForecastAbstractFactory getForecastConstructor() {
 		return new MeteoAMForecastFactory();
-	}
-
-	@Override
-	public String cleanSiteContent(String siteContent) {
-		HTMLCleaner cleaner = new HTMLCleaner(); 
-		String cleanContent = cleaner.cutTag(siteContent, "([^\"])(<script.)", "</script>"); //toglie i tag script e il loro contenuto
-		cleanContent = cleaner.removeBlocks(cleanContent, "<!-- /.block -->");
-		return siteContent;
 	}
 
 	private String getCodeLocation(String location) throws IOException {

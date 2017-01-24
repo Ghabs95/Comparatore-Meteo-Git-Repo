@@ -9,6 +9,8 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
+import core.forecast.ForecastConstants;
+
 public class MeteoAMForecastFactory extends ForecastAbstractFactory {
 	private Element lastUpdateRoot;
 
@@ -25,32 +27,47 @@ public class MeteoAMForecastFactory extends ForecastAbstractFactory {
 		} else if (day == FactoryConstants.DOMANI) {
 			return putInMap(root, "domani");
 		} else {
-			return putInMap(root, "dopodomani");
+			return putInMap(root, "tregiorni");
 		}
 	}
 
-	//TODO #choose: visto che le key delle mappe sono stringhe, adrebbero fissate con delle costanti in Forecast (ma sono tante, forse viene brutto...)
 	private Map<String, String> putInMap(Elements root, String giorno) {
 		Map<String, String> infoGiorno = new LinkedHashMap<>();
-		if (giorno.equals("dopodomani")) {
-			giorno = "tregiorni";
-		}
 		Element dayElement = root.select("#" + giorno).select("tbody").first();
-		infoGiorno.put("aggiornamento",
-				lastUpdateRoot.getElementsContainingOwnText("aggiornamento pagina").get(0).text());
-		if (!giorno.equals("tregiorni")) {
-			infoGiorno.put("giorno", giorno);
-		} else {
-			infoGiorno.put("giorno", "dopodomani");
-		}
-		infoGiorno.put("T_min", getDegree(dayElement, Integer::min) + "\u00B0");
-		infoGiorno.put("T_max", getDegree(dayElement, Integer::max) + "\u00B0");
-		infoGiorno.put("allerta", getAlerts(dayElement));
+		infoGiorno.put(ForecastConstants.AGGIORNAMENTO,	lastUpdateRoot.getElementsContainingOwnText("aggiornamento pagina").get(0).text());
+		infoGiorno.put(ForecastConstants.GIORNO, root.select("#" + giorno).select("th").get(0).text());
+		infoGiorno.put(ForecastConstants.MIN, getDegree(dayElement, Integer::min) + "\u00B0");
+		infoGiorno.put(ForecastConstants.MAX, getDegree(dayElement, Integer::max) + "\u00B0");
+		infoGiorno.put(ForecastConstants.ALLERTA, getAlerts(dayElement));
 		return infoGiorno;
 	}
 
+	@Override
+	public Map<String, String> getPrevisioniOrarie(Elements root, int day, int orario) {
+		if (day == FactoryConstants.OGGI) {
+			return putInMapHour(root, "oggi", orario);
+		} else if (day == FactoryConstants.DOMANI) {
+			return putInMapHour(root, "domani", orario);
+		} else {
+			return putInMapHour(root, "tregiorni", orario);
+		}
+	}
+	
+	private Map<String, String> putInMapHour(Elements root, String giorno, int orario) {
+		Map<String, String> infoOra = new LinkedHashMap<>();
+		Element dayElement = root.select("#" + giorno).select("tbody").first();
+		Elements hourElements = dayElement.select("tr");
+		if (takeHour(hourElements, orario) != null) {
+			infoOra.put(ForecastConstants.CIELO, takeHour(hourElements, orario).select("td").get(1).select("img[title]").attr("title"));
+			infoOra.put(ForecastConstants.TEMPERATURA, takeHour(hourElements, orario).select("td").get(3).text() + "\u00B0");
+			infoOra.put(ForecastConstants.TEMP_PERCEPITA, takeHour(hourElements, orario).select(".temperatura-percepita").text() + "\u00B0");
+			infoOra.put(ForecastConstants.PROB_PIOGGIA, takeHour(hourElements, orario).select("td").get(2).text());
+		}
+		return infoOra;
+	}
+
 	private Integer getDegree(Element root, BinaryOperator<Integer> function) {
-		Elements degs = root.select("tr");  //TODO #check: con alcune località lancia una NullPointerException, aggiungere controllo!
+		Elements degs = root.select("tr");  //TODO #check: con alcune localitï¿½ lancia una NullPointerException, aggiungere controllo!
 		return degs.stream()
 				   .map(p -> p.select("td").get(3))
 				   .map(Element::text)
@@ -76,33 +93,6 @@ public class MeteoAMForecastFactory extends ForecastAbstractFactory {
 		return allerte;
 	}
 
-	
-	@Override
-	public Map<String, String> getPrevisioniOrarie(Elements root, int day, int orario) {
-		if (day == FactoryConstants.OGGI) {
-			return putInMapHour(root, "oggi", orario);
-		} else if (day == FactoryConstants.DOMANI) {
-			return putInMapHour(root, "domani", orario);
-		} else {
-			return putInMapHour(root, "tregiorni", orario);
-		}
-	}
-	
-	//TODO #choose: visto che le key delle mappe sono stringhe, adrebbero fissate con delle costanti in Forecast (ma sono tante, forse viene brutto...)
-	private Map<String, String> putInMapHour(Elements root, String giorno, int orario) {
-		Map<String, String> infoOra = new LinkedHashMap<>();
-		Element dayElement = root.select("#" + giorno).select("tbody").first();
-		Elements hourElements = dayElement.select("tr");
-		if (takeHour(hourElements, orario) != null) {
-			infoOra.put("cielo", takeHour(hourElements, orario).select("td").get(1).select("img[title]").attr("title"));
-			infoOra.put("prob. pioggia", takeHour(hourElements, orario).select("td").get(2).text());
-			infoOra.put("temp. percepita", takeHour(hourElements, orario).select(".temperatura-percepita").text() + "\u00B0");
-			infoOra.put("temperatura", takeHour(hourElements, orario).select("td").get(3).text() + "\u00B0");
-		}
-		return infoOra;
-	}
-
-	//TODO #refactoring: ci sono un pò di varibili usate una sola volta, probilmente si posso creare in-place ed evitare la dichiarazione a parte
 	private Element takeHour(Elements hours, int orario) {
 		Element hour = null;
 		String notteH = "04:00";

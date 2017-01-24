@@ -29,8 +29,8 @@ public abstract class Site {
 		String url = getLocationUrl(location, day);
 		WebHandler web = WebHandler.getInstance();
 		String siteContent = web.getSite(url);
-		String cleanContent = cleanSiteContent(siteContent);  //TODO #choose: serve? col nuovo parser pare di no, ma va verificato
-		Document document = Jsoup.parse(cleanContent);
+//		String cleanContent = cleanSiteContent(siteContent);  //TODO #choose: serve? col nuovo parser pare di no, ma va verificato
+		Document document = Jsoup.parse(siteContent);
 		ForecastAbstractFactory constructor = getForecastConstructor();
 		return constructor.createForecast(document, day);
 	}
@@ -42,8 +42,6 @@ public abstract class Site {
 	public abstract String getLocationUrl(String location, int day);
 
 	public abstract ForecastAbstractFactory getForecastConstructor();
-	
-	public abstract String cleanSiteContent(String siteContent);
 	
 	//TODO #java8: riscrivere il metodo!
 	public String getFormattedLocation(String location) {
@@ -60,8 +58,8 @@ public abstract class Site {
 		String path = getPath(fileName);
 		String locations = loadFromFile(path);
 		String[] tmp = locations.split("\n");
-		//Supponendo che le località siano già formattate nel file (no space + lowercase)
-		//Cerco la dimensione della parola più lunga:
+		//Supponendo che le localitï¿½ siano giï¿½ formattate nel file (no space + lowercase)
+		//Cerco la dimensione della parola piï¿½ lunga:
 		int max = 0;
 		for(String loc:tmp){
 			if(loc.length()>max){
@@ -122,7 +120,7 @@ public abstract class Site {
 	public void showAvailableLocations(){
 		for(int i=0; i<availableLocations.size(); i++){
 			System.out.println("\nLen: "+i);
-			availableLocations.get(i).forEach((String s) -> System.out.println(s)); 
+			availableLocations.get(i).forEach((String s) -> System.out.println(s));
 		}
 	}
 }

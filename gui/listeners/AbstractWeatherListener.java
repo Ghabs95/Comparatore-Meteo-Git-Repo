@@ -86,7 +86,7 @@ public abstract class AbstractWeatherListener implements ActionListener {
 				}
 			}
 		}
-		if(dayIDs.size() == 0){dayIDs.add(getDefaultDay());} //se nessuno è selezionato, seleziono domani
+		if(dayIDs.size() == 0){dayIDs.add(getDefaultDay());} //se nessuno ï¿½ selezionato, seleziono domani
 		return dayIDs;
 	}
 	
@@ -108,12 +108,12 @@ public abstract class AbstractWeatherListener implements ActionListener {
 				}
 			}
 		}
-		if(timeIDs.size() == 0){timeIDs.add(getDefaultTime());} //se nessuno è selezionato, seleziono mattina
+		if(timeIDs.size() == 0){timeIDs.add(getDefaultTime());} //se nessuno ï¿½ selezionato, seleziono mattina
 		return timeIDs;
 	}
 	
 	private String getDefaultTime(){
-		return ForecastConstants.GIORNO;
+		return ForecastConstants.INFOGIORNO;
 	}
 
 	public String getMeteo(int meteoID){

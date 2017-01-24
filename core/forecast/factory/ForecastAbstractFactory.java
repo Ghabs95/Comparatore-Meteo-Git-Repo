@@ -16,7 +16,7 @@ public abstract class ForecastAbstractFactory {
 	public Forecast createForecast(Document doc, int day) {
 		Elements root = createRoot(doc);
 		Map<String, Map<String, String>> forecast = new LinkedHashMap<>();
-		forecast.put(ForecastConstants.GIORNO, getInfoGiorno(root, day));
+		forecast.put(ForecastConstants.INFOGIORNO, getInfoGiorno(root, day));
 		forecast.put(ForecastConstants.NOTTE, getPrevisioniOrarie(root, day, FactoryConstants.NOTTE));
 		forecast.put(ForecastConstants.MATTINA, getPrevisioniOrarie(root, day, FactoryConstants.MATTINA));
 		forecast.put(ForecastConstants.POMERIGGIO, getPrevisioniOrarie(root, day, FactoryConstants.POMERIGGIO));
