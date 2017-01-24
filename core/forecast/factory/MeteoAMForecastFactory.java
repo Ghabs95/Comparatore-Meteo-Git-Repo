@@ -86,8 +86,6 @@ public class MeteoAMForecastFactory extends ForecastAbstractFactory {
 		Element dayElement = root.select("#" + giorno).select("tbody").first();
 		Elements hourElements = dayElement.select("tr");
 		if (takeHour(hourElements, orario) != null) {
-			//TODO #choose: il tag ora è presente solo qui, probabilmente va eliminato
-			infoOra.put("ora", takeHour(hourElements, orario).select("th").text());  //TODO #check: che info prende questo tag?
 			infoOra.put("cielo", takeHour(hourElements, orario).select("td").get(1).select("img[title]").attr("title"));
 			infoOra.put("prob. pioggia", takeHour(hourElements, orario).select("td").get(2).text());
 			infoOra.put("temp. percepita", takeHour(hourElements, orario).select(".temperatura-percepita").text() + "\u00B0");

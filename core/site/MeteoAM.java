@@ -20,7 +20,7 @@ public class MeteoAM extends Site {
 		String locUrl = getUrl();
 		try {
 			locUrl += getCodeLocation(location);
-		} catch (IOException e) {				//TODO #choose: serve il try catch? in caso affermativo, va aggiunto negli altri siti?
+		} catch (IOException e) {	
 			System.out.println("FNF");
 		}
 		return locUrl;

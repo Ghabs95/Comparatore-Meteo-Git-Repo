@@ -99,7 +99,7 @@ public class ForecastTree {
 	}
 	
 	
-	//TODO #choose: questi metodi non sono utilizzati, sono solo esempi delle possibilità della struttura ad albero. Decidere se tenerli o no!
+	/* Meteodi per funzionalità future */
 	public Map<String, ArrayList<Forecast>> getForecastByMeteo(int meteoID) {
 		return forecastTree.get(meteoID);
 	}
