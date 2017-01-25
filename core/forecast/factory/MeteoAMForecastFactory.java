@@ -34,7 +34,7 @@ public class MeteoAMForecastFactory extends ForecastAbstractFactory {
 	private Map<String, String> putInMap(Elements root, String giorno) {
 		Map<String, String> infoGiorno = new LinkedHashMap<>();
 		Element dayElement = root.select("#" + giorno).select("tbody").first();
-		infoGiorno.put(ForecastConstants.AGGIORNAMENTO,	lastUpdateRoot.getElementsContainingOwnText("aggiornamento pagina").get(0).text());
+		infoGiorno.put(ForecastConstants.AGGIORNAMENTO,	lastUpdateRoot.getElementsContainingOwnText("aggiornamento pagina").get(0).text().substring(22,42));
 		infoGiorno.put(ForecastConstants.GIORNO, root.select("#" + giorno).select("th").get(0).text());
 		infoGiorno.put(ForecastConstants.MIN, getDegree(dayElement, Integer::min) + "\u00B0");
 		infoGiorno.put(ForecastConstants.MAX, getDegree(dayElement, Integer::max) + "\u00B0");
@@ -79,20 +79,22 @@ public class MeteoAMForecastFactory extends ForecastAbstractFactory {
 	private String getAlerts(Element root) {
 		Elements alerts = root.select("tr");
 		String allerte = "";
-		for (int i = 1; i < alerts.size(); i = i + 2) {
+		for (int i = 0; i < alerts.size(); i++) {
 			Element alert = alerts.get(i).select("td").get(0);
-			if (alert.text().equals("-")) {
-				allerte += "nessuno, ";
-			} else {
+			if (!alert.text().equals("-")) {
 				Elements img = alert.select("img[title]");
-				for (int j = 0; j < img.size(); j++) {
+				int j = 0;
+				for (; j < img.size() - 1; j++) {
 					allerte += img.get(j).attr("title") + ", ";
 				}
+				allerte += img.get(j).attr("title");
 			}
+		}
+		if (allerte.equals("")) {
+			allerte = "nessuno";
 		}
 		return allerte;
 	}
-
 
 	private Element takeHour(Elements hours, int orario) {
 		Element hour = null;

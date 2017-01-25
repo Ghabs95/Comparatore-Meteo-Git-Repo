@@ -61,7 +61,7 @@ public class WebHandler {
 		} else if (url.contains("meteoam")) {
 			path = getPath("meteoAM.html");
 		} else if (url.contains("3bmeteo")) {
-			path = getPath("3bMeteo.html");   //TODO #check: il file caricato non viene parsato correttamente, modificare il file!
+			path = getPath("3bMeteo.html");
 		} else {
 			return "Sito non disponibile!";
 		}

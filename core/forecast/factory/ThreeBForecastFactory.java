@@ -72,7 +72,7 @@ public class ThreeBForecastFactory extends ForecastAbstractFactory {
 		infoGiorno.put(ForecastConstants.GIORNO, giorno.text());
 		infoGiorno.put(ForecastConstants.MIN, getDegree(Double::min, degree) + ThreeBConstants.DEGREE_SIMBOL);
 		infoGiorno.put(ForecastConstants.MAX, getDegree(Double::max, degree) + ThreeBConstants.DEGREE_SIMBOL);
-		infoGiorno.put(ForecastConstants.ALLERTA, "");
+		infoGiorno.put(ForecastConstants.ALLERTA, "non disponibile");
 		return infoGiorno;
 	}
 	

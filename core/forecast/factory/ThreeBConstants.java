@@ -1,7 +1,7 @@
 package core.forecast.factory;
 
 public class ThreeBConstants {
-	public final static String LAST_UPDATE_TAG = "div.page-header.text-align-sm > div";
+	public final static String LAST_UPDATE_TAG = "div.col-sm-2-3.col-md-3-4 > p > b";
 	public final static String ROOT_TAG = "div.box.noMarg";
 	public final static String DAY_LIST_TAG = "div.navDays";
 	public final static String TODAY_DEG_TAG = "span.switchcelsius.switch-te.active";
