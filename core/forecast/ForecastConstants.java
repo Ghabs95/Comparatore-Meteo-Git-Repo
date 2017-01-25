@@ -9,7 +9,7 @@ public class ForecastConstants {
 	public final static int DOMANI = 1;
 	public final static int DOPODOMANI = 2;
 	
-	public final static String INFOGIORNO = "infoGiorno";
+	public final static String INFOGIORNO = "giorno";
 	public final static String NOTTE = "notte";
 	public final static String MATTINA = "mattina";
 	public final static String POMERIGGIO = "pomeriggio";

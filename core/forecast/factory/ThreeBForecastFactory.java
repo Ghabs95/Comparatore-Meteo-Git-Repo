@@ -2,6 +2,8 @@ package core.forecast.factory;
 
 import static java.util.stream.Collectors.toList;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -68,8 +70,8 @@ public class ThreeBForecastFactory extends ForecastAbstractFactory {
 		Map<String, String> infoGiorno = new LinkedHashMap<>();
 		infoGiorno.put(ForecastConstants.AGGIORNAMENTO, lastUpdateRoot.text());
 		infoGiorno.put(ForecastConstants.GIORNO, giorno.text());
-		infoGiorno.put(ForecastConstants.MIN, getDegree(root, stringTag, Double::min, degree) + ThreeBConstants.DEGREE_SIMBOL);
-		infoGiorno.put(ForecastConstants.MAX, getDegree(root, stringTag, Double::max, degree) + ThreeBConstants.DEGREE_SIMBOL);
+		infoGiorno.put(ForecastConstants.MIN, getDegree(Double::min, degree) + ThreeBConstants.DEGREE_SIMBOL);
+		infoGiorno.put(ForecastConstants.MAX, getDegree(Double::max, degree) + ThreeBConstants.DEGREE_SIMBOL);
 		infoGiorno.put(ForecastConstants.ALLERTA, "");
 		return infoGiorno;
 	}
@@ -77,19 +79,35 @@ public class ThreeBForecastFactory extends ForecastAbstractFactory {
 
 	private Map<String, String> putInMapForecast(Elements root, int orario) {
 		Map<String, String> forecast = new LinkedHashMap<>();
-		forecast.put(ForecastConstants.CIELO, getDayTime(root, ThreeBConstants.FORECAST_TAG).get(orario));
-		forecast.put(ForecastConstants.TEMPERATURA, getDayTime(root, ThreeBConstants.DEG_TAG).subList(0, 4).get(orario));
-		forecast.put(ForecastConstants.TEMP_PERCEPITA, slicingList(getDayTime(root, ThreeBConstants.TODAY_DEG_TAG), 2).get(orario));
-		forecast.put(ForecastConstants.PROB_PIOGGIA, getDayTime(root, ThreeBConstants.DATA_TAG).subList(12, 16).get(orario));
+		List<String> strings = getStringValue(root, orario);
+		forecast.put(ForecastConstants.CIELO, strings.get(0));
+		forecast.put(ForecastConstants.TEMPERATURA,  strings.get(1));
+		forecast.put(ForecastConstants.TEMP_PERCEPITA,  strings.get(2));
+		forecast.put(ForecastConstants.PROB_PIOGGIA,  strings.get(3));
 		return forecast;
 	}
+
+	private List<String> getStringValue(Elements root, int orario) {
+		String strCielo, strTemp, strTempPerc, strProbPioggia;
+		try {
+			strCielo = getDayTime(root, ThreeBConstants.FORECAST_TAG).get(orario);
+			strTemp = getDayTime(root, ThreeBConstants.DEG_TAG).subList(0, 4).get(orario);
+			strTempPerc = slicingList(getDayTime(root, ThreeBConstants.TODAY_DEG_TAG), 2).get(orario);
+			strProbPioggia = getDayTime(root, ThreeBConstants.DATA_TAG).subList(12, 16).get(orario);
+		} catch (Exception e) {
+			strCielo = strTemp = strTempPerc = strProbPioggia = "Non disponibile offline";
+		}
+		return new ArrayList<>(Arrays.asList(strCielo,strTemp,strTempPerc,strProbPioggia));
+	}
+
 	
-	private Double getDegree(Elements root, String tag, BinaryOperator<Double> function, List<String> degree) {
+	
+	private Double getDegree(BinaryOperator<Double> function, List<String> degree) {
 		return degree.stream()
 					.map(text -> text.replaceAll(ThreeBConstants.DELETE_DEG_SIMBOL_REGEX, ""))
 					.map(Double::parseDouble)
 					.reduce(function)
-					.get();
+					.orElse(0.0);
 	}
 	
 	private List<String> getDayTime(Elements root, String tag) {
