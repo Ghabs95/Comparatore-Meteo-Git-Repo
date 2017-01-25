@@ -2,7 +2,7 @@ package core.forecast;
 
 import java.util.LinkedList;
 import java.util.Map;
-import java.util.stream.Collectors;
+import static java.util.stream.Collectors.*;
 
 public class Forecast {	
 	private Map<String,Map<String,String>> forecast;
@@ -12,11 +12,9 @@ public class Forecast {
 		forecast = root;
 	}
 	
-	
 	// Visualizza da console (debug only)
 	public void show() {
-		// stampa key - value
-		forecast.forEach((day, info) -> printMap(day, info));
+		forecast.forEach(this::printMap);
 	}
 
 	private void printMap(String day, Map<String, String> info) {
@@ -25,21 +23,19 @@ public class Forecast {
 	}
 	
 	@Override
-	 public String toString(){
-	  String str = "";
-	  str = forecast.entrySet().stream().map(entry -> getTostring(entry)).collect(Collectors.joining());
-	  
-	  return str;
-	 }
+	public String toString(){
+		return forecast.entrySet().stream()
+								  .map(this::getTostring)
+								  .collect(joining());
+	}
 
-
-	 private String getTostring(Map.Entry<String, Map<String, String>> entry) {
-	  String str = entry.getKey() + ":\n";
-	  str += entry.getValue().entrySet().stream()
-	            .map(sub_entry -> "\t" + sub_entry.getKey() + ": " + sub_entry.getValue() + "\n")
-	            .collect(Collectors.joining());
-	  return str;
-	 }
+	private String getTostring(Map.Entry<String, Map<String, String>> entry) {
+		String str = entry.getKey() + ":\n";
+		str += entry.getValue().entrySet().stream()
+										  .map(sub_entry -> "\t" + sub_entry.getKey() + ": " + sub_entry.getValue() + "\n")
+										  .collect(joining());
+		return str;
+	}
 	
 	public static LinkedList<String> getAvailableElements(){
 		LinkedList<String> elements = new LinkedList<>();

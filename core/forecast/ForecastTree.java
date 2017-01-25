@@ -93,20 +93,17 @@ public class ForecastTree {
 	}
 
 	public ArrayList<ArrayList<Forecast>> getForecastByLocation(String location) {
-		meteoIDs.forEach((id) -> checkAvailability(id, location));
 		ArrayList<ArrayList<Forecast>> byLoc = new ArrayList<>();
-		for (int meteo : meteoIDs) {
-			byLoc.add(forecastTree.get(meteo).get(location));
-		}
+		meteoIDs.forEach((id) -> checkAvailability(id, location));
+		meteoIDs.forEach(meteo -> byLoc.add(forecastTree.get(meteo).get(location)));
+		
 		return byLoc;
 	}
 
 	public ArrayList<Forecast> getForecastByDay(String location, int dayID) {
-		meteoIDs.forEach((id) -> checkAvailability(id, location)); 
 		ArrayList<Forecast> byDay = new ArrayList<>();
-		for (int meteo : meteoIDs) {
-			byDay.add(getDayForecast(meteo, location, dayID));
-		}
+		meteoIDs.forEach((id) -> checkAvailability(id, location)); 
+		meteoIDs.forEach(meteo -> byDay.add(getDayForecast(meteo, location, dayID)));
 		return byDay;
 	}
 

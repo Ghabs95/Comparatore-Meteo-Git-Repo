@@ -10,6 +10,7 @@ import java.io.UnsupportedEncodingException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.net.URLDecoder;
+import static java.util.stream.Collectors.*;
 
 import javax.imageio.ImageIO;
 
@@ -79,30 +80,16 @@ public class WebHandler {
 		return path;
 	}
 	
-	//TODO #java8: riscrivere il metodo! + ricontrollare anche gli altri metodi della classe
 	private String loadFromFile(String path){
-		BufferedReader br = null;
-		FileReader fr = null;
 		String site = "";
 		try {
-			fr = new FileReader(path);
-			br = new BufferedReader(fr);
-			String line;
-			while((line = br.readLine())!= null){
-				site += line;
-			}
-			
+			BufferedReader br = new BufferedReader(new FileReader(path));
+			site = br.lines().collect(joining());
+			br.close();
 		} catch (Exception e) {
 			e.printStackTrace();
-		} finally {
-			try {
-				if(br != null){	br.close(); }
-				if(fr != null){ fr.close(); }
-			} catch (IOException e) {
-				e.printStackTrace();
-			} 
-		}
-		return site;		
+		} 
+		return site;
 	}
 	
 	/* Restituisce una BufferedImage, trasferibile tramite la classe ImageIO */

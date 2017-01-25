@@ -1,7 +1,7 @@
 package gui.listeners;
 
 import java.awt.event.ActionEvent;
-import java.util.LinkedList;
+import java.util.List;
 
 import javax.swing.JComboBox;
 
@@ -20,10 +20,10 @@ public class CompareElementListener extends AbstractWeatherListener {
 	public void actionPerformed(ActionEvent arg0) {
 		String location = searchBox.getText();
 		display.setText("");  //ripulisco il display
-		LinkedList<Integer> meteoIDs = getSelectedMeteo();
+		List<Integer> meteoIDs = getSelectedMeteo();
 		if(meteoNotSelected(meteoIDs)){ return; } //se non c'è un meteo selezionato interrompo
-		LinkedList<Integer> daysIDs = getSelectedDays();
-		LinkedList<String> timesIDs = getSelectedTimes();
+		List<Integer> daysIDs = getSelectedDays();
+		List<String> timesIDs = getSelectedTimes();
 		for(int mID:meteoIDs){
 			display.append("+++"+getMeteo(mID)+"+++\n\n");
 			for(int dID:daysIDs){
@@ -40,7 +40,7 @@ public class CompareElementListener extends AbstractWeatherListener {
 		cancel.setSelected(true);
 	}
 	
-	private boolean meteoNotSelected(LinkedList<Integer> meteoIDs){
+	private boolean meteoNotSelected(List<Integer> meteoIDs){
 		if(meteoIDs.size() == 0){
 			display.append("SELEZIONARE UN SERVIZIO METEO!\n");
 			cancel.setSelected(true);

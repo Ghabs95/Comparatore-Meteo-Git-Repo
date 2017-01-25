@@ -56,7 +56,7 @@ public class Command extends GridBagContainer {
 	
 	private void addComboBox(String name, LinkedList<String> description, int y){
 		JComboBox<String> box = new JComboBox<>();
-		description.forEach((element) -> box.addItem(element));
+		description.forEach(box::addItem);
 		box.setSelectedItem("prob. pioggia");
 		lim.setPosition(1, y);
 		activeComponents.addComboBox(name, box);
