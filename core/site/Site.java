@@ -31,8 +31,6 @@ public abstract class Site {
 		String url = getLocationUrl(location, day);
 		WebHandler web = WebHandler.getInstance();
 		String siteContent = web.getSite(url);
-		// String cleanContent = cleanSiteContent(siteContent); //TODO #choose:
-		// serve? col nuovo parser pare di no, ma va verificato
 		Document document = Jsoup.parse(siteContent);
 		ForecastAbstractFactory constructor = getForecastConstructor();
 		return constructor.createForecast(document, day);

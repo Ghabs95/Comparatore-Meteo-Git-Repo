@@ -30,6 +30,4 @@ public class InformationManager {
 		return strElement;
 	}
 	
-		
-	
 }

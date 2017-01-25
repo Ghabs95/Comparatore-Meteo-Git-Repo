@@ -96,7 +96,7 @@ public abstract class AbstractWeatherListener implements ActionListener {
 	}
 	
 	private List<String> getDefaultTime(){
-		return new LinkedList<>(Arrays.asList(ForecastConstants.GIORNO));
+		return new LinkedList<>(Arrays.asList(ForecastConstants.INFOGIORNO));
 	}
 
 	public String getMeteo(int meteoID){
