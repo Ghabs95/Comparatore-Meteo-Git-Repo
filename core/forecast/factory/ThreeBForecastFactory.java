@@ -58,13 +58,24 @@ public class ThreeBForecastFactory extends ForecastAbstractFactory {
 			String dayTimeList = dayTime.get(index * 2 + 1);
 			List<String> allTemp = getDayTime(root, ThreeBConstants.TODAY_DEG_TAG);
 			hourForecast.put(ForecastConstants.CIELO, dayTimeList);
-			hourForecast.put(ForecastConstants.TEMPERATURA, slicingList(allTemp, 3).get(index));
-			hourForecast.put(ForecastConstants.TEMP_PERCEPITA, slicingList(allTemp.subList(1, allTemp.size()), 3).get(index));
+			hourForecast.put(ForecastConstants.TEMPERATURA, getSliceTemp(index, allTemp));
+			hourForecast.put(ForecastConstants.TEMP_PERCEPITA, getSliceTemp(index, allTemp.subList(1, allTemp.size())));
 			hourForecast.put(ForecastConstants.PROB_PIOGGIA, getDayTime(root, ThreeBConstants.RAIN_TAG).get(index));
 		}
 		return hourForecast;
 	}
-	
+
+	private String getSliceTemp(int index, List<String> allTemp) {
+		int indexSlice = 3;
+		String string;
+		try {
+			string = slicingList(allTemp, indexSlice).get(index);				
+		} catch (Exception e) {
+			indexSlice = indexSlice == 3 ? 2 : 3; 
+			string = slicingList(allTemp, indexSlice).get(index);
+		}
+		return string;
+	}
 	
 	private Map<String, String> putInMapInfoDay(Elements root, Element giorno, String stringTag, List<String> degree) {
 		Map<String, String> infoGiorno = new LinkedHashMap<>();
@@ -99,14 +110,15 @@ public class ThreeBForecastFactory extends ForecastAbstractFactory {
 		}
 		return new ArrayList<>(Arrays.asList(strCielo,strTemp,strTempPerc,strProbPioggia));
 	}
+
+	
 	
 	private Double getDegree(BinaryOperator<Double> function, List<String> degree) {
-		System.out.println(ThreeBConstants.DELETE_DEG_SIMBOL_REGEX);
 		return degree.stream()
-					 .map(text -> text.replaceAll(ThreeBConstants.DELETE_DEG_SIMBOL_REGEX, ""))
-					 .map(Double::parseDouble)
-					 .reduce(function)
-					 .orElse(0.0);
+					.map(text -> text.replaceAll(ThreeBConstants.DELETE_DEG_SIMBOL_REGEX, ""))
+					.map(Double::parseDouble)
+					.reduce(function)
+					.orElse(0.0);
 	}
 	
 	private List<String> getDayTime(Elements root, String tag) {
