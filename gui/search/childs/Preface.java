@@ -47,8 +47,6 @@ public class Preface extends GridBagContainer {
 		return resize(image,250,150);
 	}
 
-	// Trovato su internet!
-	//TODO #check: controllare, visto che è preso da internet!
 	private BufferedImage resize(BufferedImage image, int width, int height) {
 		BufferedImage bi = new BufferedImage(width, height, BufferedImage.TRANSLUCENT);
 		Graphics2D g2d = (Graphics2D) bi.createGraphics();

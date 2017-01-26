@@ -59,7 +59,7 @@ public class LammaForecastFactory extends ForecastAbstractFactory {
 	private String getAlerts(Element dayTag) {
 		String value = dayTag.select("allerta").attr("value");
 		String alerts = "";
-		if (value != "" && !value.equals("nessuno")) {
+		if (value != "" && !value.equals("nessuno") && !value.contains("NA")) {
 				alerts = "Allerta: " + value + "\n";
 				alerts += getRisks(dayTag);
 		} else {
