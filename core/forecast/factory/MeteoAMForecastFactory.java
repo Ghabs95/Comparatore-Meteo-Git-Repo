@@ -67,7 +67,7 @@ public class MeteoAMForecastFactory extends ForecastAbstractFactory {
 	}
 
 	private Integer getDegree(Element root, BinaryOperator<Integer> function) {
-		Elements degs = root.select("tr");  //TODO #check: con alcune localit� lancia una NullPointerException, aggiungere controllo!
+		Elements degs = root.select("tr"); 
 		return degs.stream()
 				   .map(p -> p.select("td").get(3))
 				   .map(Element::text)

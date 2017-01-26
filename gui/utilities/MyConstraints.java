@@ -27,5 +27,5 @@ public class MyConstraints extends GridBagConstraints {
 		this.insets.right = right;
 	}
 	
-	//TODO #choose: inserire metodi per constraints di default? (tipo se le label hanno tutte le stesse constraints...)
+	
 }
