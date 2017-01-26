@@ -28,7 +28,7 @@ public class MeteoService extends GridBagContainer {
 		this.add(sl, lim);
 	}
 	
-	private void addCheckBoxes(){
+	private void addCheckBoxes(){ // TODO #refactoring: astrarre il metodo o in una classe apposta (vedi TimeChoice)
 		//imposto le limitazioni
 		lim.setInsets(5,0,5,0);
 		lim.setFillAndAnchor(GridBagConstraints.NONE, GridBagConstraints.WEST);

@@ -37,7 +37,7 @@ public class TimeChoice extends GridBagContainer {
 		this.add(sl, lim);
 	}
 	
-	private void setupConstraints(){
+	private void setupConstraints(){ // TODO #refactoring: vedi MeteoService
 		//imposto le limitazioni
 		lim.setInsets(5,0,5,0);
 		lim.setFillAndAnchor(GridBagConstraints.NONE, GridBagConstraints.WEST);
