@@ -2,6 +2,7 @@ package core.forecast.factory;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
+import static java.util.stream.Collectors.*;
 
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -70,11 +71,9 @@ public class LammaForecastFactory extends ForecastAbstractFactory {
 
 	private String getRisks(Element dayTag) {
 		Elements risks = dayTag.select("rischio");
-		String allRisks = "";
-		for (int i = 0; i < risks.size(); i++) {
-			allRisks += getRisk(risks.get(i));
-		}
-		return allRisks;
+		return risks.stream()
+					.map(this::getRisk)
+					.collect(joining());
 	}
 
 	private String getRisk(Element element) {
@@ -105,8 +104,9 @@ public class LammaForecastFactory extends ForecastAbstractFactory {
 		default:
 			increment = 1;
 		}
-		if (day == FactoryConstants.OGGI)
+		if (day == FactoryConstants.OGGI) {
 			increment--;
+		}
 		return (getDayIndex(day) + increment);
 	}
 

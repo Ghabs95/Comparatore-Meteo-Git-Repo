@@ -66,9 +66,7 @@ public abstract class AbstractWeatherListener implements ActionListener {
 	}
 
 	private Stream<JCheckBox> getFiltered(List<JCheckBox> meteo, String meteoName) {
-		return meteo.stream()
-					.filter(box -> box.isSelected())
-					.filter(box -> box.getText().contains(meteoName));
+		return meteo.stream().filter(box -> box.isSelected()).filter(box -> box.getText().contains(meteoName));
 	}
 
 	public List<Integer> getSelectedDays() {
@@ -125,6 +123,35 @@ public abstract class AbstractWeatherListener implements ActionListener {
 	}
 
 	@Override
-	public abstract void actionPerformed(ActionEvent arg0);
+	public void actionPerformed(ActionEvent arg0) {
+		String location = searchBox.getText();
+		display.setText(""); // ripulisco il display
+		List<Integer> meteoIDs = getSelectedMeteo();
+		if (meteoNotSelected(meteoIDs)) {
+			return;
+		} // se non c'è un meteo selezionato interrompo
+		List<Integer> daysIDs = getSelectedDays();
+		List<String> timesIDs = getSelectedTimes();
+		meteoIDs.forEach(mID -> displayAppend(location, daysIDs, timesIDs, mID));
+		cancel.setSelected(true);
+	}
+	
+	//Template method -> abs print
+	private void displayAppend(String location, List<Integer> daysIDs, List<String> timesIDs, int mID) {
+		display.append("+++" + getMeteo(mID) + "+++\n\n");
+		daysIDs.forEach(dID -> print(location, timesIDs, mID, dID));
+		display.append("\n\n");
+	}
+
+	public boolean meteoNotSelected(List<Integer> meteoIDs) {
+		if (meteoIDs.size() == 0) {
+			display.append("SELEZIONARE UN SERVIZIO METEO!\n");
+			cancel.setSelected(true);
+			return true;
+		}
+		return false;
+	}
+
+	public abstract void print(String location, List<String> timesIDs, int mID, int dID);
 
 }

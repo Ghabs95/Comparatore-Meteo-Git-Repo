@@ -1,6 +1,5 @@
 package gui.listeners;
 
-import java.awt.event.ActionEvent;
 import java.util.List;
 
 import javax.swing.JComboBox;
@@ -13,44 +12,25 @@ public class CompareElementListener extends AbstractWeatherListener {
 	public CompareElementListener(ActiveComponentsManager acm) {
 		super(acm);
 		chooseElement = acm.getComboBox("chooseForecastElement");
-	} 
+	}
 
-	//TODO #refactoring: rifattorizzare gli elementi in comune con CustomWeatherListener
 	@Override
-	public void actionPerformed(ActionEvent arg0) {
-		String location = searchBox.getText();
-		display.setText("");  //ripulisco il display
-		List<Integer> meteoIDs = getSelectedMeteo();
-		if(meteoNotSelected(meteoIDs)){ return; } //se non c'è un meteo selezionato interrompo
-		List<Integer> daysIDs = getSelectedDays();
-		List<String> timesIDs = getSelectedTimes();
-		for(int mID:meteoIDs){
-			display.append("+++"+getMeteo(mID)+"+++\n\n");
-			for(int dID:daysIDs){
-				display.append("\n--"+getDay(dID)+"--\n");
-				for(String tID:timesIDs){
-					display.append("*"+tID+"*\n");
-					String ce = getChoosedElement();
-					display.append(ce +": "+info.getPrintableForecastElement(mID, location, dID, tID, ce));
-					display.append("\n");
-				}
-			}
-			display.append("\n\n");
-		}
+	public void print(String location, List<String> timesIDs, int mID, int dID) {
+		display.append("\n--" + getDay(dID) + "--\n");
+		timesIDs.forEach(tID -> displayAppend(location, mID, dID, tID));
+		display.append("\n\n");
 		cancel.setSelected(true);
 	}
-	
-	private boolean meteoNotSelected(List<Integer> meteoIDs){
-		if(meteoIDs.size() == 0){
-			display.append("SELEZIONARE UN SERVIZIO METEO!\n");
-			cancel.setSelected(true);
-			return true;
-		}
-		return false;
+
+	private void displayAppend(String location, int mID, int dID, String tID) {
+		display.append("*" + tID + "*\n");
+		String ce = getChoosedElement();
+		display.append(getChoosedElement() + ": " + info.getPrintableForecastElement(mID, location, dID, tID, ce));
+		display.append("\n");
 	}
-	
-	private String getChoosedElement(){
-		return (String)chooseElement.getSelectedItem();
+
+	private String getChoosedElement() {
+		return (String) chooseElement.getSelectedItem();
 	}
 
 }

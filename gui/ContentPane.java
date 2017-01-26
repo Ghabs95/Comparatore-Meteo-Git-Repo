@@ -11,12 +11,12 @@ import gui.utilities.GridBagContainer;
 
 @SuppressWarnings("serial")
 public class ContentPane extends GridBagContainer {
-	
+
 	@Override
 	public void addComponents() {
 		addSearch();
 		addDisplay();
-		//LISTENERS:
+		// LISTENERS:
 		addLocationAvailability();
 		addCustomWeatherListener();
 		addCompareElementListener();
@@ -40,21 +40,20 @@ public class ContentPane extends GridBagContainer {
 		getChildActiveComponents(displayC.getActiveComponents());
 		this.add(displayC, lim);
 	}
-	
-	private void addLocationAvailability(){
+
+	private void addLocationAvailability() {
 		LocationAvailability la = new LocationAvailability(activeComponents);
 		activeComponents.getTextField("searchBox").addCaretListener(la);
 	}
-	
-	private void addCustomWeatherListener(){
+
+	private void addCustomWeatherListener() {
 		CustomWeatherListener twl = new CustomWeatherListener(activeComponents);
 		activeComponents.getRadioButton("customWeather").addActionListener(twl);
 	}
-	
-	private void addCompareElementListener(){
+
+	private void addCompareElementListener() {
 		CompareElementListener cel = new CompareElementListener(activeComponents);
 		activeComponents.getRadioButton("forecastElement").addActionListener(cel);
 	}
-	
 
 }

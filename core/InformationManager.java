@@ -1,6 +1,7 @@
 package core;
 
 import java.util.Map;
+import static java.util.stream.Collectors.*;
 
 import core.forecast.Forecast;
 import core.forecast.ForecastTree;
@@ -13,13 +14,11 @@ public class InformationManager {
 	}
 
 	public String getPrintablePartialForecast(int meteoID, String location, int dayID, String timeID) {
-		String partialForecast = "";
 		Forecast tmp = ft.getDayForecast(meteoID, location, dayID);
 		Map<String, String> pf = tmp.getPartialForecast(timeID);
-		for (String key : pf.keySet()) {
-			partialForecast += key + ": " + pf.get(key) + "\n";
-		}
-		return partialForecast;
+		return pf.keySet().stream()
+						  .map(key -> key + ": " + pf.get(key) + "\n")
+						  .collect(joining());
 	}
 
 	public String getPrintableForecastElement(int meteoID, String location, int dayID, String timeID, String element) {
@@ -31,5 +30,4 @@ public class InformationManager {
 		}
 		return strElement;
 	}
-
 }

@@ -7,26 +7,21 @@ import gui.utilities.GridBagContainer;
 
 @SuppressWarnings("serial")
 public class DisplayContainer extends GridBagContainer {
-		
+
 	@Override
 	public void addComponents() {
 		setupConstraints();
-		addChild(new Display(),0);
+		addChild(new Display(), 0);
 	}
-	
-	private void setupConstraints(){
-		lim.setInsets(0,0,0,0);
+
+	public void setupConstraints() {
+		super.setupConstraints();
 		lim.setFillAndAnchor(GridBagConstraints.NONE, GridBagConstraints.EAST);
-		lim.setGridCellDimension(1,1);
 	}
-	
-	private void addChild(GridBagContainer child, int y){
+
+	private void addChild(GridBagContainer child, int y) {
 		lim.setPosition(0, y);
 		getChildActiveComponents(child.getActiveComponents());
-		this.add(child,lim);
+		this.add(child, lim);
 	}
-	
-	
-
-	
 }

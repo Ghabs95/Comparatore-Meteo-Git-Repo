@@ -14,15 +14,15 @@ public class Display extends GridBagContainer {
 	public void addComponents() {
 		addDisplay();
 	}
-	
+
 	private void addDisplay() {
-		JTextArea displayBox = new JTextArea(40,40);
+		JTextArea displayBox = new JTextArea(40, 40);
 		displayBox.setEditable(false);
 		JScrollPane sp = new JScrollPane(displayBox);
-		lim.setPosition(0,0);
-		lim.setInsets(10,10,10,10);
-		lim.setFillAndAnchor(GridBagConstraints.BOTH,GridBagConstraints.CENTER);
-		lim.setGridCellDimension(1,1);
+		lim.setPosition(0, 0);
+		lim.setInsets(10, 10, 10, 10);
+		lim.setFillAndAnchor(GridBagConstraints.BOTH, GridBagConstraints.CENTER);
+		lim.setGridCellDimension(1, 1);
 		activeComponents.addTextArea("display", displayBox);
 		this.add(sp, lim);
 	}

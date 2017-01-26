@@ -10,7 +10,7 @@ import core.forecast.Forecast;
 import core.forecast.ForecastConstants;
 
 public abstract class ForecastAbstractFactory {
-	
+
 	public Forecast createForecast(Document doc, int day) {
 		Elements root = createRoot(doc);
 		Map<String, Map<String, String>> forecast = new LinkedHashMap<>();
