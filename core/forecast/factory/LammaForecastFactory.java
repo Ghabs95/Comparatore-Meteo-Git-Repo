@@ -12,7 +12,7 @@ import core.forecast.ForecastConstants;
 public class LammaForecastFactory extends ForecastAbstractFactory {
 
 	@Override
-	public Elements createRoot(Document doc) {		
+	public Elements createRoot(Document doc) {
 		return doc.select("dati");
 	}
 
@@ -25,7 +25,7 @@ public class LammaForecastFactory extends ForecastAbstractFactory {
 		infoGiorno.put(ForecastConstants.GIORNO, dayTag.attr("datadescr"));
 		infoGiorno.put(ForecastConstants.MIN, dayTag.select("temp").get(0).text());
 		infoGiorno.put(ForecastConstants.MAX, dayTag.select("temp").get(1).text());
-		infoGiorno.put(ForecastConstants.ALLERTA, getAlerts(dayTag));	
+		infoGiorno.put(ForecastConstants.ALLERTA, getAlerts(dayTag));
 		return infoGiorno;
 	}
 
@@ -34,17 +34,17 @@ public class LammaForecastFactory extends ForecastAbstractFactory {
 		Map<String, String> hourForecast = new LinkedHashMap<>();
 		Element forecastTag = root.select("previsione").get(getHourIndex(day, orario));
 		if (!tagNotFound(forecastTag)) {
-		hourForecast.put(ForecastConstants.CIELO, forecastTag.select("simbolo").get(0).attr("descr"));
-		hourForecast.put(ForecastConstants.TEMPERATURA, forecastTag.select("temp").get(0).text());
-		hourForecast.put(ForecastConstants.TEMP_PERCEPITA, forecastTag.select("temp").get(1).text());
-		hourForecast.put(ForecastConstants.PROB_PIOGGIA, forecastTag.select("prob_rain").text());
+			hourForecast.put(ForecastConstants.CIELO, forecastTag.select("simbolo").get(0).attr("descr"));
+			hourForecast.put(ForecastConstants.TEMPERATURA, forecastTag.select("temp").get(0).text());
+			hourForecast.put(ForecastConstants.TEMP_PERCEPITA, forecastTag.select("temp").get(1).text());
+			hourForecast.put(ForecastConstants.PROB_PIOGGIA, forecastTag.select("prob_rain").text());
 		}
 		return hourForecast;
 	}
 
 	private boolean tagNotFound(Element forecastTag) {
 		String hour = forecastTag.attr("ora");
-		return hour.equals("giorno") ? true : false;
+		return hour.equals("giorno");
 	}
 
 	private int getDayIndex(int day) {
@@ -60,8 +60,8 @@ public class LammaForecastFactory extends ForecastAbstractFactory {
 		String value = dayTag.select("allerta").attr("value");
 		String alerts = "";
 		if (value != "" && !value.equals("nessuno") && !value.contains("NA")) {
-				alerts = "Allerta: " + value + "\n";
-				alerts += getRisks(dayTag);
+			alerts = "Allerta: " + value + "\n";
+			alerts += getRisks(dayTag);
 		} else {
 			alerts = "nessuno";
 		}
@@ -90,14 +90,23 @@ public class LammaForecastFactory extends ForecastAbstractFactory {
 	private int getHourIndex(int day, int orario) {
 		int increment = 0;
 		switch (orario) {
-		case FactoryConstants.NOTTE: increment = 1; break;
-		case FactoryConstants.MATTINA: increment = 2; break;
-		case FactoryConstants.POMERIGGIO: increment = 3;	break;
-		case FactoryConstants.SERA: increment = 4; break;
-		default: increment = 1;
+		case FactoryConstants.NOTTE:
+			increment = 1;
+			break;
+		case FactoryConstants.MATTINA:
+			increment = 2;
+			break;
+		case FactoryConstants.POMERIGGIO:
+			increment = 3;
+			break;
+		case FactoryConstants.SERA:
+			increment = 4;
+			break;
+		default:
+			increment = 1;
 		}
-		if (day == FactoryConstants.OGGI) 
-			increment--; 
+		if (day == FactoryConstants.OGGI)
+			increment--;
 		return (getDayIndex(day) + increment);
 	}
 

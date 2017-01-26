@@ -99,15 +99,14 @@ public class ThreeBForecastFactory extends ForecastAbstractFactory {
 		}
 		return new ArrayList<>(Arrays.asList(strCielo,strTemp,strTempPerc,strProbPioggia));
 	}
-
-	
 	
 	private Double getDegree(BinaryOperator<Double> function, List<String> degree) {
+		System.out.println(ThreeBConstants.DELETE_DEG_SIMBOL_REGEX);
 		return degree.stream()
-					.map(text -> text.replaceAll(ThreeBConstants.DELETE_DEG_SIMBOL_REGEX, ""))
-					.map(Double::parseDouble)
-					.reduce(function)
-					.orElse(0.0);
+					 .map(text -> text.replaceAll(ThreeBConstants.DELETE_DEG_SIMBOL_REGEX, ""))
+					 .map(Double::parseDouble)
+					 .reduce(function)
+					 .orElse(0.0);
 	}
 	
 	private List<String> getDayTime(Elements root, String tag) {
