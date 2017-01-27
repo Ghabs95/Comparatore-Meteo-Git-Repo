@@ -84,11 +84,9 @@ public class MeteoAMForecastFactory extends ForecastAbstractFactory {
 			Element alert = alerts.get(i).select("td").get(0);
 			if (!alert.text().equals("-")) {
 				Elements img = alert.select("img[title]");
-				int j = 0;
-				for (; j < img.size() - 1; j++) {
+				for (int j = 0; j < img.size(); j++) {
 					allerte += img.get(j).attr("title") + ", ";
 				}
-				allerte += img.get(j).attr("title");
 			}
 		}
 		if (allerte.equals("")) {
