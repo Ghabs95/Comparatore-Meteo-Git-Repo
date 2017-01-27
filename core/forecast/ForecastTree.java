@@ -115,4 +115,9 @@ public class ForecastTree {
 		meteoIDs.forEach(meteo -> byDay.add(getDayForecast(meteo, location, dayID)));
 		return byDay;
 	}
+	
+	public List<Map<String, List<Forecast>>> getForecastTree() {
+		return forecastTree;
+	}
 }
+
