@@ -125,11 +125,10 @@ public abstract class AbstractWeatherListener implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
 		String location = searchBox.getText();
-		display.setText(""); // ripulisco il display
+		display.setText(""); 
 		List<Integer> meteoIDs = getSelectedMeteo();
-		if (meteoNotSelected(meteoIDs)) {
+		if (meteoNotSelected(meteoIDs))				 // se non c'è un meteo selezionato interrompo
 			return;
-		} // se non c'è un meteo selezionato interrompo
 		List<Integer> daysIDs = getSelectedDays();
 		List<String> timesIDs = getSelectedTimes();
 		meteoIDs.forEach(mID -> displayAppend(location, daysIDs, timesIDs, mID));
@@ -142,8 +141,10 @@ public abstract class AbstractWeatherListener implements ActionListener {
 		daysIDs.forEach(dID -> print(location, timesIDs, mID, dID));
 		display.append("\n\n");
 	}
+	
+	public abstract void print(String location, List<String> timesIDs, int mID, int dID);
 
-	public boolean meteoNotSelected(List<Integer> meteoIDs) {
+	private boolean meteoNotSelected(List<Integer> meteoIDs) {
 		if (meteoIDs.size() == 0) {
 			display.append("SELEZIONARE UN SERVIZIO METEO!\n");
 			cancel.setSelected(true);
@@ -152,6 +153,5 @@ public abstract class AbstractWeatherListener implements ActionListener {
 		return false;
 	}
 
-	public abstract void print(String location, List<String> timesIDs, int mID, int dID);
 
 }

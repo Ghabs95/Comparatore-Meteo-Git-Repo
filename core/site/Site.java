@@ -36,13 +36,14 @@ public abstract class Site {
 		return constructor.createForecast(document, day);
 	}
 
-	public String getUrl() {
-		return urlSite;
-	}
-
 	public abstract String getLocationUrl(String location, int day);
 
 	public abstract ForecastAbstractFactory getForecastConstructor();
+	
+	
+	public String getUrl() {
+		return urlSite;
+	}
 
 	public String getFormattedLocation(String location) {
 		return Stream.of(location.split(" ")).map(String::toLowerCase).collect(joining());
@@ -52,9 +53,9 @@ public abstract class Site {
 		String path = getPath(fileName);
 		String locations = loadFromFile(path);
 		String[] tmp = locations.split("\n");
-		// Supponendo che le localit� siano gi� formattate nel file (no
+		// Supponendo che le localita siano gia formattate nel file (no
 		// space + lowercase)
-		// Cerco la dimensione della parola pi� lunga:
+		// Cerco la dimensione della parola piu lunga:
 		int max = Stream.of(tmp).mapToInt(String::length).max().getAsInt();
 
 		// inizializzo la lista:
