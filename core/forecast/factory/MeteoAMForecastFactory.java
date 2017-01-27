@@ -34,7 +34,7 @@ public class MeteoAMForecastFactory extends ForecastAbstractFactory {
 	private Map<String, String> putInMap(Elements root, String giorno) {
 		Map<String, String> infoGiorno = new LinkedHashMap<>();
 		Element dayElement = root.select("#" + giorno).select("tbody").first();
-		infoGiorno.put(ForecastConstants.AGGIORNAMENTO,	lastUpdateRoot.getElementsContainingOwnText("aggiornamento pagina").get(0).text().substring(22,42));
+		infoGiorno.put(ForecastConstants.AGGIORNAMENTO,	lastUpdateRoot.getElementsContainingOwnText("aggiornamento pagina").get(0).text().substring(22, 42));
 		infoGiorno.put(ForecastConstants.GIORNO, root.select("#" + giorno).select("th").get(0).text());
 		infoGiorno.put(ForecastConstants.MIN, getDegree(dayElement, Integer::min) + "\u00B0");
 		infoGiorno.put(ForecastConstants.MAX, getDegree(dayElement, Integer::max) + "\u00B0");
@@ -52,7 +52,7 @@ public class MeteoAMForecastFactory extends ForecastAbstractFactory {
 			return putInMapHour(root, "tregiorni", orario);
 		}
 	}
-	
+
 	private Map<String, String> putInMapHour(Elements root, String giorno, int orario) {
 		Map<String, String> infoOra = new LinkedHashMap<>();
 		Element dayElement = root.select("#" + giorno).select("tbody").first();
@@ -67,9 +67,10 @@ public class MeteoAMForecastFactory extends ForecastAbstractFactory {
 	}
 
 	private Integer getDegree(Element root, BinaryOperator<Integer> function) {
-		Elements degs = root.select("tr"); 
+		Elements degs = root.select("tr");
 		return degs.stream()
-				   .map(p -> p.select("td").get(3))
+				   .map(p -> p.select("td")
+				   .get(3))
 				   .map(Element::text)
 				   .map(Integer::parseInt)
 				   .reduce(function)

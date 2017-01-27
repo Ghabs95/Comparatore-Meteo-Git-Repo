@@ -12,7 +12,7 @@ import core.forecast.ForecastConstants;
 import core.forecast.ForecastTree;
 
 public class ForecastTreeTest {
-	
+
 	ForecastTree forecastTree = new ForecastTree();
 
 	@Test
@@ -21,11 +21,11 @@ public class ForecastTreeTest {
 		forecastTree.createLocationForecast(meteoID, "firenze");
 		assertTrue(ForecastConstants.LAMMA == meteoID);
 		assertTrue(forecastTree.getForecastTree().toString().contains("firenze"));
-		
+
 		String dayTime = new SimpleDateFormat("dd/MM/yyyy").format(new Date());
 		assertTrue(forecastTree.getForecastTree().toString().contains(dayTime));
 	}
-	
+
 	@Test
 	public void isAvailableTest() {
 		int meteoID = 0;
@@ -33,7 +33,7 @@ public class ForecastTreeTest {
 		createLocationForecastTest();
 		assertTrue(forecastTree.isAvailable(meteoID, "firenze"));
 	}
-	
+
 	@Test
 	public void getDayForecast() {
 		int meteoID = 0;

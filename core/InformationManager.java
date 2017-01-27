@@ -16,9 +16,7 @@ public class InformationManager {
 	public String getPrintablePartialForecast(int meteoID, String location, int dayID, String timeID) {
 		Forecast tmp = ft.getDayForecast(meteoID, location, dayID);
 		Map<String, String> pf = tmp.getPartialForecast(timeID);
-		return pf.keySet().stream()
-						  .map(key -> key + ": " + pf.get(key) + "\n")
-						  .collect(joining());
+		return pf.keySet().stream().map(key -> key + ": " + pf.get(key) + "\n").collect(joining());
 	}
 
 	public String getPrintableForecastElement(int meteoID, String location, int dayID, String timeID, String element) {

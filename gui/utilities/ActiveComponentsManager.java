@@ -10,14 +10,14 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 public class ActiveComponentsManager {
-	private HashMap<String,JComboBox<String>> comboBox;
-	private HashMap<String,JRadioButton> radioButton;
-	private HashMap<String,JCheckBox> checkBox;
-	private HashMap<String,JTextField> textField;
-	private HashMap<String,JTextArea> textArea;
-	private HashMap<String,JLabel> label;
-	
-	public ActiveComponentsManager(){
+	private HashMap<String, JComboBox<String>> comboBox;
+	private HashMap<String, JRadioButton> radioButton;
+	private HashMap<String, JCheckBox> checkBox;
+	private HashMap<String, JTextField> textField;
+	private HashMap<String, JTextArea> textArea;
+	private HashMap<String, JLabel> label;
+
+	public ActiveComponentsManager() {
 		comboBox = new HashMap<>();
 		radioButton = new HashMap<>();
 		checkBox = new HashMap<>();
@@ -25,34 +25,34 @@ public class ActiveComponentsManager {
 		textArea = new HashMap<>();
 		label = new HashMap<>();
 	}
-	
+
 	/* ADDERS */
-	public void addComboBox(String name, JComboBox<String> component){
+	public void addComboBox(String name, JComboBox<String> component) {
 		comboBox.put(name, component);
 	}
-	
-	public void addRadioButton(String name, JRadioButton component){
+
+	public void addRadioButton(String name, JRadioButton component) {
 		radioButton.put(name, component);
 	}
-	
-	public void addCheckBox(String name, JCheckBox component){
+
+	public void addCheckBox(String name, JCheckBox component) {
 		checkBox.put(name, component);
 	}
-	
-	public void addTextField(String name, JTextField component){
+
+	public void addTextField(String name, JTextField component) {
 		textField.put(name, component);
 	}
-	
-	public void addTextArea(String name, JTextArea component){
+
+	public void addTextArea(String name, JTextArea component) {
 		textArea.put(name, component);
 	}
-	
-	public void addLabel(String name, JLabel component){
+
+	public void addLabel(String name, JLabel component) {
 		label.put(name, component);
 	}
-	
+
 	/* UPDATER */
-	public void updateAll(ActiveComponentsManager acm){
+	public void updateAll(ActiveComponentsManager acm) {
 		comboBox.putAll(acm.comboBox);
 		radioButton.putAll(acm.radioButton);
 		checkBox.putAll(acm.checkBox);
@@ -60,31 +60,30 @@ public class ActiveComponentsManager {
 		textArea.putAll(acm.textArea);
 		label.putAll(acm.label);
 	}
-	
-	
+
 	/* GETTERS per ricerca */
-	public JComboBox<String> getComboBox(String name){
+	public JComboBox<String> getComboBox(String name) {
 		return comboBox.get(name);
 	}
-	
-	public JCheckBox getCheckBox(String name){
+
+	public JCheckBox getCheckBox(String name) {
 		return checkBox.get(name);
 	}
-	
-	public JRadioButton getRadioButton(String name){
+
+	public JRadioButton getRadioButton(String name) {
 		return radioButton.get(name);
 	}
-	
-	public JTextField getTextField(String name){
+
+	public JTextField getTextField(String name) {
 		return textField.get(name);
 	}
-	
-	public JTextArea getTextArea(String name){
+
+	public JTextArea getTextArea(String name) {
 		return textArea.get(name);
 	}
-	
-	public JLabel getLabel(String name){
+
+	public JLabel getLabel(String name) {
 		return label.get(name);
 	}
-	
+
 }

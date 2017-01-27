@@ -24,4 +24,5 @@ public class DisplayContainer extends GridBagContainer {
 		getChildActiveComponents(child.getActiveComponents());
 		this.add(child, lim);
 	}
+
 }

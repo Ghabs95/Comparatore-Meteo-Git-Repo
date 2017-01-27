@@ -21,7 +21,7 @@ public class LocationAvailability implements CaretListener {
 	private JCheckBox lammaCheck;
 	private JCheckBox amCheck;
 	private JCheckBox threeBCheck;
-	
+
 	public LocationAvailability(ActiveComponentsManager acm) {
 		super();
 		lamma = new Lamma();
@@ -33,7 +33,6 @@ public class LocationAvailability implements CaretListener {
 		threeBCheck = acm.getCheckBox("check3B");
 	}
 
-	
 	@Override
 	public void caretUpdate(CaretEvent ce) {
 		String loc = searchBox.getText();
@@ -41,12 +40,12 @@ public class LocationAvailability implements CaretListener {
 		displayAvailability(am, amCheck, loc);
 		displayAvailability(threeB, threeBCheck, loc);
 	}
-	
-	private void displayAvailability(Site meteo,JCheckBox meteoCheck, String location){
-		if(meteo.isAvailable(location)){
+
+	private void displayAvailability(Site meteo, JCheckBox meteoCheck, String location) {
+		if (meteo.isAvailable(location)) {
 			meteoCheck.setBackground(Color.GREEN);
 			meteoCheck.setEnabled(true);
-		}else{
+		} else {
 			meteoCheck.setEnabled(false);
 			meteoCheck.setSelected(false);
 			meteoCheck.setBackground(Color.RED);

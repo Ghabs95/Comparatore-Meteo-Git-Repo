@@ -39,7 +39,7 @@ public class LammaForecastFactoryTest {
 		assertTrue(infoGiorno.containsKey(ForecastConstants.GIORNO));
 		assertTrue(infoGiorno.containsKey(ForecastConstants.ALLERTA));
 	}
-	
+
 	@Test
 	public void getPrevisioniOrarieTest() {
 		Map<String, String> prevOrarie = lammaFactory.getPrevisioniOrarie(root, 0, 0);
@@ -49,7 +49,7 @@ public class LammaForecastFactoryTest {
 		assertTrue(prevOrarie.containsKey(ForecastConstants.CIELO));
 		assertTrue(prevOrarie.containsKey(ForecastConstants.TEMP_PERCEPITA));
 		assertTrue(prevOrarie.containsKey(ForecastConstants.TEMPERATURA));
-	
+
 	}
 
 }

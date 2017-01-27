@@ -24,7 +24,7 @@ public class ForecastTest {
 		root.put("giorno", tempMap);
 		forecast = new Forecast(root);
 	}
-	
+
 	@Test
 	public void getAvailableElementsTest() {
 		LinkedList<String> availableElements = Forecast.getAvailableElements();
@@ -38,12 +38,12 @@ public class ForecastTest {
 		assertTrue(availableElements.contains(ForecastConstants.TEMP_PERCEPITA));
 		assertEquals(8, availableElements.size());
 	}
-	
+
 	@Test
 	public void toStringTest() {
 		assertEquals(forecast.toString(), "giorno:\n\ttemp_min: 4\n\ttemp_max: 15\n");
 	}
-	
+
 	@Test
 	public void getPartialForecast() {
 		Map<String, String> partialForecast = forecast.getPartialForecast("giorno");

@@ -18,7 +18,7 @@ public class InformationManagerTest {
 		String dayTime = new SimpleDateFormat("dd/MM/yyyy").format(new Date());
 		assertTrue(printableForecastElement.contains(dayTime));
 	}
-	
+
 	@Test
 	public void getPrintableForecastElement() {
 		String printableForecastElement = informationManager.getPrintableForecastElement(0, "firenze", 0, "giorno", "");

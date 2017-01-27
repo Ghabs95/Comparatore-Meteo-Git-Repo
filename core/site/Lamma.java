@@ -20,5 +20,5 @@ public class Lamma extends Site {
 	public ForecastAbstractFactory getForecastConstructor() {
 		return new LammaForecastFactory();
 	}
-	
+
 }

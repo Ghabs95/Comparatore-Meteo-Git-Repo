@@ -25,7 +25,7 @@ public class SiteTest {
 		meteoAM = new MeteoAM();
 		threeb = new ThreeB();
 	}
-	
+
 	@Test
 	public void locationUrlTest() {
 		String locationUrlLamma = lamma.getLocationUrl("firenze", 0);
@@ -35,7 +35,7 @@ public class SiteTest {
 		assertTrue(locationUrlAM.equals("http://www.meteoam.it/ta/previsione/286"));
 		assertTrue(locationUrl3B.equals("http://www.3bmeteo.com/meteo/firenze/2"));
 	}
-	
+
 	@Test
 	public void getForecastConstructorTest() {
 		ForecastAbstractFactory lammaForecastFactory = lamma.getForecastConstructor();

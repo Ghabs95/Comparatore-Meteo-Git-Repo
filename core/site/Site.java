@@ -1,5 +1,7 @@
 package core.site;
 
+import static java.util.stream.Collectors.joining;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.UnsupportedEncodingException;
@@ -8,7 +10,6 @@ import java.net.URLDecoder;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.stream.Stream;
-import static java.util.stream.Collectors.*;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -39,23 +40,23 @@ public abstract class Site {
 	public abstract String getLocationUrl(String location, int day);
 
 	public abstract ForecastAbstractFactory getForecastConstructor();
-	
-	
+
 	public String getUrl() {
 		return urlSite;
 	}
 
 	public String getFormattedLocation(String location) {
-		return Stream.of(location.split(" ")).map(String::toLowerCase).collect(joining());
+		return Stream.of(location.split(" "))
+					 .map(String::toLowerCase)
+					 .collect(joining());
 	}
 
 	private void setupAvailableLocations(String fileName) {
 		String path = getPath(fileName);
 		String locations = loadFromFile(path);
 		String[] tmp = locations.split("\n");
-		// Supponendo che le localita siano gia formattate nel file (no
-		// space + lowercase)
-		// Cerco la dimensione della parola piu lunga:
+		// Supponendo che le localita' siano gia' formattate nel file (no space + lowercase)
+		// Cerco la dimensione della parola piu' lunga:
 		int max = Stream.of(tmp).mapToInt(String::length).max().getAsInt();
 
 		// inizializzo la lista:

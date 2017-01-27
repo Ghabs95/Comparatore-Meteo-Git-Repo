@@ -8,32 +8,32 @@ import java.awt.GridBagLayout;
 public abstract class GridBagContainer extends Container {
 	protected ActiveComponentsManager activeComponents;
 	protected MyConstraints lim;
-	
-	public GridBagContainer(){
+
+	public GridBagContainer() {
 		initContainer();
 		addComponents();
 	}
-	
+
 	private void initContainer() {
 		this.setLayout(new GridBagLayout());
 		lim = new MyConstraints();
 		activeComponents = new ActiveComponentsManager();
 	}
-	
+
 	public abstract void addComponents();
-	
-	public void getChildActiveComponents(ActiveComponentsManager childComponents){
+
+	public void getChildActiveComponents(ActiveComponentsManager childComponents) {
 		activeComponents.updateAll(childComponents);
 	}
-	
-	public ActiveComponentsManager getActiveComponents(){
+
+	public ActiveComponentsManager getActiveComponents() {
 		return activeComponents;
 	}
-	
-	public void setupConstraints(){
-		//imposto le limitazioni
-		lim.setInsets(5,0,5,0);
+
+	public void setupConstraints() {
+		// imposto le limitazioni
+		lim.setInsets(5, 0, 5, 0);
 		lim.setFillAndAnchor(GridBagConstraints.NONE, GridBagConstraints.WEST);
-		lim.setGridCellDimension(1,1);
+		lim.setGridCellDimension(1, 1);
 	}
 }

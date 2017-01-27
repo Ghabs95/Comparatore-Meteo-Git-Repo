@@ -97,7 +97,7 @@ public class ForecastTree {
 		return forecastTree.get(meteoID).get(location).get(dayID);
 	}
 
-	/* Meteodi per funzionalità future */
+	/* Meteodi per funzionalita' future */
 	public Map<String, List<Forecast>> getForecastByMeteo(int meteoID) {
 		return forecastTree.get(meteoID);
 	}
@@ -115,9 +115,9 @@ public class ForecastTree {
 		meteoIDs.forEach(meteo -> byDay.add(getDayForecast(meteo, location, dayID)));
 		return byDay;
 	}
-	
+
+	/* Test */
 	public List<Map<String, List<Forecast>>> getForecastTree() {
 		return forecastTree;
 	}
 }
-

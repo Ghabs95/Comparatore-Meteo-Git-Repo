@@ -71,9 +71,7 @@ public class LammaForecastFactory extends ForecastAbstractFactory {
 
 	private String getRisks(Element dayTag) {
 		Elements risks = dayTag.select("rischio");
-		return risks.stream()
-					.map(this::getRisk)
-					.collect(joining());
+		return risks.stream().map(this::getRisk).collect(joining());
 	}
 
 	private String getRisk(Element element) {

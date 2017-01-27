@@ -56,25 +56,26 @@ public abstract class AbstractWeatherListener implements ActionListener {
 		times.add(acm.getCheckBox("checkSera"));
 	}
 
-	public List<Integer> getSelectedMeteo() {
+	private List<Integer> getSelectedMeteo() {
 		List<Integer> meteoIDs = new LinkedList<>();
 		getFiltered(meteo, "Lamma").forEach(box -> meteoIDs.add(ForecastConstants.LAMMA));
 		getFiltered(meteo, "AM").forEach(box -> meteoIDs.add(ForecastConstants.AM));
 		getFiltered(meteo, "3B").forEach(box -> meteoIDs.add(ForecastConstants.THREEB));
-
 		return meteoIDs;
 	}
 
 	private Stream<JCheckBox> getFiltered(List<JCheckBox> meteo, String meteoName) {
-		return meteo.stream().filter(box -> box.isSelected()).filter(box -> box.getText().contains(meteoName));
+		return meteo.stream()
+					.filter(box -> box.isSelected())
+					.filter(box -> box.getText()
+					.contains(meteoName));
 	}
 
-	public List<Integer> getSelectedDays() {
+	private List<Integer> getSelectedDays() {
 		LinkedList<Integer> dayIDs = new LinkedList<>();
 		getFiltered(days, "Oggi").forEach(box -> dayIDs.add(ForecastConstants.OGGI));
 		getFiltered(days, "Domani").forEach(box -> dayIDs.add(ForecastConstants.DOMANI));
 		getFiltered(days, "Dopodomani").forEach(box -> dayIDs.add(ForecastConstants.DOPODOMANI));
-
 		return dayIDs.size() == 0 ? getDefaultDay() : dayIDs;
 	}
 
@@ -83,7 +84,7 @@ public abstract class AbstractWeatherListener implements ActionListener {
 		return new LinkedList<>(Arrays.asList(ForecastConstants.DOMANI));
 	}
 
-	public List<String> getSelectedTimes() {
+	private List<String> getSelectedTimes() {
 		LinkedList<String> timeIDs = new LinkedList<>();
 		getFiltered(times, "Mattina").forEach(box -> timeIDs.add(ForecastConstants.MATTINA));
 		getFiltered(times, "Pomeriggio").forEach(box -> timeIDs.add(ForecastConstants.POMERIGGIO));
@@ -95,7 +96,7 @@ public abstract class AbstractWeatherListener implements ActionListener {
 		return new LinkedList<>(Arrays.asList(ForecastConstants.INFOGIORNO));
 	}
 
-	public String getMeteo(int meteoID) {
+	private String getMeteo(int meteoID) {
 		switch (meteoID) {
 		case ForecastConstants.LAMMA:
 			return "LAMMA";
@@ -119,29 +120,29 @@ public abstract class AbstractWeatherListener implements ActionListener {
 		default:
 			return "";
 		}
-
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
 		String location = searchBox.getText();
-		display.setText(""); 
+		display.setText(""); // ripulisco il display
 		List<Integer> meteoIDs = getSelectedMeteo();
-		if (meteoNotSelected(meteoIDs))				 // se non c'è un meteo selezionato interrompo
+		if (meteoNotSelected(meteoIDs)) {
 			return;
+		} // se non c'e' un meteo selezionato interrompo
 		List<Integer> daysIDs = getSelectedDays();
 		List<String> timesIDs = getSelectedTimes();
 		meteoIDs.forEach(mID -> displayAppend(location, daysIDs, timesIDs, mID));
 		cancel.setSelected(true);
 	}
-	
-	//Template method -> abs print
+
+	// Template method -> abs print
 	private void displayAppend(String location, List<Integer> daysIDs, List<String> timesIDs, int mID) {
 		display.append("+++" + getMeteo(mID) + "+++\n\n");
 		daysIDs.forEach(dID -> print(location, timesIDs, mID, dID));
 		display.append("\n\n");
 	}
-	
+
 	public abstract void print(String location, List<String> timesIDs, int mID, int dID);
 
 	private boolean meteoNotSelected(List<Integer> meteoIDs) {
@@ -152,6 +153,5 @@ public abstract class AbstractWeatherListener implements ActionListener {
 		}
 		return false;
 	}
-
 
 }
