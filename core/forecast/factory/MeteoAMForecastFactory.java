@@ -34,11 +34,15 @@ public class MeteoAMForecastFactory extends ForecastAbstractFactory {
 	private Map<String, String> putInMap(Elements root, String giorno) {
 		Map<String, String> infoGiorno = new LinkedHashMap<>();
 		Element dayElement = root.select("#" + giorno).select("tbody").first();
-		infoGiorno.put(ForecastConstants.AGGIORNAMENTO,	lastUpdateRoot.getElementsContainingOwnText("aggiornamento pagina").get(0).text().substring(22, 42));
-		infoGiorno.put(ForecastConstants.GIORNO, root.select("#" + giorno).select("th").get(0).text());
-		infoGiorno.put(ForecastConstants.MIN, getDegree(dayElement, Integer::min) + "\u00B0");
-		infoGiorno.put(ForecastConstants.MAX, getDegree(dayElement, Integer::max) + "\u00B0");
-		infoGiorno.put(ForecastConstants.ALLERTA, getAlerts(dayElement));
+		try {
+			infoGiorno.put(ForecastConstants.AGGIORNAMENTO, lastUpdateRoot.getElementsContainingOwnText("aggiornamento pagina").get(0).text().substring(22, 42));
+			infoGiorno.put(ForecastConstants.GIORNO, root.select("#" + giorno).select("th").get(0).text());
+			infoGiorno.put(ForecastConstants.MIN, getDegree(dayElement, Integer::min) + "\u00B0");
+			infoGiorno.put(ForecastConstants.MAX, getDegree(dayElement, Integer::max) + "\u00B0");
+			infoGiorno.put(ForecastConstants.ALLERTA, getAlerts(dayElement));
+		} catch (Exception e) { // TODO: try catch per gestire la mancanza di informazioni. Pensiamoci un po'
+			
+		}
 		return infoGiorno;
 	}
 
@@ -58,10 +62,14 @@ public class MeteoAMForecastFactory extends ForecastAbstractFactory {
 		Element dayElement = root.select("#" + giorno).select("tbody").first();
 		Elements hourElements = dayElement.select("tr");
 		if (takeHour(hourElements, orario) != null) {
-			infoOra.put(ForecastConstants.CIELO, takeHour(hourElements, orario).select("td").get(1).select("img[title]").attr("title"));
-			infoOra.put(ForecastConstants.TEMPERATURA, takeHour(hourElements, orario).select("td").get(3).text() + "\u00B0");
-			infoOra.put(ForecastConstants.TEMP_PERCEPITA, takeHour(hourElements, orario).select(".temperatura-percepita").text() + "\u00B0");
-			infoOra.put(ForecastConstants.PROB_PIOGGIA, takeHour(hourElements, orario).select("td").get(2).text());
+			try {
+				infoOra.put(ForecastConstants.CIELO, takeHour(hourElements, orario).select("td").get(1).select("img[title]").attr("title"));
+				infoOra.put(ForecastConstants.TEMPERATURA, takeHour(hourElements, orario).select("td").get(3).text() + "\u00B0");
+				infoOra.put(ForecastConstants.TEMP_PERCEPITA, takeHour(hourElements, orario).select(".temperatura-percepita").text() + "\u00B0");
+				infoOra.put(ForecastConstants.PROB_PIOGGIA, takeHour(hourElements, orario).select("td").get(2).text());
+			} catch (Exception e) {  // TODO: try catch per gestire la mancanza di informazioni. Pensiamoci un po'
+
+			}
 		}
 		return infoOra;
 	}
@@ -85,7 +93,9 @@ public class MeteoAMForecastFactory extends ForecastAbstractFactory {
 			if (!alert.text().equals("-")) {
 				Elements img = alert.select("img[title]");
 				for (int j = 0; j < img.size(); j++) {
-					allerte += img.get(j).attr("title") + ", ";
+					if (!allerte.contains(img.get(j).attr("title"))) {
+						allerte += img.get(j).attr("title") + " ";
+					}
 				}
 			}
 		}
