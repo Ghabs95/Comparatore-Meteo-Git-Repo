@@ -17,9 +17,9 @@ import core.forecast.ForecastConstants;
 import gui.utilities.ActiveComponentsManager;
 
 public abstract class AbstractWeatherListener implements ActionListener {
-	private LinkedList<JCheckBox> meteo;
-	private LinkedList<JCheckBox> days;
-	private LinkedList<JCheckBox> times;
+	private List<JCheckBox> meteo;
+	private List<JCheckBox> days;
+	private List<JCheckBox> times;
 	protected JTextField searchBox;
 	protected JTextArea display;
 	protected JRadioButton cancel;

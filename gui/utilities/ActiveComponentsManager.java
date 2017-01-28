@@ -1,6 +1,7 @@
 package gui.utilities;
 
 import java.util.HashMap;
+import java.util.Map;
 
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
@@ -10,12 +11,12 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 public class ActiveComponentsManager {
-	private HashMap<String, JComboBox<String>> comboBox;
-	private HashMap<String, JRadioButton> radioButton;
-	private HashMap<String, JCheckBox> checkBox;
-	private HashMap<String, JTextField> textField;
-	private HashMap<String, JTextArea> textArea;
-	private HashMap<String, JLabel> label;
+	private Map<String, JComboBox<String>> comboBox;
+	private Map<String, JRadioButton> radioButton;
+	private Map<String, JCheckBox> checkBox;
+	private Map<String, JTextField> textField;
+	private Map<String, JTextArea> textArea;
+	private Map<String, JLabel> label;
 
 	public ActiveComponentsManager() {
 		comboBox = new HashMap<>();

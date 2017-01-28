@@ -36,4 +36,9 @@ public abstract class GridBagContainer extends Container {
 		lim.setFillAndAnchor(GridBagConstraints.NONE, GridBagConstraints.WEST);
 		lim.setGridCellDimension(1, 1);
 	}
+	
+	// for test only
+	public MyConstraints getLim() {
+		return lim;
+	}
 }

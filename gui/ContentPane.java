@@ -2,8 +2,11 @@ package gui;
 
 import java.awt.GridBagConstraints;
 
+import javax.swing.event.CaretListener;
+
 import gui.display.DisplayContainer;
 import gui.listeners.LocationAvailability;
+import gui.listeners.AbstractWeatherListener;
 import gui.listeners.CompareElementListener;
 import gui.listeners.CustomWeatherListener;
 import gui.search.SearchContainer;
@@ -23,7 +26,7 @@ public class ContentPane extends GridBagContainer {
 	}
 
 	private void addSearch() {
-		SearchContainer searchC = new SearchContainer();
+		GridBagContainer searchC = new SearchContainer();
 		lim.setPosition(0, 0);
 		lim.setFillAndAnchor(GridBagConstraints.HORIZONTAL, GridBagConstraints.NORTH);
 		lim.setGridCellDimension(1, 1);
@@ -32,7 +35,7 @@ public class ContentPane extends GridBagContainer {
 	}
 
 	private void addDisplay() {
-		DisplayContainer displayC = new DisplayContainer();
+		GridBagContainer displayC = new DisplayContainer();
 		lim.setPosition(1, 0);
 		lim.setInsets(10, 10, 10, 10);
 		lim.setFillAndAnchor(GridBagConstraints.BOTH, GridBagConstraints.CENTER);
@@ -42,17 +45,17 @@ public class ContentPane extends GridBagContainer {
 	}
 
 	private void addLocationAvailability() {
-		LocationAvailability la = new LocationAvailability(activeComponents);
+		CaretListener la = new LocationAvailability(activeComponents);
 		activeComponents.getTextField("searchBox").addCaretListener(la);
 	}
 
 	private void addCustomWeatherListener() {
-		CustomWeatherListener twl = new CustomWeatherListener(activeComponents);
+		AbstractWeatherListener twl = new CustomWeatherListener(activeComponents);
 		activeComponents.getRadioButton("customWeather").addActionListener(twl);
 	}
 
 	private void addCompareElementListener() {
-		CompareElementListener cel = new CompareElementListener(activeComponents);
+		AbstractWeatherListener cel = new CompareElementListener(activeComponents);
 		activeComponents.getRadioButton("forecastElement").addActionListener(cel);
 	}
 
