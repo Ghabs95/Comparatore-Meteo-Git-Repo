@@ -21,7 +21,7 @@ public class SearchContainer extends GridBagContainer {
 	}
 
 	public void setupConstraints() {
-		lim.setupDefaultCheckBoxConstraints();
+		lim.setupDefaultLeftAlignmentConstraints();
 		lim.setInsets(0, 0, 0, 0);
 	}
 

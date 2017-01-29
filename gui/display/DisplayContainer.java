@@ -15,7 +15,7 @@ public class DisplayContainer extends GridBagContainer {
 	}
 
 	public void setupConstraints() {
-		lim.setupDefaultCheckBoxConstraints();
+		lim.setupDefaultLeftAlignmentConstraints();
 		lim.setFillAndAnchor(GridBagConstraints.NONE, GridBagConstraints.EAST);
 	}
 

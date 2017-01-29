@@ -38,7 +38,7 @@ public class TimeChoice extends GridBagContainer {
 	}
 
 	public void setupConstraints() {
-		lim.setupDefaultCheckBoxConstraints();
+		lim.setupDefaultLeftAlignmentConstraints();
 	}
 
 	private void addBox(String name, String description, int x, int y) {

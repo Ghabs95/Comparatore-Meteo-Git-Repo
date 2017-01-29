@@ -28,16 +28,5 @@ public abstract class GridBagContainer extends Container {
 	public ActiveComponentsManager getActiveComponents() {
 		return activeComponents;
 	}
-
-//	public void setupConstraints() {
-//		// imposto le limitazioni
-//		lim.setInsets(5, 0, 5, 0);
-//		lim.setFillAndAnchor(GridBagConstraints.NONE, GridBagConstraints.WEST);
-//		lim.setGridCellDimension(1, 1);
-//	}
 	
-	// for test only
-	public MyConstraints getLim() {
-		return lim;
-	}
 }
