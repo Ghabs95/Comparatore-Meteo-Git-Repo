@@ -29,7 +29,7 @@ public class MeteoService extends GridBagContainer {
 	}
 
 	private void addCheckBoxes() {
-		super.setupConstraints();
+		lim.setupDefaultCheckBoxConstraints();
 		addBox("checkLamma", "Lamma", 2);
 		addBox("checkAM", "Meteo AM", 3);
 		addBox("check3B", "3B Meteo", 4);

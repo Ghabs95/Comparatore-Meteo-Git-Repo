@@ -27,4 +27,11 @@ public class MyConstraints extends GridBagConstraints {
 		this.insets.right = right;
 	}
 
+	public void setupDefaultCheckBoxConstraints() {
+		// imposto le limitazioni
+		this.setInsets(5, 0, 5, 0);
+		this.setFillAndAnchor(GridBagConstraints.NONE, GridBagConstraints.WEST);
+		this.setGridCellDimension(1, 1);
+	}
+
 }
