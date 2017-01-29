@@ -28,5 +28,10 @@ public abstract class GridBagContainer extends Container {
 	public ActiveComponentsManager getActiveComponents() {
 		return activeComponents;
 	}
+
+	// only for test
+	public MyConstraints getLim() {
+		return lim;
+	}
 	
 }
