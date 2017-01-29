@@ -40,9 +40,7 @@ public class Command extends GridBagContainer {
 
 	private void operationConstraintsSetup() {
 		group = new ButtonGroup();
-		lim.setInsets(5, 0, 5, 0);
-		lim.setFillAndAnchor(GridBagConstraints.NONE, GridBagConstraints.WEST);
-		lim.setGridCellDimension(1, 1);
+		lim.setupDefaultLeftAlignmentConstraints();
 	}
 
 	private void addOperation(String name, String description, int y) {
